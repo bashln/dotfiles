@@ -10,7 +10,7 @@
 (push "/home/bashln/go/bin" exec-path)
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "JetBrainsMono Nerd Font" "JetBrainsMono Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "JetBrainsMono NF" "JetBrainsMono Nerd Font")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 
@@ -311,7 +311,8 @@
       :n "C-w l" #'evil-window-right
       :n "C-w w" #'evil-window-next
       :n "C-w c" #'evil-window-delete
-      :n "C-w o" #'doom/window-maximize-buffer)
+      :n "C-w o" #'doom/window-maximize-buffer
+      :n "C-w C-w" #'menu-bar--wrap-long-lines-window-edge)
 
 ;; Dired com navegação tipo Oil.nvim
 (after! dired
