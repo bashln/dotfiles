@@ -47,6 +47,8 @@ home/.config/fish/fish_variables
 __pycache__/
 node_modules/
 *.bak
+*.bak.*
+*\(2\)*
 *Zone.Identifier*
 .DS_Store
 Thumbs.db
