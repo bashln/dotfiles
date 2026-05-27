@@ -2,7 +2,7 @@ return {
   {
     "bashln/Doom-One.nvim",
     lazy = true,
-    enabled = true,
+    enabled = false,
     priority = 1000,
     opts = {
       transparent = false,

@@ -28,3 +28,7 @@ fi
 unset rc
 
 . "$HOME/.local/share/../bin/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/bashln/.local/bin:$PATH"

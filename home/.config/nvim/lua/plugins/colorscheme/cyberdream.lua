@@ -1,7 +1,7 @@
 return {
   "scottmckendry/cyberdream.nvim",
   lazy = false,
-  enabled = true,
+  enabled = false,
   priority = 1000,
   cmd = { "CyberdreamLoad" },
   keys = {

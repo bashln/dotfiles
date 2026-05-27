@@ -170,3 +170,7 @@ if command -v zoxide >/dev/null 2>&1; then
 fi
 
 . "$HOME/.local/share/../bin/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/bashln/.local/bin:$PATH"

@@ -1,111 +1,150 @@
-@import "../omarchy/current/theme/waybar.css";
-
+/* -----------------------------------------------------
+   Global Reset & Base Typography
+   ----------------------------------------------------- */
 * {
-  background-color: @background;
-  color: @foreground;
-
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: 'JetBrainsMono Nerd Font';
-  font-size: 12px;
+    font-family: 'JetBrainsMono Nerd Font';
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
 }
 
-.modules-left {
-  margin-left: 8px;
+/* -----------------------------------------------------
+   Main Bar Window
+   ----------------------------------------------------- */
+window#waybar {
+    background-color: #11111b;
+    color: #cdd6f4;
+    border-bottom: 2px solid #fab387; /* Omarchy Peach Border */
 }
 
-.modules-right {
-  margin-right: 8px;
-}
-
+/* -----------------------------------------------------
+   Workspaces
+   ----------------------------------------------------- */
 #workspaces button {
-  all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
+    padding: 0 10px;
+    color: rgba(255, 255, 255, 0.55);
+    background: transparent;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
 }
 
 #workspaces button.empty {
-  opacity: 0.5;
+    color: rgba(255, 255, 255, 0.25)
 }
 
-#cpu,
-#battery,
+#workspaces button.active {
+    color: #fab387;
+    border-bottom: 3px solid #fab387;
+    background: rgba(250, 179, 135, 0.1);
+}
+
+#workspaces button:hover {
+    background: rgba(137, 180, 250, 0.15);
+    color: #89b4fa;
+}
+
+/* -----------------------------------------------------
+   Left Side Modules (Arch Logo)
+   ----------------------------------------------------- */
+#custom-arch {
+    color: #89b4fa;
+    padding-left: 12px;
+    padding-right: 15px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+#custom-arch:hover {
+    background: rgba(137, 180, 250, 0.15);
+    border-radius: 0px 12px 12px 0px;
+}
+
+/* -----------------------------------------------------
+   Unified Module Hover (Clock, Audio, WiFi, Battery, System, etc.)
+   ----------------------------------------------------- */
+#clock,
 #pulseaudio,
-#custom-omarchy,
-#custom-update {
-  min-width: 12px;
-  margin: 0 7.5px;
+#network,
+#custom-wifi,         /* Matches your "custom/wifi" config */
+#custom-weather,
+#battery,
+#custom-net_speed,
+#custom-system {
+    padding: 0 10px;
+    margin: 4px 2px;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
 }
 
-#tray {
-  margin-right: 16px;
+#clock:hover,
+#pulseaudio:hover,
+#network:hover,
+#custom-wifi:hover,
+#custom-weather:hover,
+#battery:hover,
+#custom-net_speed:hover,
+#custom-system:hover {
+    background: rgba(137, 180, 250, 0.15);
+    border-radius: 12px;
+    color: #89b4fa;
 }
 
-#bluetooth {
-  margin-right: 17px;
+/* -----------------------------------------------------
+   Individual Module Colors
+   ----------------------------------------------------- */
+#clock { color: #cba6f7; font-weight: bold; }
+#pulseaudio { color: #89dceb; }
+#network, #custom-wifi { color: #89dceb; }
+#custom-weather { color: #89dceb; }
+#custom-system { color: #89dceb; }
+
+/* Net Speed 3D Effect */
+#custom-net_speed {
+    color: #cdd6f4;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    font-size: 12px;
 }
 
-#network {
-  margin-right: 13px;
+/* -----------------------------------------------------
+   Battery States
+   ----------------------------------------------------- */
+#battery { color: #f9e2af; }
+
+#battery.charging,
+#battery.plugged {
+    color: #a6e3a1; /* Your green */
 }
 
-#custom-expand-icon {
-  margin-right: 18px;
+#battery.critical:not(.charging) {
+    color: #f38ba8;
 }
 
+/* -----------------------------------------------------
+   TOOLTIPS (Essential for Dashboard scripts)
+   ----------------------------------------------------- */
 tooltip {
-  padding: 2px;
+    background: #11111b;
+    border: 2px solid #fab387;
+    border-radius: 12px;
 }
 
-#custom-update {
-  font-size: 10px;
+tooltip label {
+    font-family: 'JetBrainsMono Nerd Font';
+    padding: 12px;
+    color: #cdd6f4;
 }
 
-#clock {
-  margin-left: 8.75px;
+/* -----------------------------------------------------
+   Extra Animations
+   ----------------------------------------------------- */
+#custom-weather.offline {
+    color: #f38ba8;
+    font-weight: bold;
+    animation: pulse 2.5s infinite;
 }
 
-#custom-weather {
-  margin-left: 7.5px;
-  margin-right: 7.5px;
-}
-
-#custom-weather.unavailable {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.hidden {
-  opacity: 0;
-}
-
-#custom-screenrecording-indicator,
-#custom-idle-indicator,
-#custom-notification-silencing-indicator {
-  min-width: 12px;
-  margin-left: 5px;
-  margin-right: 0;
-  font-size: 10px;
-  padding-bottom: 1px;
-}
-
-#custom-screenrecording-indicator.active {
-  color: #a55555;
-}
-
-#custom-idle-indicator.active,
-#custom-notification-silencing-indicator.active {
-  color: #a55555;
-}
-
-#custom-voxtype {
-  min-width: 12px;
-  margin: 0 0 0 7.5px;
-}
-
-#custom-voxtype.recording {
-  color: #a55555;
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
