@@ -58,7 +58,7 @@ wezterm.on("augment-command-palette", function(window, pane)
 end)
 
 -- ===== Fontes e Cores =====
-config.font_size = 11
+config.font_size = 10
 config.font = wezterm.font_with_fallback({
 	"JetBrainsMono Nerd Font",
 	"Terminess Nerd Font Mono",
@@ -91,7 +91,7 @@ local bg_path = (os.getenv("HOME") or "") .. "/.config/wezterm/bg-blurred.png"
 
 if file_exists(bg_path) then
 	config.window_background_image = bg_path
-	config.window_background_opacity = 1.0
+	config.window_background_opacity = 1.00
 end
 
 -- ============================================================================
@@ -102,7 +102,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.initial_rows = 35
 	config.initial_cols = 120
 
-	config.window_background_image = nil
+	-- config.window_background_image = nil
 
 	local candidates = {
 		"C:\\Program Files\\Git\\usr\\bin\\bash.exe",
