@@ -32,3 +32,14 @@ unset rc
 
 # Added by Antigravity CLI installer
 export PATH="/home/bashln/.local/bin:$PATH"
+
+# Secure wrapper functions to run AI CLI tools under the 'aiagent' user
+agy() {
+    sudo -i -u aiagent agy "$@"
+}
+codex() {
+    sudo -i -u aiagent codex "$@"
+}
+opencode() {
+    sudo -i -u aiagent opencode "$@"
+}
