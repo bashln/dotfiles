@@ -252,6 +252,5 @@ end
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-
 # Added by Antigravity CLI installer
 set -gx PATH "/home/bashln/.local/bin" $PATH

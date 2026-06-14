@@ -38,6 +38,9 @@ opt.hlsearch = false
 opt.updatetime = 150
 opt.timeoutlen = 400
 
+-- ========== Clipboard ==========
+opt.clipboard = "unnamedplus"
+
 -- ========== Outros ==========
 opt.splitbelow = true
 opt.splitright = true
