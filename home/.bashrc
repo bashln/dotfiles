@@ -27,7 +27,7 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-. "$HOME/.local/share/../bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 
 # Added by Antigravity CLI installer

@@ -74,13 +74,15 @@ alias nviml='NVIM_APPNAME=lazyvim nvim'
 alias nconf='nvim ~/.zshrc'
 alias src='source ~/.zshrc'
 
-# System helpers (dnf)
-alias update='sudo dnf upgrade -y; flatpak update -y; npm update -g; command -v fwupdmgr >/dev/null && fwupdmgr update -y; command -v rustup >/dev/null && rustup update && npm -g update'
-alias install='sudo dnf install -y'
-alias search='dnf search'
-alias remove='sudo dnf remove -y'
-alias cleanup='sudo dnf autoremove -y'
+# System helpers (pacman — CachyOS/Arch)
+alias update='sudo pacman -Syu'
+alias install='sudo pacman -S --needed'
+alias search='pacman -Ss'
+alias remove='sudo pacman -Rns'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq 2>/dev/null)'
 alias jctl='journalctl -p 3 -xb'
+alias fixpacman='sudo rm /var/lib/pacman/db.lck'
+alias mirror='sudo cachyos-rate-mirrors'
 
 # Navigation
 alias ..='cd ..'
@@ -121,7 +123,7 @@ log() {
 }
 
 cleanup-orphans() {
-  toolbox run -c dev sudo dnf autoremove -y
+  sudo pacman -Rns $(pacman -Qtdq 2>/dev/null)
 }
 
 doomsync() {
@@ -169,7 +171,7 @@ if command -v zoxide >/dev/null 2>&1; then
   alias cd='z'
 fi
 
-. "$HOME/.local/share/../bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 
 # Added by Antigravity CLI installer
