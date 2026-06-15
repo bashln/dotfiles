@@ -133,5 +133,5 @@
       "mode": "subagent"
     }
   },
-  "plugin": ["./plugins/caveman/plugin.js"]
+  "plugin": ["./plugins/caveman/plugin.js", "./plugins/ponytail/.opencode/plugins/ponytail.mjs"]
 }
