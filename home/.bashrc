@@ -16,6 +16,10 @@ export PATH
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
+# 7-Zip
+alias enc7z='7zz a -t7z -p -mhe=on'
+alias dec7z='7zz x -p'
+
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
   for rc in ~/.bashrc.d/*; do
@@ -42,7 +46,7 @@ export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platfor
 # ------------------------------------------------------------------
 
 # Ensure common user paths are early in PATH if they exist
-for p in "$HOME/.local/bin" "$HOME/bin" "$HOME/go/bin" "$HOME/.cargo/bin" "/usr/local/bin" "$HOME/.npm-global/bin" "/opt/nvim-linux-x86_64/bin"; do
+for p in "$HOME/.local/bin" "$HOME/bin" "$HOME/go/bin" "$HOME/.cargo/bin" "/usr/local/bin" "$HOME/.npm-global/bin" "/opt/nvim-linux-x86_64/bin" "$HOME/.config/emacs/bin"; do
   if [ -d "$p" ]; then
     PATH="$p:$PATH"
   fi
@@ -126,10 +130,6 @@ alias dotsize='du -sh .git && git count-objects -vH'
 alias cl='clear'
 alias ask='gemini'
 
-# 7-Zip
-alias enc7z='7zz a -t7z -p -mhe=on'
-alias dec7z='7zz x -p'
-
 # Functions
 log() {
   local cmd="$*"
@@ -164,5 +164,33 @@ if command -v zoxide >/dev/null 2>&1; then
   alias cd='z'
 fi
 
-eval "$(starship init bash)"
+# Homebrew (Linux) - only run if brew directory exists
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+fi
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init bash)"
+fi
+
+# ------------------------------------------------------------------
+# AI Loop aliases
+# ------------------------------------------------------------------
+alias ai-bug='bash ~/.config/opencode/scripts/ai-loop.sh once linear-bug-finding'
+alias ai-sec='bash ~/.config/opencode/scripts/ai-loop.sh once security-review'
+alias ai-deps='bash ~/.config/opencode/scripts/ai-loop.sh once dependency-audit'
+alias ai-qa='bash ~/.config/opencode/scripts/ai-loop.sh once qa-review'
+alias ai-loop='bash ~/.config/opencode/scripts/ai-loop.sh loop'
+alias ai-status='bash ~/.config/opencode/scripts/ai-loop.sh status'
+alias ai-dry='DRY_RUN=true bash ~/.config/opencode/scripts/ai-loop.sh once'
+alias ai-cron='bash ~/.config/opencode/scripts/ai-loop.sh cron-install'
+alias ai-cron-rm='bash ~/.config/opencode/scripts/ai-loop.sh cron-remove'
+alias ai-improve='bash ~/.config/opencode/scripts/ai-loop.sh improve'
+alias ai-timed='bash ~/.config/opencode/scripts/ai-loop.sh timed'
+
+# Global env source from dotfiles (safe check)
+if [ -f "$HOME/.local/share/../bin/env" ]; then
+  . "$HOME/.local/share/../bin/env"
+fi
+
 export PATH="$HOME/.local/bin:$PATH"
