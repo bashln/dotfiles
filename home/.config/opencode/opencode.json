@@ -1,20 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "build",
-  "mcp": {
-    "supabase": {
-      "type": "local",
-      "command": ["/home/leonamduarte/.keystores/run-supabase-mcp.sh"],
-      "enabled": true
-    },
-    "android": {
-      "type": "local",
-      "command": ["npx", "-y", "mcp-android-emulator"],
-      "enabled": true
-    }
-  },
   "agent": {
     "build": {
+      "description": "Default execution agent.",
+      "prompt": "{file:./prompts/build.txt}",
       "permission": {
         "edit": "allow",
         "bash": "allow",

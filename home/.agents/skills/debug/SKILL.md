@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Reproduz erro/teste quebrado, acha causa raiz, corrige minimamente e valida.
+description: Reproduz uma falha concreta, encontra a causa raiz, aplica a menor correcao segura e valida o resultado. Use quando houver erro, teste quebrando, regressao, stack trace ou comportamento incorreto observavel.
 ---
 
 ## Objective

@@ -145,13 +145,4 @@ At the start of every session (especially after interruption or context compacti
 - [ ] Read `errors.json` — what errors have already been seen and solved?
 - [ ] Re-read the original task description
 - [ ] Confirm the next step before executing it
-
----
-
-## 🤖 Agent Source of Truth
-
-- Agent definitions are versioned in `home/.agents` inside this repo.
-- Runtime paths are symlinked:
-  - `~/.codex/agents` -> `~/.agents/codex/agents`
-  - `~/.claude/agents` -> `~/.agents/claude/agents`
-- Edit agent files only in the dotfiles source tree (`home/.agents/...`) to avoid drift.
+Teste de escrita

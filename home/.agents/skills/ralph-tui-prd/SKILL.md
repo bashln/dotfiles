@@ -1,6 +1,6 @@
 ---
 name: ralph-tui-prd
-description: "Generate ralph-tui PRDs with user stories for planning, requirements, beads or prd.json."
+description: "Generate a Product Requirements Document (PRD) for ralph-tui task orchestration. Creates PRDs with user stories that can be converted to beads issues or prd.json for automated execution. Triggers on: create a prd, write prd for, plan this feature, requirements for, spec out."
 ---
 
 # Ralph TUI PRD Generator

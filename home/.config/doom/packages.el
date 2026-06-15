@@ -31,9 +31,9 @@
 (package! treesit-auto)
 (package! harpoon)
 
-(package! grease
-  :recipe (:local-repo "lisp/grease"))
-  ;; :recipe (:host github :repo "mwac-dev/grease.el"  :files ("*.el")))
+(package! prettier)
+(package! prettier-js)
+(package! prettier-rc)
 
 (package! gcmh)
 (package! kdl-mode)

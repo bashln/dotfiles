@@ -66,7 +66,8 @@ config.font = wezterm.font_with_fallback({
 })
 
 config.force_reverse_video_cursor = true
--- config.color_scheme = "Eldritch"
+config.color_scheme = "Eldritch"
+-- config.color_scheme = "Mirage"
 
 -- ===== Renderizacao =====
 config.enable_wayland = true

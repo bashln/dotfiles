@@ -1,6 +1,6 @@
 ---
 name: architecture
-description: "Avalia sustentabilidade arquitetural: boundaries, naming, acoplamento, modularidade e invariantes."
+description: Avalia se uma mudanca preserva ou melhora a sustentabilidade do sistema. Use quando a decisao envolver boundaries, naming estrutural, acoplamento, modularidade, seams, invariantes, profundidade de modulos ou evolucao futura da arquitetura.
 ---
 
 ## Objective

@@ -1,6 +1,6 @@
 ---
 name: analyze
-description: Analisa contexto incerto, mapeia escopo/riscos e define próximo passo antes de mudar código.
+description: Analisa o repositório, o contexto atual e define o próximo passo mais seguro. Use quando faltar contexto, o pedido estiver vago, houver múltiplas direções possíveis, ou for preciso mapear escopo, riscos, plano, backlog ou critérios de aceite antes de mudar código.
 ---
 
 ## Objective

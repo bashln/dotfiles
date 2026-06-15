@@ -2,7 +2,7 @@
    Global Reset & Base Typography
    ----------------------------------------------------- */
 * {
-    font-family: 'JetBrainsMono Nerd Font';
+    font-family: 'JetBrainsMono Nerd Font Mono';
     font-size: 13px;
     border: none;
     border-radius: 0;
@@ -129,7 +129,7 @@ tooltip {
 }
 
 tooltip label {
-    font-family: 'JetBrainsMono Nerd Font';
+    font-family: 'JetBrainsMono Nerd Font Mono';
     padding: 12px;
     color: #cdd6f4;
 }

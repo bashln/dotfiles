@@ -1,6 +1,6 @@
 ---
 name: test
-description: "Define e executa validação útil: testes, lint, typecheck, cobertura ou TDD."
+description: Define e executa a menor estrategia de validacao util para uma mudanca. Use quando precisar escrever testes, escolher o nivel certo de cobertura, rodar suites relevantes, validar lint, typecheck ou aplicar TDD com foco em comportamento observavel.
 ---
 
 ## Objective

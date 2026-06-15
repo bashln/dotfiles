@@ -1,6 +1,6 @@
 ---
 name: review
-description: "Revisa prontidão de entrega: riscos, bugs, regressões, validação e bloqueadores."
+description: Revisa a prontidao imediata de uma mudanca com foco em risco, qualidade e clareza de entrega. Use antes de merge, entrega ou release para checar bugs, regressao, observabilidade, validacao, documentacao operacional e bloqueadores concretos.
 ---
 
 ## Objective

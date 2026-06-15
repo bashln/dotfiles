@@ -1,6 +1,6 @@
 ---
 name: implement
-description: Implementa a menor mudança correta quando escopo está claro e objetivo é alterar código.
+description: Implementa a menor mudanca correta para entregar uma feature, melhoria ou refatoracao local. Use quando o escopo ja estiver claro e o objetivo principal for mudar o codigo sem abrir investigacoes paralelas nem expandir o trabalho.
 ---
 
 ## Objective

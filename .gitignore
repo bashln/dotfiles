@@ -22,6 +22,19 @@
 .aws/
 .kube/
 
+# Gemini agent - credenciais e dados de runtime
+home/.agents/gemini/google_accounts.json
+home/.agents/gemini/oauth_creds.json
+home/.agents/gemini/projects.json
+home/.agents/gemini/settings.json
+home/.agents/gemini/state.json
+home/.agents/gemini/installation_id
+home/.agents/gemini/trustedFolders.json
+home/.agents/gemini/history/
+home/.agents/gemini/tmp/
+# Ignore entire gemini agent directory (contains sensitive runtime credentials)
+home/.agents/gemini/
+
 # Fish shell (contém dados sensíveis)
 .config/fish/conf.d/secrets.fish
 home/.config/fish/fish_variables
@@ -69,3 +82,6 @@ home/.config/opencode/node_modules/
 
 # But track opencode commands (custom .md files)
 !home/.config/opencode/commands/*.md
+
+# Ignore local app caches and installed binaries
+home/.local/

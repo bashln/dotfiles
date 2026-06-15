@@ -1,16 +1,27 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Shell & PATH
-(setq shell-file-name (executable-find "bash"))
-(setq-default vterm-shell "/bin/fish")
-(setq-default explicit-shell-file-name "/bin/fish")
+;; Shell & PATH (cross-platform: pwsh on Windows, bash/fish on Linux)
+(cond ((eq system-type 'windows-nt)
+       (let ((shell (or (executable-find "pwsh")
+                        (executable-find "powershell")
+                        "cmdproxy.exe")))
+         (setq shell-file-name shell)
+         (setq-default explicit-shell-file-name shell)
+         (setq-default vterm-shell shell)))
+      (t
+       (setq shell-file-name (or (executable-find "bash") "/bin/bash"))
+       (setq-default explicit-shell-file-name (or (executable-find "fish") (executable-find "bash") "/bin/bash"))
+       (setq-default vterm-shell (or (executable-find "fish") (executable-find "bash") "/bin/bash"))))
 
-;; Go tools PATH
-(setenv "PATH" (concat (or (getenv "HOME") "") "/go/bin:" (or (getenv "PATH") "")))
-(push "/home/bashln/go/bin" exec-path)
+;; Go tools PATH (cross-platform)
+(let* ((home (or (getenv "HOME") (getenv "USERPROFILE") ""))
+       (go-bin (expand-file-name "go/bin" home)))
+  (when (file-directory-p go-bin)
+    (setenv "PATH" (concat go-bin (path-separator) (or (getenv "PATH") "")))
+    (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "JetBrainsMono NF" "JetBrainsMono Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "Hack Nerd Font" "GeistMono Nerd Font Mono")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 
@@ -69,10 +80,11 @@
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2))
 
-;; Treesitter Auto Install
+;; Treesitter Auto Install — baixa binários pré-compilados (sem precisar de cc/gcc)
 (use-package! treesit-auto
-  :commands (treesit-auto-mode)
-  :hook (prog-mode . treesit-auto-mode))
+  :config
+  (setq treesit-auto-install 'treesit-auto-install-remote)
+  (global-treesit-auto-mode))
 
 ;; FIX: Kotlin Tree-sitter Grammar — registra fonte e auto-instala se ausente
 (after! treesit
@@ -150,6 +162,21 @@
 ;; Apenas prioritizamos linguagens específicas
 (setq-hook! 'lua-mode-hook +format-with-lsp nil)
 (setq-hook! 'python-mode-hook +format-with-lsp nil)
+
+;; Windows: apheleia chama prettier direto (sem apheleia-npx bash script)
+(when (eq system-type 'windows-nt)
+  (after! apheleia
+    (setf (alist-get 'prettier apheleia-formatters)
+          '("prettier" "--stdin-filepath" filepath
+            (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))
+    (setf (alist-get 'prettier-javascript apheleia-formatters)
+          '("prettier" "--stdin-filepath" filepath
+            "--parser=babel-flow"
+            (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))
+    (setf (alist-get 'prettier-typescript apheleia-formatters)
+          '("prettier" "--stdin-filepath" filepath
+            "--parser=typescript"
+            (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))))
 
 ;; -------------------------------
 ;; 4. LSP TUNING & BOOSTER
@@ -311,8 +338,7 @@
       :n "C-w l" #'evil-window-right
       :n "C-w w" #'evil-window-next
       :n "C-w c" #'evil-window-delete
-      :n "C-w o" #'doom/window-maximize-buffer
-      :n "C-w C-w" #'menu-bar--wrap-long-lines-window-edge)
+      :n "C-w o" #'doom/window-maximize-buffer)
 
 ;; Dired com navegação tipo Oil.nvim
 (after! dired
@@ -398,14 +424,6 @@
 (map! :v "<" (lambda () (interactive) (evil-shift-left (region-beginning) (region-end)) (evil-normal-state) (evil-visual-restore))
       :v ">" (lambda () (interactive) (evil-shift-right (region-beginning) (region-end)) (evil-normal-state) (evil-visual-restore)))
 
-;; Folding: Markdown headings navigation/folding (zj, zk, z;, zi)
-(after! markdown-mode
-  (map! :map markdown-mode-map
-        :nv "zj" #'markdown-next-visible-heading
-        :nv "zk" #'markdown-previous-visible-heading
-        :nv "z;" #'markdown-cycle
-        :nv "zi" #'markdown-cycle-global))
-
 ;; Harpoon (Quick file access)
 (use-package! harpoon
   :config
@@ -487,8 +505,6 @@
 
 ;; -----------------------------
 ;; 10. MARKDOWN FOLDING (Neovim zj/zk/zl/zu/zi)
-;; -----------------------------
-;; MARKDOWN FOLDING (Neovim zj/zk/zl/zu/zi)
 ;; -----------------------------
 
 (defun +markdown-fold-level (level)
@@ -703,19 +719,6 @@
       which-key-idle-secondary-delay 0.1
       which-key-max-display-columns 6
       which-key-min-display-lines 4)
-
-;; Fast window switching
-;; REMOVED: Duplicado de C-w hjkl nas linhas 378-385
-;; (map! "C-h" #'evil-window-left
-;;       "C-j" #'evil-window-down
-;;       "C-k" #'evil-window-up
-;;       "C-l" #'evil-window-right)
-
-;; Disable arrow keys in insert mode (force hjkl)
-;; (map! :n "<left>" (lambda () (interactive) (message "Use h"))
-;;       :n "<right>" (lambda () (interactive) (message "Use l"))
-;;       :n "<up>" (lambda () (interactive) (message "Use k"))
-;;       :n "<down>" (lambda () (interactive) (message "Use j")))
 
 ;; Auto-save improvements
 (setq auto-save-default t
