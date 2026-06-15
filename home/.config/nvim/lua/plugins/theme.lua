@@ -1,1 +1,0 @@
-/home/bashln/.config/omarchy/current/theme/neovim.lua

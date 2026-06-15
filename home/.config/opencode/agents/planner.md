@@ -1,7 +1,6 @@
 ---
 description: Planning specialist for repository analysis, architecture review, and implementation planning.
 mode: subagent
-model: openai/gpt-5.4
 permission:
   edit: deny
   webfetch: deny

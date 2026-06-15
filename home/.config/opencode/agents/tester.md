@@ -1,7 +1,6 @@
 ---
 description: Especialista de validacao que seleciona a menor combinacao de testes e analise estatica.
 mode: subagent
-model: github-copilot/gpt-5-mini
 permission:
   edit: deny
   webfetch: deny

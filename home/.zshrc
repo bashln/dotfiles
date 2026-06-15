@@ -4,10 +4,18 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-plugins=(git zsh-autosuggestions history-substring-search zsh-syntax-highlighting z extract command-not-found)
+plugins=(
+  git
+  zsh-autosuggestions
+  history-substring-search
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -37,34 +45,13 @@ zstyle ':completion:*' recent-dirs-insert both
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-# Homebrew (Linux)
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-
-# Source system zsh plugins (autosuggestions, syntax-highlighting)
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-export PATH="$HOME/.npm-global/bin:$PATH"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# Android SDK Configuration
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH
-
 # ------------------------------------------------------------------
 # PATH
 # ------------------------------------------------------------------
-for p in "$HOME/.local/bin" "$HOME/bin" "$HOME/go/bin" "$HOME/.cargo/bin" "/usr/local/bin" "$HOME/.npm-global/bin" "/opt/nvim-linux-x86_64/bin" "$HOME/.config/emacs/bin"; do
+for p in "$HOME/.local/bin" "$HOME/bin" "$HOME/go/bin" "$HOME/.cargo/bin" "/usr/local/bin" "$HOME/.npm-global/bin" "/opt/nvim-linux-x86_64/bin"; do
   [ -d "$p" ] && PATH="$p:$PATH"
 done
+PATH="$HOME/.local/bin:$PATH"
 
 # ------------------------------------------------------------------
 # Environment variables
@@ -77,36 +64,6 @@ export NODE_OPTIONS=--no-deprecation
 # Aliases
 # ------------------------------------------------------------------
 
-# Toolbox shortcuts
-alias dev='toolbox run -c dev'
-alias deventer='toolbox enter -c dev'
-alias devinstall='toolbox run -c dev sudo dnf install -y'
-alias devsearch='toolbox run -c dev dnf search'
-alias devop='toolbox run -c dev opencode'
-alias devnvim='toolbox run -c dev nvim'
-alias devemacs='toolbox run -c dev emacs'
-
-# Toolbox leo
-alias leo='toolbox run -c leo'
-alias leoenter='toolbox enter -c leo'
-alias leoinstall='toolbox run -c leo sudo dnf install -y'
-
-# Sandbox containers
-alias ralphbox='podman run --rm -it \
-  --name ralph-sandbox \
-  --user root \
-  --security-opt=no-new-privileges \
-  --cap-drop=ALL \
-  --pids-limit=512 \
-  --memory=4g \
-  --cpus=4 \
-  --tmpfs /tmp:rw,nosuid,nodev,size=2g \
-  --tmpfs /run:rw,nosuid,nodev,size=128m \
-  -v "$PWD:/workspace:rw,Z" \
-  -w /workspace \
-  docker.io/oven/bun:latest \
-  bash'
-
 # Editors
 alias v='nvim'
 alias vim='nvim'
@@ -114,17 +71,18 @@ alias e='emacs'
 alias nvima='NVIM_APPNAME=astronvim nvim'
 alias bv='NVIM_APPNAME=bash-nvim nvim'
 alias nviml='NVIM_APPNAME=lazyvim nvim'
-alias nbash='nvim ~/.bashrc'
 alias nconf='nvim ~/.zshrc'
 alias src='source ~/.zshrc'
 
-# System helpers (Fedora/dnf via toolbox)
-alias update='toolbox run -c dev sudo dnf upgrade -y'
-alias install='toolbox run -c dev sudo dnf install -y'
-alias search='toolbox run -c dev dnf search'
-alias remove='toolbox run -c dev sudo dnf remove -y'
-alias cleanup='toolbox run -c dev sudo dnf autoremove -y'
+# System helpers (pacman — CachyOS/Arch)
+alias update='sudo pacman -Syu'
+alias install='sudo pacman -S --needed'
+alias search='pacman -Ss'
+alias remove='sudo pacman -Rns'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq 2>/dev/null)'
 alias jctl='journalctl -p 3 -xb'
+alias fixpacman='sudo rm /var/lib/pacman/db.lck'
+alias mirror='sudo cachyos-rate-mirrors'
 
 # Navigation
 alias ..='cd ..'
@@ -133,7 +91,7 @@ alias ....='cd ../../..'
 alias cdg='cd ~/.config'
 alias cddev='cd ~/'
 
-# Git shorthands
+# Git
 alias gs='git status'
 alias ga='git add -A'
 alias gc='git commit -m'
@@ -165,7 +123,7 @@ log() {
 }
 
 cleanup-orphans() {
-  toolbox run -c dev sudo dnf autoremove -y
+  sudo pacman -Rns $(pacman -Qtdq 2>/dev/null)
 }
 
 doomsync() {
@@ -184,11 +142,37 @@ doomupd() {
   fi
 }
 
-# zoxide (if available)
+# ------------------------------------------------------------------
+# Initializations
+# ------------------------------------------------------------------
+
+# Homebrew (Linux)
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
+eval "$(starship init zsh)"
+
+# SDKMAN
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Android SDK
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# zoxide (kept last — zoxide recommends being at the end of the file)
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
   alias cd='z'
 fi
 
-eval "$(starship init zsh)"
-export PATH="$HOME/.local/bin:$PATH"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/bashln/.local/bin:$PATH"

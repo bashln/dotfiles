@@ -9,12 +9,16 @@ STOP_FLAG="${AI_DIR}/loop.stop"
 
 mkdir -p "$AI_DIR"
 
+has_crontab() {
+  command -v crontab &>/dev/null
+}
+
 print_usage() {
   echo "loop-ctl.sh — Utility for /loop command"
   echo ""
   echo "Subcommands:"
-  echo "  schedule <id> <interval> <prompt>   Install cron job"
-  echo "  unschedule <id>                     Remove cron job"
+  echo "  schedule <id> <interval> <prompt>   Install cron job (requires crontab)"
+  echo "  unschedule <id>                     Remove cron job (requires crontab)"
   echo "  stop                                Stop active loop"
   echo "  status                              Show loop state"
   echo "  run <prompt>                        Headless execution"
@@ -54,16 +58,23 @@ clear_state() {
 }
 
 cmd_clean_all() {
-  local existing
-  existing=$(crontab -l 2>/dev/null | grep "opencode run --agent build" || true)
-  if [ -n "$existing" ]; then
-    crontab -l 2>/dev/null | grep -v "opencode run --agent build" | crontab -
+  if has_crontab; then
+    local existing
+    existing=$(crontab -l 2>/dev/null | grep "opencode run" || true)
+    if [ -n "$existing" ]; then
+      crontab -l 2>/dev/null | grep -v "opencode run" | crontab -
+    fi
   fi
   rm -f "${REPO_ROOT}/.ai/loop.stop" "${REPO_ROOT}/.ai/loop-state.json" 2>/dev/null
 }
 
 cmd_schedule() {
-  [ $# -lt 3 ] && { echo "USO: schedule <id> <interval> <prompt>"; exit 1; }
+  if ! has_crontab; then
+    echo "ERROR: crontab not available. Timed loop mode requires crontab."
+    echo "Install cron (e.g., apt install cron, pacman -S cronie) or use self-paced mode."
+    exit 1
+  fi
+  [ $# -lt 3 ] && { echo "USAGE: schedule <id> <interval> <prompt>"; exit 1; }
   local id="$1" interval="$2" prompt="$3"
   local cron_expr
   cron_expr=$(interval_to_cron "$interval")
@@ -86,6 +97,11 @@ cmd_schedule() {
 }
 
 cmd_unschedule() {
+  if ! has_crontab; then
+    clear_state
+    echo "ok (no crontab)"
+    return
+  fi
   local id="${1:-}"
   if crontab -l 2>/dev/null | grep -q "loop-ctl.*${id}"; then
     crontab -l 2>/dev/null | grep -v "loop-ctl.*${id}" | crontab -
@@ -99,10 +115,12 @@ cmd_unschedule() {
 cmd_stop() {
   touch "$STOP_FLAG"
 
-  local ids
-  ids=$(crontab -l 2>/dev/null | grep "loop-ctl" | sed 's/.*loop-ctl\.sh run //' | sed 's/ >>.*//' || true)
-  if [ -n "$ids" ]; then
-    crontab -l 2>/dev/null | grep -v "loop-ctl" | crontab -
+  if has_crontab; then
+    local ids
+    ids=$(crontab -l 2>/dev/null | grep "loop-ctl" | sed 's/.*loop-ctl\.sh run //' | sed 's/ >>.*//' || true)
+    if [ -n "$ids" ]; then
+      crontab -l 2>/dev/null | grep -v "loop-ctl" | crontab -
+    fi
   fi
   clear_state
   echo "stopped"
@@ -118,13 +136,14 @@ cmd_status() {
 
 cmd_run() {
   local prompt="$*"
+  [ -z "$prompt" ] && { echo "Usage: loop-ctl.sh run <prompt>"; exit 1; }
 
   LOCK_FILE="${AI_DIR}/loop-run.lock"
   if [ -f "$LOCK_FILE" ]; then
     local lock_pid
     lock_pid=$(cat "$LOCK_FILE" 2>/dev/null)
     if kill -0 "$lock_pid" 2>/dev/null; then
-      echo "⏭️  Ejecução anterior (PID $lock_pid) ainda está rodando. Pulando este ciclo."
+      echo "Previous run (PID $lock_pid) still active. Skipping cycle."
       exit 0
     fi
     rm -f "$LOCK_FILE"
