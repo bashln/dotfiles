@@ -33,17 +33,6 @@ unset rc
 # Added by Antigravity CLI installer
 export PATH="/home/bashln/.local/bin:$PATH"
 
-# Secure wrapper functions to run AI CLI tools under the 'aiagent' user
-agy() {
-    sudo -i -u aiagent agy "$@"
-}
-codex() {
-    sudo -i -u aiagent codex "$@"
-}
-opencode() {
-    sudo -i -u aiagent opencode "$@"
-}
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
