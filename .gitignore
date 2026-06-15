@@ -9,10 +9,8 @@
 # Credenciais e chaves
 *.pem
 *.key
-*_rsa
-*_ed25519
-*id_rsa*
-*id_ed25519*
+*_rsa*
+*_ed25519*
 *.ppk
 *.env
 .envrc
@@ -29,7 +27,7 @@
 home/.agents/gemini/
 
 # Fish shell (contém dados sensíveis)
-.config/fish/conf.d/secrets.fish
+home/.config/fish/conf.d/secrets.fish
 **/fish_variables
 
 # ============================================================
@@ -89,12 +87,9 @@ build/
 .cache/
 .direnv/
 
-# Ignore opencode generated and temporary files
+# Ignore opencode generated/temp files
 home/.config/opencode/.codex*
-home/.config/opencode/*.log
-home/.config/opencode/node_modules/
-
-# But track opencode commands (custom .md files)
+# But track opencode commands
 !home/.config/opencode/commands/*.md
 
 # Ignore local app caches and installed binaries
