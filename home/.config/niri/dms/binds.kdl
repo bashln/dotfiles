@@ -26,7 +26,7 @@ binds {
     Mod+N hotkey-overlay-title="Notification Center" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
     Mod+Shift+N hotkey-overlay-title="Neovim" { spawn "wezterm" "-e" "nvim"; }
 
-    Mod+B hotkey-overlay-title="Open browser" { spawn "vivaldi"; }
+    Mod+B hotkey-overlay-title="Open browser" { spawn "brave"; }
     Mod+Shift+return hotkey-overlay-title="Open file manager" { spawn "dolphin"; }
 
 
