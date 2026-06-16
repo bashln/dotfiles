@@ -109,17 +109,17 @@
     },
     "planner": {
       "description": "Planning agent.",
-      "model": "openai/gpt-5.4-mini",
+      "model": "openai/gpt-5.4",
       "mode": "subagent"
     },
     "auditor": {
       "description": "Audit and review agent.",
-      "model": "openai/gpt-5.4-mini",
+      "model": "openai/gpt-5.4",
       "mode": "subagent"
     },
     "debug": {
       "description": "Debug agent.",
-      "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.5",
       "mode": "subagent"
     },
     "arquiteto": {
@@ -129,9 +129,12 @@
     },
     "codex": {
       "description": "Critical code agent.",
-      "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.5",
       "mode": "subagent"
     }
   },
-  "plugin": ["./plugins/caveman/plugin.js", "./plugins/ponytail/.opencode/plugins/ponytail.mjs"]
+  "plugin": [
+    "./plugins/caveman/plugin.js",
+    "./plugins/ponytail/.opencode/plugins/ponytail.mjs"
+  ]
 }
