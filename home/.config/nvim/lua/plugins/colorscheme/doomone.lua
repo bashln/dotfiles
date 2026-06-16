@@ -2,10 +2,10 @@ return {
   {
     "bashln/Doom-One.nvim",
     lazy = true,
-    enabled = false,
+    enabled = true,
     priority = 1000,
     opts = {
-      transparent = false,
+      transparent = true,
       background = "dark",
       styles = {
         comments = { italic = true },

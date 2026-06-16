@@ -4,9 +4,6 @@ return {
   enabled = true,
   priority = 1000,
   cmd = { "CyberdreamLoad" },
-  keys = {
-    { "<leader>uC", "<cmd>CyberdreamLoad<cr>", desc = "Load cyberdream theme" },
-  },
   config = function()
     require("cyberdream").setup({
       -- Set light or dark variant
