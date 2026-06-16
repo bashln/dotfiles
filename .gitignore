@@ -2,10 +2,6 @@
 # SEGURANÇA CRÍTICA - NUNCA rastrear dados sensíveis
 # ============================================================
 
-/*.md
-!README.md
-!home/.agents/skills/**/*.md
-
 # Credenciais e chaves
 *.pem
 *.key
@@ -13,7 +9,6 @@
 *_ed25519*
 *.ppk
 *.env
-.envrc
 .secrets/
 
 # Diretórios sensíveis
@@ -86,6 +81,7 @@ build/
 # Caches
 .cache/
 .direnv/
+.envrc
 
 # Ignore opencode generated/temp files
 home/.config/opencode/.codex*
