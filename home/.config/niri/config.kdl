@@ -178,8 +178,11 @@ overview {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 // This line starts waybar, a commonly used bar for Wayland compositors.
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets,pkcs11"
 environment {
-  XDG_CURRENT_DESKTOP "niri"
+  XDG_CURRENT_DESKTOP "niri:kde"
+  GNOME_KEYRING_CONTROL "/run/user/1000/keyring"
+  SSH_AUTH_SOCK "/run/user/1000/keyring/ssh"
 }
 hotkey-overlay {
     skip-at-startup

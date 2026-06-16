@@ -2,20 +2,13 @@
 # SEGURANÇA CRÍTICA - NUNCA rastrear dados sensíveis
 # ============================================================
 
-/*.md
-!README.md
-!home/.agents/skills/**/*.md
-
 # Credenciais e chaves
 *.pem
 *.key
-*_rsa
-*_ed25519
-*id_rsa*
-*id_ed25519*
+*_rsa*
+*_ed25519*
 *.ppk
 *.env
-.envrc
 .secrets/
 
 # Diretórios sensíveis
@@ -26,21 +19,10 @@
 .kube/
 
 # Gemini agent - credenciais e dados de runtime
-home/.agents/gemini/google_accounts.json
-home/.agents/gemini/oauth_creds.json
-home/.agents/gemini/projects.json
-home/.agents/gemini/settings.json
-home/.agents/gemini/state.json
-home/.agents/gemini/installation_id
-home/.agents/gemini/trustedFolders.json
-home/.agents/gemini/history/
-home/.agents/gemini/tmp/
-# Ignore entire gemini agent directory (contains sensitive runtime credentials)
 home/.agents/gemini/
 
 # Fish shell (contém dados sensíveis)
-.config/fish/conf.d/secrets.fish
-home/.config/fish/fish_variables
+home/.config/fish/conf.d/secrets.fish
 **/fish_variables
 
 # ============================================================
@@ -63,14 +45,16 @@ home/.config/fish/fish_variables
 __pycache__/
 node_modules/
 package.json
-package-lock.json
 bun.lock
+*lock.json
 *.bak
 *.bak.*
 *\(2\)*
 *Zone.Identifier*
 .DS_Store
 Thumbs.db
+*.tmp
+*.log
 
 # Neovim / Vim
 *.swp
@@ -83,12 +67,25 @@ undo/
 .elc
 .projectile
 
-# Ignore opencode generated and temporary files
-home/.config/opencode/.codex*
-home/.config/opencode/*.log
-home/.config/opencode/node_modules/
+# Python
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
 
-# But track opencode commands (custom .md files)
+# Build artifacts
+dist/
+build/
+
+# Caches
+.cache/
+.direnv/
+.envrc
+
+# Ignore opencode generated/temp files
+home/.config/opencode/.codex*
+# But track opencode commands
 !home/.config/opencode/commands/*.md
 
 # Ignore local app caches and installed binaries
