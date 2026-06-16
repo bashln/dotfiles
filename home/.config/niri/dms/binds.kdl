@@ -5,7 +5,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // === Application Launchers ===
-    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "wezterm"; }
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "kitty"; }
     Mod+Space hotkey-overlay-title="Application Launcher" {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
     }
@@ -24,7 +24,7 @@ binds {
         spawn "dms" "ipc" "call" "dankdash" "wallpaper";
     }
     Mod+N hotkey-overlay-title="Notification Center" { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-    Mod+Shift+N hotkey-overlay-title="Neovim" { spawn "wezterm" "-e" "nvim"; }
+    Mod+Shift+N hotkey-overlay-title="Neovim" { spawn "kitty" "-e" "nvim"; }
 
     Mod+B hotkey-overlay-title="Open browser" { spawn "brave"; }
     Mod+Shift+return hotkey-overlay-title="Open file manager" { spawn "dolphin"; }
