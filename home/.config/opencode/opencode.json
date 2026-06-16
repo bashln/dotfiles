@@ -1,40 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "build",
-  "provider": {
-    "xiaomi": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Xiaomi MiMo",
-      "options": {
-        "baseURL": "https://token-plan-sgp.xiaomimimo.com/v1",
-        "apiKey": "{file:~/.secrets/mimo-api-key}"
-      },
-      "models": {
-        "mimo-v2.5": {
-          "name": "MiMo V2.5",
-          "limit": {
-            "context": 1048576,
-            "output": 131072
-          },
-          "modalities": {
-            "input": ["text", "image"],
-            "output": ["text"]
-          }
-        },
-        "mimo-v2.5-pro": {
-          "name": "MiMo V2.5 Pro",
-          "limit": {
-            "context": 1048576,
-            "output": 131072
-          },
-          "modalities": {
-            "input": ["text"],
-            "output": ["text"]
-          }
-        }
-      }
-    }
-  },
   "mcp": {
     "supabase": {
       "type": "remote",
@@ -81,22 +47,37 @@
     },
     "executor": {
       "description": "Mechanical execution agent.",
-      "model": "xiaomi/mimo-v2.5",
-      "mode": "subagent"
-    },
-    "tester": {
-      "description": "Tester agent.",
-      "model": "xiaomi/mimo-v2.5",
+      "model": "xiaomi-token-plan-sgp/mimo-v2.5",
       "mode": "subagent"
     },
     "analista": {
       "description": "Refactor agent.",
-      "model": "xiaomi/mimo-v2.5",
+      "model": "xiaomi-token-plan-sgp/mimo-v2.5",
+      "mode": "subagent"
+    },
+    "debug": {
+      "description": "Debug agent.",
+      "model": "openai/gpt-5.4",
+      "mode": "subagent"
+    },
+    "arquiteto": {
+      "description": "Architecture agent.",
+      "model": "openai/gpt-5.4",
+      "mode": "subagent"
+    },
+    "codex": {
+      "description": "Critical code agent.",
+      "model": "openai/gpt-5.4",
+      "mode": "subagent"
+    },
+    "tester": {
+      "description": "Tester agent.",
+      "model": "xiaomi-token-plan-sgp/mimo-v2.5",
       "mode": "subagent"
     },
     "goal-worker": {
       "description": "Executes goal checkpoints autonomously toward a durable objective.",
-      "model": "xiaomi/mimo-v2.5",
+      "model": "xiaomi-token-plan-sgp/mimo-v2.5",
       "mode": "subagent",
       "permission": {
         "edit": "allow",
@@ -115,21 +96,6 @@
     "auditor": {
       "description": "Audit and review agent.",
       "model": "openai/gpt-5.4-mini",
-      "mode": "subagent"
-    },
-    "debug": {
-      "description": "Debug agent.",
-      "model": "openai/gpt-5.4",
-      "mode": "subagent"
-    },
-    "arquiteto": {
-      "description": "Architecture agent.",
-      "model": "openai/gpt-5.4",
-      "mode": "subagent"
-    },
-    "codex": {
-      "description": "Critical code agent.",
-      "model": "openai/gpt-5.4",
       "mode": "subagent"
     }
   },
