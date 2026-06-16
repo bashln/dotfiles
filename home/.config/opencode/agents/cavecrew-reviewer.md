@@ -5,7 +5,6 @@ description: >
   Use for "review this PR", "review my diff", "audit this file". Skips
   formatting nits unless they change meaning.
 mode: subagent
-model: github-copilot/claude-haiku-4.5
 permission:
   edit: deny
   webfetch: deny

@@ -6,12 +6,9 @@ permission:
   webfetch: deny
   skill:
     "*": deny
-    "30-quality-lint": allow
-    "30-test-jest-unit": allow
-    "30-test-jest-integration": allow
-    "30-quality-types": allow
-    "30-test-component": allow
-    "30-test-e2e-maestro": allow
+    "quality-checks": allow
+    "test": allow
+    "tdd": allow
   bash:
     "*": ask
     "git status*": allow
@@ -47,11 +44,11 @@ Core workflow:
 
 1. Detect the stack from the repository before loading any test skill.
 2. For JavaScript or TypeScript repositories, load only the smallest relevant skill set:
-   - lint/typecheck issues -> `30-quality-lint`, `30-quality-types`
-   - pure logic or helpers -> `30-test-jest-unit`
-   - module or integration boundaries -> `30-test-jest-integration`
-   - UI behavior -> `30-test-component`
-   - end-to-end flows -> `30-test-e2e-maestro`
+   - lint/typecheck issues -> `quality-checks`
+   - pure logic or helpers -> `test`
+   - module or integration boundaries -> `test`
+   - UI behavior -> `test`
+   - end-to-end flows -> `test`
 3. For repositories without a matching skill, do not fake coverage. Run the native validation commands that already exist in the repo and report the result.
 4. Do not edit files and do not implement fixes. If new tests or code changes are needed, say exactly what should be added next.
 

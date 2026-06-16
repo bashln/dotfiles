@@ -5,7 +5,6 @@ description: >
   caveman-compressed so the main thread eats ~60% fewer tokens than
   vanilla Explore. Refuses to suggest fixes.
 mode: subagent
-model: github-copilot/claude-haiku-4.5
 permission:
   edit: deny
   webfetch: deny

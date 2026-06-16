@@ -7,8 +7,8 @@ subtask: false
 Execute melhoria contínua no código com permissão de edição, usando skills especializadas.
 
 ESCOPO:
-- Carregar skills para cada fase: code-debug, audit-and-fix, feature-implement,
-  code-simplifier, tdd, test-suite, quality-checks, qa-review
+- Carregar skills para cada fase: debug, audit-and-fix, implement,
+  code-simplifier, tdd, test, quality-checks
 - Encontrar bugs, problemas de qualidade, falta de testes
 - Implementar correções com a menor mudança possível
 - Validar cada correção (testes, lint, typecheck)
