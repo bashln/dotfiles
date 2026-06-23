@@ -1,6 +1,6 @@
 ---
 name: pre-merge-analysis
-description: Analisa estado git do repositório: branch, status, commits locais/remotos, divergência, comparação com branch alvo e recomendação de merge. Use antes de merge, PR, push, ou quando precisar entender estado atual da branch e próximos passos.
+description: "Analisa estado git do repositório: branch, status, commits locais/remotos, divergência, comparação com branch alvo e recomendação de merge. Use antes de merge, PR, push, ou quando precisar entender estado atual da branch e próximos passos."
 ---
 
 ## Objective

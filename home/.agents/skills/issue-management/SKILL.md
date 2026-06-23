@@ -1,6 +1,6 @@
 ---
 name: issue-management
-description: Ciclo de bugs: QA conversacional, triagem e gestão de issues no GitHub.
+description: "Ciclo de bugs: QA conversacional, triagem e gestão de issues no GitHub."
 ---
 
 ## QA Workflow

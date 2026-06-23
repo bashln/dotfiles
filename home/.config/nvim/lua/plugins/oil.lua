@@ -3,9 +3,7 @@ return {
   ---@module "oil"
   ---@type oil.SetupOpts
   opts = function()
-    local path_nav = require("config.path_navigation")
     local detail_view = false
-
     return {
       open_preview = {
         vertical = true,
@@ -32,18 +30,8 @@ return {
       },
       view_options = {
         show_hidden = true,
-        is_hidden_file = function(name, bufnr)
-          if name:match("^%.") then
-            return true
-          end
-
-          local current_dir = require("oil").get_current_dir(bufnr)
-          if current_dir and path_nav.is_unc_path(current_dir) then
-            local full_path = path_nav.join_path(current_dir, name)
-            return path_nav.is_hidden_windows(full_path)
-          end
-
-          return false
+        is_hidden_file = function(name, _)
+          return name:match("^%.") ~= nil
         end,
       },
     }

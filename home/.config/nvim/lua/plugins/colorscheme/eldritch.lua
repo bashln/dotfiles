@@ -1,10 +1,9 @@
 return {
   "eldritch-theme/eldritch.nvim",
   lazy = false,
-  enabled = true,
   priority = 1000,
   opts = {
-    transparent = true,
+    transparent = false,
     terminal_colors = true,
     styles = {
       comments = { italic = true },
@@ -18,7 +17,5 @@ return {
     hide_inactive_statusline = false,
     dim_inactive = false,
     lualine_bold = true,
-    on_colors = function(colors) end,
-    on_highlights = function(highlights, colors) end,
   },
 }

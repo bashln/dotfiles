@@ -2,12 +2,12 @@
 
 ;; Shell & PATH (cross-platform: pwsh on Windows, bash/fish on Linux)
 (cond ((eq system-type 'windows-nt)
-       (let ((shell (or (executable-find "pwsh")
-                        (executable-find "powershell")
-                        "cmdproxy.exe")))
-         (setq shell-file-name shell)
-         (setq-default explicit-shell-file-name shell)
-         (setq-default vterm-shell shell)))
+       ;; cmdproxy natively handles .cmd/.bat — required for LSP/npm on Windows.
+       (let ((pwsh (or (executable-find "pwsh") (executable-find "powershell")))
+             (cmdproxy (executable-find "cmdproxy")))
+         (setq shell-file-name (or cmdproxy "cmdproxy.exe"))
+         (setq-default explicit-shell-file-name (or pwsh "cmdproxy.exe"))
+         (setq-default vterm-shell (or pwsh "cmdproxy.exe"))))
       (t
        (setq shell-file-name (or (executable-find "bash") "/bin/bash"))
        (setq-default explicit-shell-file-name (or (executable-find "fish") (executable-find "bash") "/bin/bash"))
@@ -21,7 +21,7 @@
     (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "JetBrainsMono NF" "JetBrainsMono Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "FiraCode Nerd Font" "JetBrainsMono Nerd Font")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 
@@ -80,10 +80,46 @@
         web-mode-css-indent-offset 2
         web-mode-code-indent-offset 2))
 
-;; Treesitter Auto Install — baixa binários pré-compilados (sem precisar de cc/gcc)
+;; Treesitter Auto Install — compila localmente com MSYS2 GCC
+(let ((msys2-bin "C:/msys64/ucrt64/bin"))
+  (push msys2-bin exec-path)
+  (setenv "PATH" (concat msys2-bin ";" (getenv "PATH"))))
+
+;; Patch LANGUAGE_VERSION para compatibilidade com Emacs 30 ABI (ABI 15 -> 14)
+(defadvice! +treesit-patch-abi-a (old-fn out-dir lang url &optional revision source-dir cc c++)
+  "Patch LANGUAGE_VERSION to ABI 14 before building grammar."
+  :around #'treesit--install-language-grammar-1
+  (let* ((lang-sym (if (symbolp lang) lang (intern lang)))
+         (clone-dir (make-temp-file "treesit-patched" t))
+         (workdir (expand-file-name "repo" clone-dir)))
+    (unwind-protect
+        (progn
+          (if revision
+              (treesit--call-process-signal
+               "git" nil t nil "clone" url "--depth" "1" "--quiet"
+               "-b" revision workdir)
+            (treesit--call-process-signal
+             "git" nil t nil "clone" url "--depth" "1" "--quiet" workdir))
+          (let ((src-dir (expand-file-name (or source-dir "src") workdir)))
+            (dolist (f '("parser.c" "scanner.c" "scanner.cc"))
+              (let ((fp (expand-file-name f src-dir)))
+                (when (file-exists-p fp)
+                  (with-temp-buffer
+                    (insert-file-contents fp)
+                    (goto-char (point-min))
+                    (when (re-search-forward
+                           "#define LANGUAGE_VERSION \\([0-9]+\\)" nil t)
+                      (let ((old (match-string 1)))
+                        (replace-match "14" nil nil nil 1)
+                        (write-region (point-min) (point-max) fp nil 'quiet)
+                        (message "Patched %s %s: %s -> 14"
+                                 lang-sym f old))))))))
+          (apply old-fn out-dir lang-sym workdir revision source-dir cc c++))
+      (ignore-errors (delete-directory clone-dir t)))))
+
 (use-package! treesit-auto
   :config
-  (setq treesit-auto-install 'treesit-auto-install-remote)
+  (setq treesit-auto-install 'treesit-auto-install-compile)
   (global-treesit-auto-mode))
 
 ;; FIX: Kotlin Tree-sitter Grammar — registra fonte e auto-instala se ausente
@@ -280,20 +316,6 @@
   ;; Abrir/fechar treemacs com SPC e (como nvim-tree)
   (map! :leader
         :desc "Toggle Treemacs (Neovim-style)" "e" #'treemacs))
-
-;; Grease
-(use-package! grease
-  :init
-  (setq grease-sort-method 'type
-        grease-show-hidden nil
-        grease-preview-window-width 0.4)
-  :config
-  (map! :leader
-        (:prefix ("o g" . "Grease")
-         :desc "Toggle Grease"            "g" #'grease-toggle
-         :desc "Open Grease (current)"    "o" #'grease-open
-         :desc "Open at project root"     "h" #'grease-here)
-        :desc "Toggle Grease like Oil.nvim" "-" #'grease-toggle))
 
 ;; Search files with fd (Telescope-like)
 (map! :leader
@@ -731,3 +753,16 @@
 ;; Final popup rules
 (set-popup-rule! "^\*Dirvish" :side 'left :size 0.3 :select t :quit t)
 (set-popup-rule! "^\*harpoon" :side 'bottom :size 0.25 :select t)
+
+;; Org face sizes (migrated from custom.el)
+(custom-set-faces
+ '(org-checkbox ((t (:height 1.5))))
+ '(org-document-title ((t (:height 1.5 :bold t :underline nil))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.4))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.3))))
+ '(org-level-4 ((t (:inherit outline-3 :height 1.3))))
+ '(org-level-5 ((t (:inherit outline-3 :height 1.2))))
+ '(org-level-6 ((t (:inherit outline-3 :height 1.2))))
+ '(org-level-7 ((t (:inherit outline-3 :height 1.1))))
+ '(org-level-8 ((t (:inherit outline-3 :height 1.1)))))

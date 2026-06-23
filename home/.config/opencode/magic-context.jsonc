@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
+  "historian": {
+    "model": "opencode-go/deepseek-v4-flash"
+  },
+  "dreamer": {
+    "model": "github-copilot/gpt-5-mini"
+  },
+  "sidekick": {
+    "disable": true
+  }
+}
