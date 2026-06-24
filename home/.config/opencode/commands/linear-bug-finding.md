@@ -1,6 +1,6 @@
 ---
-description: Run linear bug finding on current branch diff (loop-compatible).
-agent: build
+description: Run linear bug finding on current branch diff.
+agent: auditor
 subtask: false
 ---
 
