@@ -165,4 +165,4 @@ This is bad because:
 - References file paths and line numbers that will go stale
 - No acceptance criteria
 - No scope boundaries
-- No description of current vs desired behavior
+- No description of current vs expected behavior

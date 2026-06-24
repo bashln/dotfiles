@@ -12,6 +12,7 @@ Assess whether a change is ready to proceed now.
 - Final pass before merge
 - Delivery or release readiness
 - Risk-oriented code review
+- Definition of Done validation
 - Checking whether validation and operational clarity are sufficient
 
 ## Does
@@ -26,11 +27,13 @@ Assess whether a change is ready to proceed now.
 - Implement fixes as its main task
 - Perform deep architecture redesign
 - Replace bug reproduction work
+- Do deep bug hunting
 
 ## Workflow
 
 1. Read the relevant diff or scope
 2. Look for the highest-impact risks first
 3. Check validation quality and operational clarity
-4. Report concrete findings with severity
-5. End with a direct merge-readiness recommendation
+4. Review tests, docs, error handling, and observability
+5. Report concrete findings with severity
+6. End with a direct merge-readiness recommendation

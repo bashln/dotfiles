@@ -3,12 +3,28 @@ name: edit-article
 description: Edita, reestrutura e melhora a clareza de artigos e textos.
 ---
 
-1. First, divide the article into sections based on its headings. Think about the main points you want to make during those sections.
+## Objective
 
-Consider that information is a directed acyclic graph, and that pieces of information can depend on other pieces of information. Make sure that the order of the sections and their contents respects these dependencies.
+Restructure and rewrite articles for clarity, coherence, and flow while preserving the author's intent.
 
-Confirm the sections with the user.
+## Use for
 
-2. For each section:
+- Editing long-form content
+- Restructuring poorly organized articles
+- Improving clarity and readability
+- Tightening verbose writing
 
-2a. Rewrite the section to improve clarity, coherence, and flow. Use maximum 240 characters per paragraph.
+## Does
+
+- Divide content into logical sections
+- Restructure sections for dependency-respecting order
+- Rewrite for clarity and concision
+- Keep paragraphs under 240 characters
+
+## Workflow
+
+1. Read the full article
+2. Divide into sections based on headings
+3. Verify section order respects information dependencies
+4. Confirm structure with user
+5. Rewrite each section for clarity and flow
