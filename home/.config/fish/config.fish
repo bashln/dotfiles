@@ -1,5 +1,5 @@
 # ==========================================================
-# Fish Config — CachyOS (Arch Based)
+# Fish Config — Fedora
 # SysAdmin: Linux | Data: 2025
 # ==========================================================
 
@@ -110,24 +110,27 @@ if status is-interactive
     alias bv='NVIM_APPNAME=bash-nvim nvim'
     alias nviml='NVIM_APPNAME=lazyvim nvim'
 
-    # --- Sistema (PACMAN / ARCH) ---
-    # Anatomia: -S (Sync), -y (Refresh DB), -u (Sys Upgrade)
+    # --- Sistema (DNF / FEDORA) ---
 
-    abbr --add update 'sudo pacman -Syu --noconfirm'
-    abbr --add install 'sudo pacman -S --noconfirm --needed'
-    abbr --add search 'pacman -Ss'
+    function update
+        sudo dnf upgrade --refresh -y
+        if type -q flatpak
+            flatpak update -y
+        end
+        if type -q npm
+            npm update -g
+        end
+        echo "Sistema atualizado."
+    end
+    abbr --add install 'sudo dnf install -y'
+    abbr --add search 'dnf search'
 
-    # Remoção Segura e Recursiva
-    # -R (Remove), -s (Recursive/Dependencies), -n (No backup files)
-    abbr --add remove 'sudo pacman -Rsn'
+    abbr --add remove 'sudo dnf remove -y'
 
-    # Limpeza de Orfãos (Equivalente ao autoremove)
-    # Qtdq: Query, deps não requeridas (t), deps de deps (d), quiet (q)
     function cleanup
-        set orphans (pacman -Qtdq)
-        if test (count $orphans) -gt 0
-            sudo pacman -Rsn $orphans
-            echo "Removidos $orphans"
+        sudo dnf autoremove -y
+        if test $status -eq 0
+            echo "Órfãos removidos."
         else
             echo "Nenhum órfão encontrado."
         end
