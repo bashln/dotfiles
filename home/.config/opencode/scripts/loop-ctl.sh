@@ -71,7 +71,7 @@ cmd_clean_all() {
 cmd_schedule() {
   if ! has_crontab; then
     echo "ERROR: crontab not available. Timed loop mode requires crontab."
-    echo "Install cron (e.g., apt install cron, pacman -S cronie) or use self-paced mode."
+    echo "Install cron (e.g., apt install cron, dnf install cronie) or use self-paced mode."
     exit 1
   fi
   [ $# -lt 3 ] && { echo "USAGE: schedule <id> <interval> <prompt>"; exit 1; }
