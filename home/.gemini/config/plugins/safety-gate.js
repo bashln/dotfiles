@@ -25,8 +25,24 @@ async function main() {
     const input = JSON.parse(inputStr);
     const toolCall = input.toolCall;
     
+    if (!toolCall) {
+      console.log(JSON.stringify({ decision: "allow" }));
+      return;
+    }
+    
+    // Tools de escrita de arquivo → sempre pedir confirmação (modo consultor)
+    const writeTools = ['write_file', 'edit_file'];
+    if (writeTools.includes(toolCall.name)) {
+      console.error(`[Safety Gate] Interceptado: ${toolCall.name}`);
+      console.log(JSON.stringify({
+        decision: "force_ask",
+        reason: `Edição de arquivo detectada (${toolCall.name}). Confirma?`
+      }));
+      return;
+    }
+    
     // Interceptar comando de execução de terminal
-    if (!toolCall || toolCall.name !== 'run_command') {
+    if (toolCall.name !== 'run_command') {
       console.log(JSON.stringify({ decision: "allow" }));
       return;
     }

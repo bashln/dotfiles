@@ -10,6 +10,24 @@
             "command": "node \"C:\\Users\\itinerario\\.gemini\\config\\plugins\\safety-gate.js\""
           }
         ]
+      },
+      {
+        "matcher": "write_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:\\Users\\itinerario\\.gemini\\config\\plugins\\safety-gate.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "edit_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:\\Users\\itinerario\\.gemini\\config\\plugins\\safety-gate.js\""
+          }
+        ]
       }
     ]
   }

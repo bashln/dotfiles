@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "cyberdream",
   "default_agent": "build",
   "mcp": {
     "supabase": {
@@ -27,7 +28,7 @@
   },
   "agent": {
     "build": {
-      // "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/deepseek-v4-flash",
       "permission": {
         "edit": "allow",
         "bash": "allow",
@@ -48,7 +49,7 @@
     },
     "goal-worker": {
       "description": "Executes goal checkpoints autonomously toward a durable objective.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/deepseek-v4-flash",
       "mode": "subagent",
       "permission": {
         "edit": "allow",
@@ -61,12 +62,12 @@
     },
     "executor": {
       "description": "Mechanical execution agent.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/deepseek-v4-flash",
       "mode": "subagent"
     },
     "analista": {
       "description": "Refactor agent.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/deepseek-v4-flash",
       "mode": "subagent"
     },
     "debug": {
@@ -86,7 +87,7 @@
     },
     "tester": {
       "description": "Tester agent.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/deepseek-v4-flash",
       "mode": "subagent"
     },
     "planner": {
@@ -100,7 +101,7 @@
       "mode": "subagent"
     },
     "cavecrew-investigator": {
-      "model": "opencode/mimo-v2.5-free",
+      "model": "opencode/deepseek-v4-flash-free",
       "mode": "subagent"
     },
     "cavecrew-builder": {
@@ -112,7 +113,7 @@
       "mode": "subagent"
     },
     "tutor": {
-      "model": "opencode/mimo-v2.5-free",
+      "model": "opencode/deepseek-v4-flash-free",
       "mode": "primary"
     }
   },
