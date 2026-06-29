@@ -21,7 +21,7 @@
     (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "FiraCode Nerd Font" "JetBrainsMono Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "Maple Mono NF" "JetBrainsMono Nerd Font")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 
@@ -586,20 +586,7 @@
 (add-hook 'flycheck-error-list-mode-hook #'+close-buffer-with-q)
 (add-hook 'compilation-mode-hook #'+close-buffer-with-q)
 
-;; Auto-format on save (LazyVim style)
-;; NOTA: org-mode não tem formatter nativo no Apheleia, então ignoramos
-(defun +leo/format-buffer-on-save-h ()
-  "Format the current buffer on save when it is cheap and safe to do so."
-  (when (and (fboundp '+format/buffer)
-             buffer-file-name
-             (not (memq major-mode '(org-mode)))
-             (not (+leo/windows-mounted-path-p buffer-file-name)))
-    (condition-case err
-        (+format/buffer)
-      (error
-       (message "[doom-format] %s: %s" major-mode (error-message-string err))))))
 
-(add-hook 'before-save-hook #'+leo/format-buffer-on-save-h)
 
 ;; Conceallevel para arquivos específicos
 (setq-hook! 'json-mode-hook conceal-level 0)
