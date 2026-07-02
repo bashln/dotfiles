@@ -85,6 +85,8 @@ build/
 
 # Ignore opencode generated/temp files
 home/.config/opencode/.codex*
+home/.config/opencode/.caveman-active
+home/.config/opencode/.ponytail-active
 # But track opencode commands
 !home/.config/opencode/commands/*.md
 

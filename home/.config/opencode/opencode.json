@@ -120,8 +120,7 @@
   "plugin": [
     "./plugins/caveman/plugin.js",
     "@cortexkit/opencode-magic-context@latest",
-    "@cortexkit/aft-opencode@latest",
-    "C:\\Users\\itinerario\\Documents\\leo\\development\\ai-tools\\ponytail\\.opencode\\plugins\\ponytail.mjs"
+    "@cortexkit/aft-opencode@latest"
   ],
   "compaction": {
     "auto": false,

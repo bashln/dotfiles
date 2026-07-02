@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:\\Users\\itinerario\\.gemini\\config\\plugins\\safety-gate.js\""
+            "command": "node \"$HOME/.gemini/config/plugins/safety-gate.js\""
           }
         ]
       },
@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:\\Users\\itinerario\\.gemini\\config\\plugins\\safety-gate.js\""
+            "command": "node \"$HOME/.gemini/config/plugins/safety-gate.js\""
           }
         ]
       },
@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:\\Users\\itinerario\\.gemini\\config\\plugins\\safety-gate.js\""
+            "command": "node \"$HOME/.gemini/config/plugins/safety-gate.js\""
           }
         ]
       }
