@@ -17,6 +17,13 @@ export PATH
 alias enc7z='7zz a -t7z -p -mhe=on'
 alias dec7z='7zz x -p'
 
+# System helpers (dnf — Fedora)
+alias update='sudo dnf upgrade --refresh -y'
+alias install='sudo dnf install -y'
+alias search='dnf search'
+alias remove='sudo dnf remove -y'
+alias cleanup='sudo dnf autoremove -y'
+
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
   for rc in ~/.bashrc.d/*; do
