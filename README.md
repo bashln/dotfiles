@@ -1,65 +1,77 @@
 # dotfiles
 
-Repositorio de dotfiles para Linux. A `main` ainda reflete o fluxo atual com chezmoi; a branch `linux` concentra a migracao controlada para GNU Stow.
+Repositório de dotfiles pessoais. Instalado via **GNU Stow** (ou fallback manual via `install.sh`).
 
-## Destaques
-- Shells: Bash e Zsh
-- WMs/Bars/Launcher: Hyprland, Qtile, Polybar, Rofi
-- Terminais: Alacritty, Kitty, WezTerm, Ghostty, Rio
-- Editores: Neovim (LazyVim) e Doom Emacs
-- Outros: Yazi
+## Stack
+
+- **Shell**: Zsh (default) + Fish
+- **WM**: Hyprland (principal), Niri (secundário)
+- **Bar/Launcher**: Waybar, Rofi, Walker
+- **Terminais**: Alacritty, Kitty, Ghostty
+- **Editor**: Neovim (LazyVim / AstroNvim / bash-nvim)
+- **Outros**: Yazi (file manager), Doom Emacs (ocasional)
 
 ## Estrutura
-- `dot_config/` -> `~/.config/`
-- `dot_gitignore` -> `~/.gitignore`
-- `.chezmoiignore` -> arquivos ignorados pelo chezmoi
+
+```
+.
+├── home/                      # Pacote Stow (prefixo vira ~/)
+│   ├── .bashrc
+│   ├── .zshrc
+│   ├── .agents/               # Skills/agents
+│   ├── .config/
+│   │   ├── alacritty/
+│   │   ├── fish/
+│   │   ├── hypr/
+│   │   ├── kitty/
+│   │   ├── nvim/
+│   │   ├── opencode/
+│   │   └── waybar/
+│   └── .gemini/               # Gemini CLI config
+├── install.sh                 # Bootstrap (stow + fallback symlink)
+└── .gitignore
+```
+
+`home/<path>` → `~/<path>` via `stow -t $HOME -S home`.
 
 ## Requisitos
-- Linux
-- chezmoi
-- Dependencias opcionais conforme as configs (ex.: qtile, alacritty, kitty, wezterm, rofi, nvim, doom-emacs)
 
-## Instalacao rapida
+- Linux (testado em Fedora)
+- `git`, `stow` (Fedora: `sudo dnf install stow`)
 
-```bash
-git clone https://github.com/leonamduarte/dotfiles.git ~/.local/share/chezmoi
-cd ~/.local/share/chezmoi
-git checkout main
-chezmoi apply --force
-```
-
-## Uso
-Para reaplicar os dotfiles depois de alterar o repo:
+## Instalação rápida
 
 ```bash
-cd ~/.local/share/chezmoi
-chezmoi apply --force
+git clone https://github.com/bashln/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
 ```
 
-1. Edite os arquivos dentro de `dot_config/` e `dot_gitignore`.
-2. Reaplique com `chezmoi apply --force`.
-
-## Guardrails (anti-drift)
-- `node_modules` e arquivos transientes sao bloqueados por `.gitignore`.
-- Validacao local: `bash scripts/guardrails-check.sh`
-- Validacao em CI: `.github/workflows/chezmoi-guardrails.yml`
-- Fluxo multi-maquina e recuperacao: `docs/chezmoi-guardrails.md`
-
-## Seguranca
-O `.gitignore` bloqueia arquivos sensiveis (ex.: `.ssh`, `.gnupg`, `.aws`, chaves privadas). Nao commit arquivos de credenciais.
+O script:
+1. Cria symlinks via `stow` (ou fallback manual se stow não estiver disponível)
+2. Configura zsh como shell default (instala via `dnf` se faltar)
+3. Backup automático de arquivos conflitantes (`*.backup.YYYYMMDDHHMMSS`)
 
 ## Workflow
-- A branch principal multi-maquina e `main`.
-- Prefira branch separada + PR para mudancas grandes.
-- Antes de editar, sincronize com `origin/main` e reaplique com `chezmoi apply --force`.
 
-## Migracao para Stow
-- Guia: `docs/stow-migration.md`
-- Bootstrap seguro: `bash scripts/migrate-to-stow.sh`
-- Inventario de conflitos: `bash scripts/list-stow-conflicts.sh`
-- Exemplo de sync manual: `scripts/stow-sync.sh.example`
-- Regra fixa: nunca usar `stow --adopt`
-- Para dotfiles em `~/`, use `stow --dotfiles`
+```bash
+# Editar config
+vim ~/dotfiles/home/.config/hypr/bindings.conf
 
-## Creditos
-Parte das configs (ex.: Qtile) vem de bases publicas e foram ajustadas localmente.
+# Reaplicar (atualiza os symlinks)
+cd ~/dotfiles && stow -t $HOME -S home
+
+# Ou usar o install.sh (mais robusto, faz backup)
+./install.sh
+```
+
+## Convenções
+
+- **Package manager**: aliases usam `dnf` (Fedora). Ver `home/.zshrc`, `home/.config/fish/config.fish`, `home/.bashrc`.
+- **Configurações sensíveis** (`.ssh`, `.gnupg`, `.aws`, chaves, `fish_variables`): **nunca** commitadas (ver `.gitignore`).
+- **Opencode plugins locais** (`aft.json`, `magic-context.jsonc`): migradas para `~/.config/cortexkit/` (shared location).
+
+## Remotes
+
+- `origin`: github.com/bashln/dotfiles
+- `gitlab`: gitlab.com/bashln/dotfiles
