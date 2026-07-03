@@ -21,7 +21,7 @@
     (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "Maple Mono NF" "JetBrainsMono Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "CaskaydiaCove NF" "JetBrainsMono Nerd Font")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 

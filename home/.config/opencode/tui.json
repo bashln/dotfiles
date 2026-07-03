@@ -3,7 +3,6 @@
   "theme": "system",
   "plugin": [
     "@cortexkit/opencode-magic-context@latest",
-    "@cortexkit/aft-opencode@latest",
-    "@tarquinen/opencode-dcp@latest"
+    "@cortexkit/aft-opencode@latest"
   ]
 }
