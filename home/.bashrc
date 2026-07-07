@@ -43,3 +43,9 @@ export PATH="/home/bashln/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
+# Clean up terminal on exit — fixes opencode mouse tracking leak
+trap 'printf "\e[?1000l\e[?1003l\e[?1006l\e[?1049l"' EXIT
