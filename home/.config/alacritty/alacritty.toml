@@ -1,4 +1,4 @@
-# Alacritty config — ported from kitty (Carbonfox theme)
+# Alacritty config — ported from kitty (Tokyo Night theme)
 
 [env]
 TERM = "xterm-256color"
@@ -34,32 +34,32 @@ style = { shape = "Block", blinking = "Off" }
 duration = 0
 
 [colors.primary]
-foreground = "#f2f4f8"
-background = "#161616"
+foreground = "#c0caf5"
+background = "#1a1b26"
 
 [colors.selection]
-text = "#f2f4f8"
-background = "#2a2a2a"
+text = "#c0caf5"
+background = "#283457"
 
 [colors.normal]
-black = "#282828"
-red = "#ee5396"
-green = "#25be6a"
-yellow = "#ebcb8b"
-blue = "#78a9ff"
-magenta = "#be95ff"
-cyan = "#33b1ff"
-white = "#dfdfe0"
+black   = "#15161e"
+red     = "#f7768e"
+green   = "#9ece6a"
+yellow  = "#e0af68"
+blue    = "#7aa2f7"
+magenta = "#bb9af7"
+cyan    = "#7dcfff"
+white   = "#a9b1d6"
 
 [colors.bright]
-black = "#484848"
-red = "#f16da6"
-green = "#46c880"
-yellow = "#f0d399"
-blue = "#8cb6ff"
-magenta = "#c8a5ff"
-cyan = "#52bdff"
-white = "#e4e4e5"
+black   = "#414868"
+red     = "#ff899d"
+green   = "#9fe044"
+yellow  = "#faba4a"
+blue    = "#8db0ff"
+magenta = "#c7a9ff"
+cyan    = "#a4daff"
+white   = "#c0caf5"
 
 [[keyboard.bindings]]
 key = "Insert"
