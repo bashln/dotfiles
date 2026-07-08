@@ -1,0 +1,72 @@
+# Alacritty config — ported from kitty (Carbonfox theme)
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding = { x = 14, y = 14 }
+decorations = "None"
+opacity = 0.95
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+
+[bell]
+duration = 0
+
+[colors.primary]
+foreground = "#f2f4f8"
+background = "#161616"
+
+[colors.selection]
+text = "#f2f4f8"
+background = "#2a2a2a"
+
+[colors.normal]
+black = "#282828"
+red = "#ee5396"
+green = "#25be6a"
+yellow = "#ebcb8b"
+blue = "#78a9ff"
+magenta = "#be95ff"
+cyan = "#33b1ff"
+white = "#dfdfe0"
+
+[colors.bright]
+black = "#484848"
+red = "#f16da6"
+green = "#46c880"
+yellow = "#f0d399"
+blue = "#8cb6ff"
+magenta = "#c8a5ff"
+cyan = "#52bdff"
+white = "#e4e4e5"
+
+[[keyboard.bindings]]
+key = "Insert"
+mods = "Control"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "Insert"
+mods = "Shift"
+action = "Paste"
