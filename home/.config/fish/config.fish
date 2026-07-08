@@ -4,30 +4,43 @@
 # ==========================================================
 
 # ----------------------------------------------------------
-# 0) Verificação de Interatividade
+# 0) PATHs e Variáveis de Ambiente (fora do is-interactive)
+# ----------------------------------------------------------
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/bin
+fish_add_path $HOME/go/bin
+fish_add_path $HOME/.cargo/bin
+fish_add_path /usr/local/bin
+fish_add_path $HOME/.npm-global/bin
+
+# Neovim manual (se existir, embora no Arch usemos o do repo geralmente)
+if test -d /opt/nvim-linux-x86_64/bin
+    fish_add_path /opt/nvim-linux-x86_64/bin
+end
+
+# Editor Padrão
+set -gx EDITOR nvim
+
+# Doom Emacs no layout atual via stow
+set -gx DOOMDIR "$HOME/.config/doom"
+
+# Qt/GTK dark theme
+set -gx QT_QPA_PLATFORMTHEME qt5ct
+set -gx GTK_THEME Adwaita:dark
+
+# WSL cursor size matching Windows (24 = default, 32/48 for larger)
+if set -q WSLENV
+    set -gx XCURSOR_SIZE 24
+end
+
+# ----------------------------------------------------------
+# 1) Verificação de Interatividade
 # ----------------------------------------------------------
 if status is-interactive
 
     # ----------------------------------------------------------
-    # 1) PATHs e Variáveis de Ambiente
+    # 2) Configurações Nativas do Fish
     # ----------------------------------------------------------
-    fish_add_path $HOME/.local/bin
-    fish_add_path $HOME/bin
-    fish_add_path $HOME/go/bin
-    fish_add_path $HOME/.cargo/bin
-    fish_add_path /usr/local/bin
-    fish_add_path $HOME/.npm-global/bin
-
-    # Neovim manual (se existir, embora no Arch usemos o do repo geralmente)
-    if test -d /opt/nvim-linux-x86_64/bin
-        fish_add_path /opt/nvim-linux-x86_64/bin
-    end
-
-    # Editor Padrão
-    set -gx EDITOR nvim
-
-    # Doom Emacs no layout atual via stow
-    set -gx DOOMDIR "$HOME/.config/doom"
 
     # ----------------------------------------------------------
     # 2) Configurações Nativas do Fish
