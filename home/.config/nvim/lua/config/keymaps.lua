@@ -5,7 +5,6 @@ local opts = { noremap = true, silent = true }
 ---@field picker table
 ---@field explorer fun()
 ---@field layout table
-Snacks = Snacks
 
 map("n", "-", "<cmd>Oil --float<CR>", { desc = "Oil: Parent (float)" })
 map("n", "<leader>.", "<cmd>Yazi<cr>", { desc = "Open yazi at the current file" })
