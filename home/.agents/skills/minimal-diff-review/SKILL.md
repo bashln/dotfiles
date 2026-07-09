@@ -3,107 +3,202 @@ name: minimal-diff-review
 description: >
   Reviews git diffs looking exclusively for unnecessary changes that increase
   review cost. Finds formatting churn, unrelated refactors, incidental edits,
-  generated noise and changes that should be split into another commit or PR.
-  Use when preparing a commit, opening a pull request, reviewing AI-generated
-  changes, or whenever the goal is to produce the smallest possible diff.
+  generated noise, and changes that should be split into another commit or PR.
+  Use before commits, pull requests, or after AI-generated changes.
 ---
 
-## Step 0 — Deterministic pre-filter (run before reasoning)
+## Goal
 
-Run these commands first. Do not skip this step.
+Review the diff from the perspective of a strict maintainer.
+
+Your objective is **NOT** to improve the code.
+
+Your objective is to **reduce review cost**.
+
+Assume the default decision is `keep`.
+
+Only flag changes when there is clear evidence they are unrelated, noisy,
+incidental, or should be split into another commit or PR.
+
+Review the **diff**, not the implementation.
+
+Do **not** audit:
+
+- correctness
+- code quality
+- architecture
+- security
+- performance
+
+Only determine whether each change deserves to exist in this diff.
+
+---
+
+## Step 0 — Deterministic pre-filter
+
+If Git is available, run:
 
 ```bash
-git diff --stat                 # exact files/lines changed — use these numbers verbatim in the final report
-git diff -w                     # whitespace-insensitive diff — this is what you actually review
+git diff -w    # this is the diff you review below — whitespace noise already stripped
+git diff --stat
+git diff --name-status
+git diff -w --stat
 ```
 
-If `git diff -w` shows no changes for a file that appears in `git diff --stat`,
-that file is 100% whitespace noise. Tag it `noise:` immediately without
-further reasoning — do not spend analysis on it.
+Use these numbers verbatim in the final report.
 
-## Reviewing the filtered diff
+If a file appears in `git diff --stat` but disappears from
+`git diff -w --stat`, classify it immediately as:
 
-Review the remaining diff from the perspective of a strict open source maintainer.
+```
+noise: whitespace-only change
+```
 
-Assume every changed line must justify its existence.
+Do not inspect that file further.
 
-The default decision is KEEP.
+If Git is unavailable, review the provided diff using the same principles.
 
-Only flag a change if there is clear evidence it increases review cost without improving the feature.
+---
 
-Your objective is NOT to improve the code.
-Your objective is to reduce review cost.
+## Hard stop rules
 
-Only flag modifications unrelated to the intended feature or bugfix.
+Never inspect repeated internal structures entry by entry.
 
-Never suggest behavioral changes.
-Never suggest architectural improvements.
-Never suggest refactors unless they should be moved into a separate commit.
+Examples:
 
-## Output format
+- highlight definitions
+- syntax mappings
+- color tables
+- generated theme entries
+- snapshots
+- fixture data
+- lockfiles
+- generated assets
+- compiled files
 
-One finding per line, machine-parseable:
-<file>:L<line>: <tag> <finding>. <recommended action>.
+For files dominated by homogeneous generated content, classify the **entire file once**.
 
-or, when the finding affects the whole file:
-<file>: <tag> <finding>. <recommended action>.
+Only ask:
+
+- Does this file belong to the requested feature?
+- Is it obviously generated junk?
+- Should it belong to another commit?
+
+If the answer is obvious, stop there.
+
+Do **not** verify every generated entry.
+
+---
+
+## Reviewing everything else
+
+Flag only:
+
+- unrelated files
+- formatting churn
+- whitespace-only edits
+- incidental refactors
+- unnecessary renames
+- unnecessary reordering
+- generated comments
+- code motion without behavioral changes
+- changes that increase merge conflict risk
+- changes that belong in another commit or PR
+
+Never suggest:
+
+- behavioral changes
+- architectural improvements
+- code simplifications
+- performance optimizations
+
+Those belong to other review passes.
+
+---
+
+## Circuit breaker
+
+Stop immediately if:
+
+- you exceed 8 tool calls, **or**
+- you are no longer discovering new findings.
+
+Do **not** continue reviewing merely to increase confidence.
+
+If stopped early, report:
+
+```
+Confidence: Low — stopped early.
+```
+
+---
 
 ## Tags
 
-- `keep:` — Required change. Leave it.
-- `noise:` — No functional value: formatting, rename, reorder, style,
-  whitespace, generated comments, quote changes, code motion. No behavioral
-  difference, regardless of what caused it.
-- `split:` — Legitimate change, but belongs in another commit/PR.
-- `question:` — Ambiguous. Might be intentional (e.g. consistency with the
-  rest of the codebase). Do not decide — ask.
+- `noise:` no functional value
+- `split:` legitimate change that belongs elsewhere
+- `question:` intent is unclear; ask the human
+- `keep:` only when necessary to explain an exception
 
-Do not use finer-grained tags than this. If unsure between `noise` and
-`question`, prefer `question` — false positives on "revert this" are worse
-than an extra question to the human.
+Silence is the default for correct changes.
 
-## Things to ignore
+Do **not** emit `keep:` findings unless they add value.
 
-Bug fixes required by the feature.
-Necessary API adjustments.
-Tests required by the implementation.
-Minimal assertions or smoke tests.
-Required documentation.
-License updates required for the change.
+---
 
-## Counting the report (do this with a command, not by re-reading the diff)
+## Output format
 
-After producing the tagged findings above, count them mechanically:
+One finding per relevant file or range.
 
-```bash
-grep -c '^\S*: noise:' <findings>
-grep -c '^\S*: split:' <findings>
-grep -c '^\S*: question:' <findings>
+```
+<file>: <tag> <finding>. <recommended action>.
 ```
 
-Use `git diff --stat` from Step 0 for total files/lines — never re-estimate
-these numbers from memory of the diff.
+or
+
+```
+<file>:L<line>: <tag> <finding>. <recommended action>.
+```
+
+---
 
 ## Final report
 
+```text
 Review Cost
-Files changed: <from git diff --stat>
-Required (keep): <count>
-Noise: <count>
-Should split: <count>
-Needs a question: <count>
+
+Files changed:      <git diff --stat>
+Required:           <count or "all remaining">
+Noise:              <count>
+Should split:       <count>
+Needs a question:   <count>
+
 Recommendation:
 
 Keep as-is
+
 or
+
 Revert/split the listed changes before commit.
 
 Confidence:
-High → no ambiguous findings, proceed
-Medium → some question: findings, human should skim before commit
-Low → many question: findings or unclear feature boundary — do not
-auto-commit, human review required
 
-If nothing unnecessary is found, output only:
+High
+→ Safe to commit.
+
+Medium
+→ Human should skim the flagged findings.
+
+Low
+→ Human review required before commit.
+```
+
+---
+
+If no unnecessary changes are found, output only:
+
+```text
 Minimal diff.
+
 Lean already. Ship.
+```
