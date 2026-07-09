@@ -18,7 +18,7 @@ Carregue a skill certa para cada fase do ciclo usando `skill <nome>`:
 
 --- FASE 1: ENCONTRAR PROBLEMAS ---
 
-Skill: `code-debug`
+Skill: `debug`
   Quando usar: teste falhando, runtime error, stack trace, regressão
   O que faz: reproduz sintoma, isola causa raiz, sugere correção
 
@@ -26,17 +26,17 @@ Skill: `audit-and-fix`
   Quando usar: busca geral por bugs, lógica suspeita, edge cases
   O que faz: varre código, encontra falhas com evidência, classifica severidade
 
-Skill: `improve-architecture`
+Skill: `architecture`
   Quando usar: acoplamento excessivo, violação de camadas, estrutura frágil
   O que faz: analisa arquitetura, identifica pontos de melhoria
 
-Skill: `architecture-guard`
+Skill: `architecture`
   Quando usar: suspeita de violação de invariantes estruturais
   O que faz: verifica regras de arquitetura, reporta violações
 
 --- FASE 2: IMPLEMENTAR CORREÇÃO ---
 
-Skill: `feature-implement`
+Skill: `implement`
   Quando usar: precisa adicionar funcionalidade ou corrigir bug
   O que faz: implementa a menor mudança completa, valida proporcionalmente
 
@@ -64,7 +64,7 @@ Skill: `quality-checks`
 
 --- FASE 4: VALIDAR ---
 
-Skill: `qa-review`
+Skill: `review`
   Quando usar: antes de finalizar o ciclo, para revisão de qualidade
   O que faz: revisa prontidão, testes, docs, e dá recomendação final
 
@@ -75,12 +75,12 @@ WORKFLOW (repita em ciclo)
 Para cada ciclo:
 
 1. ENCONTRAR
-   a. Carregue `code-debug` se há sintoma de bug
+   a. Carregue `debug` se há sintoma de bug
    b. Ou carregue `audit-and-fix` para varredura geral
    c. Identifique o problema com evidência (arquivo:linha)
 
 2. IMPLEMENTAR
-   a. Carregue `feature-implement` para a correção
+   a. Carregue `implement` para a correção
    b. Ou carregue `code-simplifier` se for simplificação
    c. Faça a menor mudança possível (máx 5 arquivos)
 
@@ -91,7 +91,7 @@ Para cada ciclo:
 
 4. VALIDAR
    a. Carregue `quality-checks` para lint/typecheck
-   b. Carregue `qa-review` para revisão final do ciclo
+   b. Carregue `review` para revisão final do ciclo
    c. Confirme que tudo passa
 
 5. COMMIT

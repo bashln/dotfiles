@@ -90,10 +90,10 @@ Este loop é diferente dos outros — ele **edita o código** e usa as skills do
 
 | Fase | Skill | O que faz |
 |---|---|---|
-| Encontrar | `code-debug` / `audit-and-fix` | Isola bugs, encontra falhas com evidência |
-| Implementar | `feature-implement` / `code-simplifier` | Corrige com a menor mudança possível |
+| Encontrar | `debug` / `audit-and-fix` | Isola bugs, encontra falhas com evidência |
+| Implementar | `implement` / `code-simplifier` | Corrige com a menor mudança possível |
 | Testar | `tdd` / `test-suite` / `quality-checks` | Cria testes, roda lint, typecheck |
-| Validar | `qa-review` | Revisão final de qualidade |
+| Validar | `review` | Revisão final de qualidade |
 
 **Fluxo por ciclo:**
 1. Carrega skill → encontra problema
@@ -198,16 +198,15 @@ O loop `interactive-improve` carrega skills do diretório `.agents/skills/` em c
 
 | Skill | Localização | Uso |
 |---|---|---|
-| `code-debug` | `.agents/skills/code-debug/` | Isolar bugs com evidência |
+| `debug` | `.agents/skills/debug/` | Isolar bugs com evidência |
 | `audit-and-fix` | `.agents/skills/audit-and-fix/` | Auditoria geral de código |
-| `improve-architecture` | `.agents/skills/improve-architecture/` | Melhorias arquiteturais |
-| `architecture-guard` | `.agents/skills/architecture-guard/` | Verificar invariantes |
-| `feature-implement` | `.agents/skills/feature-implement/` | Implementar correções |
+| `architecture` | `.agents/skills/architecture/` | Melhorias arquiteturais e invariantes |
+| `implement` | `.agents/skills/implement/` | Implementar correções |
 | `code-simplifier` | `.agents/skills/code-simplifier/` | Simplificar código |
 | `tdd` | `.agents/skills/tdd/` | Test-driven development |
 | `test-suite` | `.agents/skills/test-suite/` | Suíte de testes |
 | `quality-checks` | `.agents/skills/quality-checks/` | Lint e typecheck |
-| `qa-review` | `.agents/skills/qa-review/` | Revisão de qualidade |
+| `review` | `.agents/skills/review/` | Revisão de qualidade |
 
 ## Diferença entre `loop` e `timed`
 

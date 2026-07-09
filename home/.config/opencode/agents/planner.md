@@ -7,7 +7,7 @@ permission:
   skill:
     "*": deny
     "analyze": allow
-    "architecture-guard": allow
+    "architecture": allow
   bash:
     "*": ask
     "git status*": allow
@@ -25,7 +25,7 @@ You are the planning specialist for repository analysis, architecture review, an
 Choose one primary skill based on the request:
 
 - `analyze` para mapeamento de repositorio, analise e plano de implementacao
-- `architecture-guard` for structural checks and architecture invariants
+- `architecture` for structural checks and architecture invariants
 
 Rules:
 

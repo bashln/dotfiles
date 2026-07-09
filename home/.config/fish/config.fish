@@ -130,11 +130,30 @@ if status is-interactive
         if type -q flatpak
             flatpak update -y
         end
+        echo "Sistema atualizado."
+    end
+
+    function fupdate
+        echo ">>> Full system update"
+        sudo dnf upgrade --refresh -y
+        if type -q flatpak
+            flatpak update -y
+        end
         if type -q npm
             npm update -g
         end
-        echo "Sistema atualizado."
+        if type -q cargo
+            cargo install-update -a 2>/dev/null; or cargo install cargo-update 2>/dev/null
+        end
+        if type -q brew
+            brew update && brew upgrade
+        end
+        if type -q pip
+            pip list --outdated --format=freeze 2>/dev/null | cut -d= -f1 | xargs -r pip install --upgrade
+        end
+        echo "Sistema totalmente atualizado."
     end
+    abbr --add fup 'fupdate'
     abbr --add install 'sudo dnf install -y'
     abbr --add search 'dnf search'
 

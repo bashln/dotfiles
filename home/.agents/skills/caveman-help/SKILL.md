@@ -25,8 +25,8 @@ Mode stick until changed or session end.
 | Skill | Trigger | What it do |
 |-------|---------|-----------|
 | **caveman-commit** | `/caveman-commit` | Terse commit messages. Conventional Commits. ≤50 char subject. |
-| **caveman-review** | `/caveman-review` | One-line PR comments: `L42: bug: user null. Add guard.` |
-| **caveman-compress** | `/caveman:compress <file>` | Compress .md files to caveman prose. Saves ~46% input tokens. |
+| **caveman-review** | `/caveman-review` | Review mode; maps internally to the `review` flow. |
+| **compress** | `/caveman-compress <file>` | Compress .md files to caveman prose. Saves ~46% input tokens. |
 | **caveman-help** | `/caveman-help` | This card. |
 
 ## Deactivate
