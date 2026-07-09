@@ -7,6 +7,7 @@ Find files, dependencies, code flows, integration points, or patterns in the cod
 ## Permissions
 
 ✅ READ-ONLY — never modify anything
+
 - ✅ Read files
 - ✅ Grep/rg/find
 - ✅ aft_inspect, aft_outline, aft_zoom
@@ -29,11 +30,13 @@ Find files, dependencies, code flows, integration points, or patterns in the cod
 ## Flags
 
 ### Scope
+
 - `--scope repo` — search entire repository (default)
 - `--scope dir <path>` — search specific directory
 - `--scope recent` — search recent changes (last 7 days)
 
 ### Focus
+
 - `--focus files` — find files by name or content pattern
 - `--focus deps` — find package dependencies
 - `--focus flow` — trace data/logic flow for a concept
@@ -42,6 +45,7 @@ Find files, dependencies, code flows, integration points, or patterns in the cod
 - `--focus duplicates` — find duplicate code patterns
 
 ### Options
+
 - `--verbose` — show detailed output with file paths and line numbers
 - `--dry-run` — explain what would be searched without executing
 - `--budget micro|medium|full` — control search depth (default: medium)
