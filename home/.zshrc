@@ -74,12 +74,12 @@ alias nviml='NVIM_APPNAME=lazyvim nvim'
 alias nconf='nvim ~/.zshrc'
 alias src='source ~/.zshrc'
 
-# System helpers (dnf — Fedora)
-alias update='sudo dnf upgrade --refresh -y'
-alias install='sudo dnf install -y'
-alias search='dnf search'
-alias remove='sudo dnf remove -y'
-alias cleanup='sudo dnf autoremove -y'
+# System helpers (pacman — CachyOS)
+alias update='sudo pacman -Syu'
+alias install='sudo pacman -S'
+alias search='pacman -Ss'
+alias remove='sudo pacman -Rns'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null; paru -c 2>/dev/null; true'
 alias jctl='journalctl -p 3 -xb'
 
 # Navigation
@@ -121,7 +121,8 @@ log() {
 }
 
 cleanup-orphans() {
-  sudo dnf autoremove -y
+  sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null || true
+  paru -c 2>/dev/null || true
 }
 
 doomsync() {
@@ -145,7 +146,9 @@ doomupd() {
 # ------------------------------------------------------------------
 
 # Homebrew (Linux)
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
 
 eval "$(starship init zsh)"
 
