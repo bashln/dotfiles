@@ -17,12 +17,12 @@ export PATH
 alias enc7z='7zz a -t7z -p -mhe=on'
 alias dec7z='7zz x -p'
 
-# System helpers (pacman — Arch/CachyOS)
+# System helpers (pacman — CachyOS)
 alias update='sudo pacman -Syu'
-alias install='sudo pacman -S --noconfirm'
+alias install='sudo pacman -S'
 alias search='pacman -Ss'
 alias remove='sudo pacman -Rns'
-alias cleanup='sudo pacman -Sc'
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null; paru -c 2>/dev/null; true'
 
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
@@ -44,5 +44,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Homebrew (Linux)
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+fi
 # Clean up terminal on exit — fixes opencode mouse tracking leak
 trap 'printf "\e[?1000l\e[?1003l\e[?1006l\e[?1049l"' EXIT

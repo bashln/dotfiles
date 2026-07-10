@@ -278,8 +278,10 @@ end
 # opencode
 fish_add_path $HOME/.opencode/bin
 
-# Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+# Homebrew (Linux)
+if test -x /home/linuxbrew/.linuxbrew/bin/brew
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv fish)"
+end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
