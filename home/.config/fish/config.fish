@@ -123,10 +123,10 @@ if status is-interactive
     alias bv='NVIM_APPNAME=bash-nvim nvim'
     alias nviml='NVIM_APPNAME=lazyvim nvim'
 
-    # --- Sistema (DNF / FEDORA) ---
+    # --- Sistema (PACMAN / CACHYOS) ---
 
     function update
-        sudo dnf upgrade --refresh -y
+        sudo pacman -Syu
         if type -q flatpak
             flatpak update -y
         end
@@ -135,7 +135,7 @@ if status is-interactive
 
     function fupdate
         echo ">>> Full system update"
-        sudo dnf upgrade --refresh -y
+        sudo pacman -Syu
         if type -q flatpak
             flatpak update -y
         end
@@ -154,18 +154,19 @@ if status is-interactive
         echo "Sistema totalmente atualizado."
     end
     abbr --add fup 'fupdate'
-    abbr --add install 'sudo dnf install -y'
-    abbr --add search 'dnf search'
-
-    abbr --add remove 'sudo dnf remove -y'
+    abbr --add install 'sudo pacman -S'
+    abbr --add search 'pacman -Ss'
+    abbr --add remove 'sudo pacman -Rns'
 
     function cleanup
-        sudo dnf autoremove -y
-        if test $status -eq 0
+        set orphans (pacman -Qtdq 2>/dev/null)
+        if test -n "$orphans"
+            sudo pacman -Rns --noconfirm $orphans
             echo "Órfãos removidos."
         else
             echo "Nenhum órfão encontrado."
         end
+        paru -c 2>/dev/null; or true
     end
 
     # Logs do sistema
