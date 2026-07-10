@@ -71,24 +71,24 @@
     },
     "planner": {
       "description": "Planning agent.",
-      "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.6-terra",
       "mode": "subagent"
     },
     "auditor": {
       "description": "Audit and review agent.",
-      "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.6-terra",
       "mode": "subagent"
     },
     "cavecrew-investigator": {
-      "model": "opencode/deepseek-v4-flash-free",
+      "model": "opencode-go/qwen3.7-plus",
       "mode": "subagent"
     },
     "cavecrew-builder": {
-      "model": "opencode/north-mini-code-free",
+      "model": "opencode-go/deepseek-v4-flash",
       "mode": "subagent"
     },
     "cavecrew-reviewer": {
-      "model": "github-copilot/claude-haiku-4.5",
+      "model": "openai/gpt-5.6-terra",
       "mode": "subagent"
     },
     "tutor": {
