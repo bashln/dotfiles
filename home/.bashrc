@@ -48,6 +48,5 @@ export NVM_DIR="$HOME/.nvm"
 if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
 fi
-
 # Clean up terminal on exit — fixes opencode mouse tracking leak
 trap 'printf "\e[?1000l\e[?1003l\e[?1006l\e[?1049l"' EXIT
