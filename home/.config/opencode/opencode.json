@@ -3,11 +3,11 @@
   "skills": {
     "paths": ["~/.agents/skills"]
   },
-  "theme": "tokyonight",
+  "theme": "onedark",
   "default_agent": "build",
   "agent": {
     "build": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/deepseek-v4-pro",
       "permission": {
         "edit": "allow",
         "bash": "allow",
@@ -71,16 +71,16 @@
     },
     "planner": {
       "description": "Planning agent.",
-      "model": "openai/gpt-5.6-terra",
+      "model": "opencode-go/qwen3.7-plus",
       "mode": "subagent"
     },
     "auditor": {
       "description": "Audit and review agent.",
-      "model": "openai/gpt-5.6-terra",
+      "model": "opencode-go/deepseek-v4-pro",
       "mode": "subagent"
     },
     "cavecrew-investigator": {
-      "model": "opencode-go/qwen3.7-plus",
+      "model": "opencode-go/deepseek-v4-pro",
       "mode": "subagent"
     },
     "cavecrew-builder": {
@@ -88,11 +88,11 @@
       "mode": "subagent"
     },
     "cavecrew-reviewer": {
-      "model": "openai/gpt-5.6-terra",
+      "model": "opencode-go/deepseek-v4-pro",
       "mode": "subagent"
     },
     "tutor": {
-      "model": "opencode/deepseek-v4-flash-free",
+      "model": "opencode-go/deepseek-v4-flash",
       "mode": "primary"
     }
   },
