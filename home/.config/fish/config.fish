@@ -153,8 +153,8 @@ if status is-interactive
         end
         echo "Sistema totalmente atualizado."
     end
-    abbr --add fup 'fupdate'
-    abbr --add install 'sudo pacman -S'
+    abbr --add fup fupdate
+    abbr --add install 'sudo pacman -S --needed --noconfirm'
     abbr --add search 'pacman -Ss'
     abbr --add remove 'sudo pacman -Rns'
 
