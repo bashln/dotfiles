@@ -31,13 +31,9 @@
 (package! treesit-auto)
 (package! harpoon)
 
-(package! prettier)
-(package! prettier-js)
-(package! prettier-rc)
 
 (package! gcmh)
 (package! kdl-mode)
-(package! consult-lsp)
 (package! powershell)
 
 ;; NOTAS SOBRE REMOÇÕES:
