@@ -1,5 +1,4 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
 ;; Shell & PATH (cross-platform: pwsh on Windows, bash/fish on Linux)
 (cond ((eq system-type 'windows-nt)
        ;; cmdproxy natively handles .cmd/.bat — required for LSP/npm on Windows.
@@ -21,18 +20,16 @@
     (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "BlexMono Nerd Font" "JetBrainsMono Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "BlexMono Nerd Font" "FiraCode Nerd Font")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 
 ;; Tema
 ;; (setq doom-theme 'doom-rose-pine-moon)
-
 ;; ----------------------------------------------------------------------------
 ;; REQUISITOS DO SISTEMA
 ;; ----------------------------------------------------------------------------
 ;; LSP, Formatters, Linters - ver README do projeto
-
 ;; -------------------------------
 ;; 1. ORG MODE CUSTOMIZATIONS
 ;; -------------------------------
@@ -70,7 +67,6 @@
 ;; -------------------------------
 ;; 3. DESENVOLVIMENTO & LSP
 ;; -------------------------------
-
 ;; Typescript/Web defaults
 (after! typescript-mode
   (setq typescript-indent-level 2))
@@ -181,69 +177,31 @@
 (map! :leader
       "b b" #'consult-buffer
       "f r" #'consult-recent-file)
+
 (map! "C-." #'embark-act)
 
 ;; -------------------------------
 ;; 5. FORMATAÇÃO & AUTO-SAVE
 ;; -------------------------------
-
 ;; Hooks de Limpeza (Igual ao Nvim)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 (setq require-final-newline t)
 
 ;; Org-mode: indentação automática (não precisa de formatter externo)
 (setq org-startup-indented t)
 
-;; Auto-format on save via módulo :editor format (doom já faz isso)
-;; Apenas prioritizamos linguagens específicas
-(setq-hook! 'lua-mode-hook +format-with-lsp nil)
-(setq-hook! 'python-mode-hook +format-with-lsp nil)
-
-;; Windows: apheleia chama prettier direto (sem apheleia-npx bash script)
-(when (eq system-type 'windows-nt)
-  (after! apheleia
-    (setf (alist-get 'prettier apheleia-formatters)
-          '("prettier" "--stdin-filepath" filepath
-            (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))
-    (setf (alist-get 'prettier-javascript apheleia-formatters)
-          '("prettier" "--stdin-filepath" filepath
-            "--parser=babel-flow"
-            (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))
-    (setf (alist-get 'prettier-typescript apheleia-formatters)
-          '("prettier" "--stdin-filepath" filepath
-            "--parser=typescript"
-            (apheleia-formatters-js-indent "--use-tabs" "--tab-width")))))
-
 ;; -------------------------------
 ;; 4. LSP TUNING & BOOSTER
 ;; -------------------------------
-
-(defvar +lsp-ensure-typescript-h nil)
-(setq +lsp-ensure-typescript-h
-      (lambda ()
-        "Only start LSP if TypeScript is available in the project."
-        (or (locate-dominating-file (or (buffer-file-name) default-directory) "node_modules/typescript")
-            (locate-dominating-file (or (buffer-file-name) default-directory) ".git"))))
-
-(defun +lsp-run-if-project-ready-a (old-fn &rest args)
-  "Run OLD-FN only when the current project is ready for LSP."
-  (when (funcall +lsp-ensure-typescript-h)
-    (apply old-fn args)))
-
 (after! lsp-mode
-  (when (and (fboundp 'lsp!)
-             (not (advice-member-p #'+lsp-run-if-project-ready-a 'lsp!)))
-    (advice-add 'lsp! :around #'+lsp-run-if-project-ready-a))
-
   (setq lsp-go-use-gofumpt t
         lsp-go-analyses '((nilness . t) (unusedparams . t) (unusedwrite . t))
         lsp-use-plists t
         lsp-idle-delay 0.500
         lsp-log-io nil
         lsp-enable-file-watchers nil
-        lsp-completion-provider :none
-        lsp-headerline-breadcrumb-enable nil
-        +format-with-lsp nil))
+        lsp-headerline-breadcrumb-enable nil))
 
 (after! lsp-eslint
   (setq lsp-eslint-enable t
@@ -289,7 +247,6 @@
 ;; -------------------------------
 ;; 7. EXTRA TOOLS & KEYBINDINGS
 ;; -------------------------------
-
 ;; Toggle vterm (Toggleterm equivalent)
 (map! :leader
       :desc "Toggle vterm" "t v" #'+vterm/toggle)
@@ -312,7 +269,6 @@
         :n "s" #'treemacs-visit-node-ace     ;; Abrir em split
         :n "v" #'treemacs-visit-node-ace-horizontal ;; Abrir em vsplit
         :n "w" #'treemacs-set-width)
-
   ;; Abrir/fechar treemacs com SPC e (como nvim-tree)
   (map! :leader
         :desc "Toggle Treemacs (Neovim-style)" "e" #'treemacs))
@@ -335,13 +291,13 @@
 
 ;; Otimização de Scrolling
 (setq fast-but-imprecise-scrolling t)
+
 (setq scroll-conservatively 101
       scroll-margin 5
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
 
 ;; Personal Keybindings
-
 ;; Buffer management (Neovim-style: SPC b d para delete, SPC b D para delete force)
 (map! :leader
       :desc "Kill buffer (force)" "b D" #'kill-buffer-and-window
@@ -383,7 +339,6 @@
         :n "s" #'dired-sort-toggle-or-edit))
 
 ;; Mover linha ou região usando ALT + J e ALT + K, similar ao comportamento do Neovim
-
 (defun +leo/move-line-up ()
   "Move the current line up by one."
   (interactive)
@@ -437,9 +392,9 @@
 ;; -------------------------------
 ;; 8. NEOVIM PARITY & BEHAVIORS
 ;; -------------------------------
-
 ;; Clipboard: p e x não sobrescrevem registro principal
 (setq evil-kill-on-visual-paste nil) ;; p no visual mode não mata o registro
+
 (map! :n "x" "\"_x")                ;; x deleta para o black hole register
 
 ;; Visual Mode: Indent com reselect (como no Neovim)
@@ -469,13 +424,13 @@
 
 (after! flycheck
   (setq flycheck-global-modes nil))
+
 (map! :leader
       :desc "LSP Rename (Inc Rename)" "c r" #'lsp-rename)
 
 ;; =============================================================================
 ;; NEOVIM FULL PARITY - NOVAS CONFIGURAÇÕES
 ;; =============================================================================
-
 ;; -----------------------------
 ;; 9. DIRVISH - FILE MANAGER OIL.NVIM-LIKE
 ;; -----------------------------
@@ -489,7 +444,6 @@
   (setq dirvish-attributes '(vc-state subtree-state all-the-icons collapse))
   (setq dirvish-mode-line-format '(:left (sort symlink) :right (omit yank index)))
   (setq dirvish-subtree-state-style 'arrow)
-
   ;; Keymaps Oil.nvim-like
   (map! :map dirvish-mode-map
         :n "h" #'dirvish-up-directory           ;; Subir diretório
@@ -509,7 +463,6 @@
         :n "s" #'dirvish-split-file-here        ;; Abrir em split
         :n "S" #'dirvish-vsplit-file-here       ;; Abrir em vsplit
         :n "g." #'dired-omit-mode)              ;; Toggle hidden files
-
   ;; Atalhos de líder
   (map! :leader
         :desc "Dirvish here (Oil style)" "-" (lambda () (interactive) (dirvish (or default-directory "~")))
@@ -528,7 +481,6 @@
 ;; -----------------------------
 ;; 10. MARKDOWN FOLDING (Neovim zj/zk/zl/zu/zi)
 ;; -----------------------------
-
 (defun +markdown-fold-level (level)
   "Fold all markdown headings of LEVEL or above."
   (interactive "nFold level (1-6): ")
@@ -565,7 +517,6 @@
 ;; -----------------------------
 ;; 11. AUTOCMDS (LazyVim parity)
 ;; -----------------------------
-
 ;; Fechar buffers de utilidade com 'q'
 (defun +close-buffer-with-q ()
   "Close buffer with 'q' key in utility modes."
@@ -580,13 +531,16 @@
     (local-set-key (kbd "q") #'quit-window)))
 
 (add-hook 'help-mode-hook #'+close-buffer-with-q)
+
 (add-hook 'man-mode-hook #'+close-buffer-with-q)
+
 (add-hook 'apropos-mode-hook #'+close-buffer-with-q)
+
 (add-hook 'Info-mode-hook #'+close-buffer-with-q)
+
 (add-hook 'flycheck-error-list-mode-hook #'+close-buffer-with-q)
+
 (add-hook 'compilation-mode-hook #'+close-buffer-with-q)
-
-
 
 ;; Conceallevel para arquivos específicos
 (setq-hook! 'json-mode-hook conceal-level 0)
@@ -620,7 +574,6 @@
   :config
   (diff-hl-margin-mode)
   (diff-hl-flydiff-mode)
-
   ;; Keymaps para git actions
   (map! :leader
         (:prefix ("g" . "git")
@@ -651,7 +604,6 @@
   (setq pulsar-delay 0.05
         pulsar-iterations 10
         pulsar-face 'pulsar-magenta)
-
   ;; Mantem a lista pronta caso o modo seja reativado depois.
   (add-to-list 'pulsar-pulse-functions 'evil-scroll-page-down)
   (add-to-list 'pulsar-pulse-functions 'evil-scroll-page-up)
@@ -672,7 +624,6 @@
 ;; -----------------------------
 ;; 18. PATH NAVIGATION (Windows/UNC)
 ;; -----------------------------
-
 (defun +path-normalize (path)
   "Normalize PATH for cross-platform compatibility."
   (when path
@@ -722,7 +673,6 @@
 ;; -----------------------------
 ;; 20. QOL FINAL ADJUSTMENTS
 ;; -----------------------------
-
 ;; Better help display
 (setq which-key-idle-delay 0.4
       which-key-idle-secondary-delay 0.1
@@ -739,6 +689,7 @@
 
 ;; Final popup rules
 (set-popup-rule! "^\*Dirvish" :side 'left :size 0.3 :select t :quit t)
+
 (set-popup-rule! "^\*harpoon" :side 'bottom :size 0.25 :select t)
 
 ;; Org face sizes (migrated from custom.el)
