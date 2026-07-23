@@ -1,0 +1,36 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Return",
+    ): System(Terminal),
+    (
+        modifiers: [
+            Alt,
+        ],
+        key: "F4",
+    ): Disable,
+    (
+        modifiers: [
+            Alt,
+        ],
+        key: "e",
+    ): Close,
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "n",
+        description: Some("neovim"),
+    ): Spawn("nvim"),
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "e",
+        description: Some("Emacs"),
+    ): Spawn("emacs"),
+}

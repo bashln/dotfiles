@@ -160,6 +160,7 @@ overview {
 // See the binds section below for more spawn examples.
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets,pkcs11"
+spawn-at-startup "/usr/bin/emacs" "--daemon"
 environment {
   XDG_CURRENT_DESKTOP "niri"
 }
@@ -260,6 +261,13 @@ window-rule {
 }
 debug {
     honor-xdg-activation-with-invalid-serial
+}
+
+window-rule {
+    match app-id=r#"^firefox"#
+    match app-id=r#"^brave"#
+    open-maximized true
+
 }
 
 // Override to disable super+tab

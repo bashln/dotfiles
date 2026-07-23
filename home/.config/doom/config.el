@@ -20,7 +20,7 @@
     (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "BlexMono Nerd Font" "FiraCode Nerd Font")))
+(let ((font-family (if (eq system-type 'windows-nt) "JetBrainsMono NF" "JetBrainsMono Nerd Font")))
   (setq doom-font (font-spec :family font-family :size 14)
         doom-variable-pitch-font (font-spec :family font-family :size 14)))
 
