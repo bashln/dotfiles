@@ -7,7 +7,7 @@
   "default_agent": "build",
   "agent": {
     "build": {
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "opencode-go/mimo-v2.5",
       "permission": {
         "edit": "allow",
         "bash": "allow",
@@ -28,7 +28,7 @@
     },
     "goal-worker": {
       "description": "Executes goal checkpoints autonomously toward a durable objective.",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/mimo-v2.5",
       "mode": "subagent",
       "permission": {
         "edit": "allow",
@@ -41,12 +41,12 @@
     },
     "executor": {
       "description": "Mechanical execution agent.",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/mimo-v2.5",
       "mode": "subagent"
     },
     "analista": {
       "description": "Refactor agent.",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/mimo-v2.5",
       "mode": "subagent"
     },
     "debug": {
@@ -66,7 +66,7 @@
     },
     "tester": {
       "description": "Tester agent.",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/mimo-v2.5",
       "mode": "subagent"
     },
     "planner": {
@@ -76,23 +76,23 @@
     },
     "auditor": {
       "description": "Audit and review agent.",
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
     },
     "cavecrew-investigator": {
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
     },
     "cavecrew-builder": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/mimo-v2.5",
       "mode": "subagent"
     },
     "cavecrew-reviewer": {
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
     },
     "tutor": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/mimo-v2.5",
       "mode": "primary"
     }
   },

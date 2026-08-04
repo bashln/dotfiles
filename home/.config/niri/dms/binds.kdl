@@ -9,6 +9,7 @@ binds {
     Mod+Space hotkey-overlay-title="Application Launcher" {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
     }
+    Mod+E hotkey-overlay-title="Open emacs" { spawn "emacsclient" "-c" "-a" "emacs"; }
     Mod+V hotkey-overlay-title="Clipboard Manager" {
         spawn "dms" "ipc" "call" "clipboard" "toggle";
     }
@@ -28,7 +29,8 @@ binds {
 
     // Mod+B hotkey-overlay-title="Open browser" { spawn "flatpak" "run" "com.google.Chrome"; }
     Mod+B hotkey-overlay-title="Open browser" { spawn "brave"; }
-    Mod+Shift+return hotkey-overlay-title="Open file manager" { spawn "dolphin"; }
+    Mod+Shift+B hotkey-overlay-title="Open browser" { spawn "firefox"; }
+    Mod+Shift+return hotkey-overlay-title="Open file manager" { spawn "thunar"; }
 
 
     // === Security ===
