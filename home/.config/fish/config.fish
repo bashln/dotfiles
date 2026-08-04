@@ -127,9 +127,9 @@ if status is-interactive
 
     function update
         sudo pacman -Syu
-        if type -q flatpak
-            flatpak update -y
-        end
+        # if type -q flatpak
+        flatpak update -y
+        # end
         echo "Sistema atualizado."
     end
 
