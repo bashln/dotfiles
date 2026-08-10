@@ -1,6 +1,6 @@
 ---
 name: architecture
-description: Avalia sustentabilidade, projeta módulos profundos, escaneia oportunidades de deepening, stress-testa planos contra modelo de domínio, formaliza glossário. Use when deciding boundaries, structural naming, coupling, invariants, module depth, domain modeling, or ubiquitous language.
+description: Avalia sustentabilidade, projeta módulos profundos, escaneia oportunidades de deepening, aplica a filosofia Write Simple Software, stress-testa planos contra modelo de domínio e formaliza glossário. Use when deciding boundaries, simplicity versus abstraction, coupling, invariants, module depth, domain modeling, or ubiquitous language.
 ---
 
 # Architecture
@@ -16,6 +16,8 @@ Unified skill for architecture decisions, codebase design, domain modeling, and 
 | `improve` | Scan codebase for deepening opportunities, present as report | Architectural friction, shallow modules, brittle coupling |
 | `domain` | Stress-test plan against domain model, sharpen terminology, update CONTEXT.md/ADRs | Validating a plan against project's language, decisions crystallising |
 | `language` | Extract/formalize glossary, flag ambiguities, propose canonical terms | Defining domain terms, building glossary, hardening terminology |
+
+Use the **Write Simple Software** lens in any mode when a proposed change adds concepts, layers, dependencies, configuration, or flexibility. See [SIMPLE-SOFTWARE.md](SIMPLE-SOFTWARE.md).
 
 ---
 

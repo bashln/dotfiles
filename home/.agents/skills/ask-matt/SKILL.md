@@ -10,6 +10,30 @@ You don't remember every skill, so ask.
 
 A **flow** is a path through the skills. Most paths run along one **main flow**, and two **on-ramps** merge onto it. Everything else is standalone.
 
+## Fast routing
+
+Choose the narrowest flow that matches the evidence already available:
+
+| Situation | Flow |
+|---|---|
+| Request is unclear or repository is unfamiliar | `/analyze` → `/discover` |
+| New feature or planned change | `/grill-with-docs` → `/implement` |
+| Concrete failing behavior | `/debug` |
+| Review only the current diff | `/audit-diff` |
+| Security-focused review | `/websec-audit` |
+| Validate a change | `/test` |
+| Review a completed branch or PR against standards/spec | `/review` |
+| Simplify code without changing behavior | `/code-simplifier` |
+| Architectural complexity or over-abstraction | `/architecture` with the Write Simple Software lens |
+
+For a finding that needs correction, keep discovery and mutation separate:
+
+```text
+/audit-diff or /websec-audit → /debug or /implement → /test → /review
+```
+
+Do not use a general audit-and-fix flow: it mixes diagnosis, code changes, and validation, making scope and authorization unclear.
+
 ## The main flow: idea → ship
 
 The route most work travels. You have an idea and want it built.

@@ -99,7 +99,7 @@
   "plugin": [
     "./plugins/caveman/plugin.js",
     "./plugins/ponytail/.opencode/plugins/ponytail.mjs",
-    "@cortexkit/opencode-magic-context@latest",
+    "@cortexkit/opencode-magic-context@0.33.1",
     "@cortexkit/aft-opencode@latest"
   ],
   "compaction": {

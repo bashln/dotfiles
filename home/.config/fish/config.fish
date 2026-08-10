@@ -13,7 +13,7 @@ fish_add_path $HOME/.cargo/bin
 fish_add_path /usr/local/bin
 fish_add_path $HOME/.npm-global/bin
 
-# Neovim manual (se existir, embora no Arch usemos o do repo geralmente)
+# Neovim manual (se existir)
 if test -d /opt/nvim-linux-x86_64/bin
     fish_add_path /opt/nvim-linux-x86_64/bin
 end
@@ -123,19 +123,17 @@ if status is-interactive
     alias bv='NVIM_APPNAME=bash-nvim nvim'
     alias nviml='NVIM_APPNAME=lazyvim nvim'
 
-    # --- Sistema (PACMAN / CACHYOS) ---
+    # --- Sistema (DNF / FEDORA) ---
 
     function update
-        sudo pacman -Syu
-        # if type -q flatpak
+        sudo dnf upgrade --refresh -y
         flatpak update -y
-        # end
         echo "Sistema atualizado."
     end
 
     function fupdate
         echo ">>> Full system update"
-        sudo pacman -Syu
+        sudo dnf upgrade --refresh -y
         if type -q flatpak
             flatpak update -y
         end
@@ -154,19 +152,12 @@ if status is-interactive
         echo "Sistema totalmente atualizado."
     end
     abbr --add fup fupdate
-    abbr --add install 'sudo pacman -S --needed --noconfirm'
-    abbr --add search 'pacman -Ss'
-    abbr --add remove 'sudo pacman -Rns'
+    abbr --add install 'sudo dnf install -y'
+    abbr --add search 'dnf search'
+    abbr --add remove 'sudo dnf remove'
 
     function cleanup
-        set orphans (pacman -Qtdq 2>/dev/null)
-        if test -n "$orphans"
-            sudo pacman -Rns --noconfirm $orphans
-            echo "Órfãos removidos."
-        else
-            echo "Nenhum órfão encontrado."
-        end
-        paru -c 2>/dev/null; or true
+        sudo dnf autoremove -y
     end
 
     # Logs do sistema
