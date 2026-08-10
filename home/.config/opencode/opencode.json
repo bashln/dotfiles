@@ -26,6 +26,9 @@
         }
       }
     },
+    "plan":{
+      "model": "opencode-go/gpt-5.6-luna"
+    },
     "goal-worker": {
       "description": "Executes goal checkpoints autonomously toward a durable objective.",
       "model": "opencode-go/mimo-v2.5",
@@ -51,17 +54,17 @@
     },
     "debug": {
       "description": "Debug agent.",
-      "model": "opencode-go/kimi-k2.7-code",
+      "model": "opencode-go/gpt-5.6-luna",
       "mode": "subagent"
     },
     "arquiteto": {
       "description": "Architecture agent.",
-      "model": "opencode-go/kimi-k2.7-code",
+      "model": "opencode-go/gpt-5.6-luna",
       "mode": "subagent"
     },
     "codex": {
       "description": "Critical code agent.",
-      "model": "opencode-go/kimi-k2.7-code",
+      "model": "opencode-go/gpt-5.6-luna",
       "mode": "subagent"
     },
     "tester": {
