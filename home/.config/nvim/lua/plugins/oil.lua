@@ -38,4 +38,7 @@ return {
   end,
   dependencies = { { "nvim-mini/mini.icons", opts = {} }, { "refractalize/oil-git-status.nvim" } },
   lazy = false,
+  keys = {
+    { "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
+  },
 }
