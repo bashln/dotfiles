@@ -74,6 +74,9 @@ function M.setup()
 
   local function paste(register)
     if not has_wayland then
+      if in_herdr then
+        return function() return {} end
+      end
       return osc52.paste(register)
     end
 
