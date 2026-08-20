@@ -5,10 +5,16 @@
 # Credenciais e chaves
 *.pem
 *.key
+*.p12
+*.pfx
+*.jks
 *_rsa*
 *_ed25519*
+*_ecdsa*
 *.ppk
-*.env
+.env
+.env.*
+!.env.example
 .secrets/
 
 # Diretórios sensíveis
@@ -17,6 +23,8 @@
 .password-store/
 .aws/
 .kube/
+.config/rclone/rclone.conf
+.config/lazygit/state.yml
 
 # Gemini agent - credenciais e dados de runtime
 .agents/gemini/
@@ -29,18 +37,15 @@
 # ============================================================
 # Lixo e caches
 # ============================================================
-
 *~
 *.pyc
 *.pyo
 __pycache__/
-node_modules/
-package.json
-bun.lock
-*lock.json
+*.swp
+*.swo
 *.bak
 *.bak.*
-*\(2\)*
+*\(\ 2\)*
 *Zone.Identifier*
 .DS_Store
 Thumbs.db
@@ -48,8 +53,6 @@ Thumbs.db
 *.log
 
 # Neovim / Vim
-*.swp
-*.swo
 undo/
 .netrw*
 
@@ -64,28 +67,52 @@ venv/
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
+*.egg-info/
 
 # Build artifacts
 dist/
 build/
+*.o
+*.so
+*.dylib
 
 # Caches
 .cache/
 .direnv/
 .envrc
 
+# ============================================================
+# Node.js / JavaScript
+# ============================================================
+node_modules/
+package.json
+package-lock.json
+bun.lock
+bun.lockb
+*lock.json
+.yarn/
+.pnp.*
+
+# ============================================================
 # opencode generated/temp files
+# ============================================================
 .config/opencode/.codex*
 .config/opencode/.caveman-active
 .config/opencode/.ponytail-active
 
+# ============================================================
 # Local app caches and installed binaries
+# ============================================================
 .local/
 
+# ============================================================
 # Git bare repo itself
+# ============================================================
 .dotfiles-bare/
 
-# System / Desktop
+# ============================================================
+# System / Desktop (não são dotfiles)
+# ============================================================
 .config/BraveSoftware/
 .config/chromium/
 .config/Code/
@@ -128,13 +155,17 @@ build/
 .config/lazygit/
 .config/cosmic/
 
+# ============================================================
 # Android / SDK
+# ============================================================
 .android/
 .gradle/
 .keystores/
 .nuget/
 
+# ============================================================
 # Other tools
+# ============================================================
 .codex/
 .claude/
 .cline/
@@ -148,29 +179,40 @@ build/
 .pki/
 .azure/
 
+# ============================================================
 # Home dirs (not configs)
+# ============================================================
 Documents/
 Downloads/
 Music/
 Pictures/
 Projects/
 Postman/
+Work/
 
+# ============================================================
 # Logs
+# ============================================================
 oc-go-debug.log
 nvim.log
 
+# ============================================================
 # kwallet
+# ============================================================
 kwalletd/
 kwalletrc
 
+# ============================================================
 # Shell state
+# ============================================================
 .bash_history
 .bash_logout
 .bash_profile
 .zsh_history
 
+# ============================================================
 # X / Desktop
+# ============================================================
 .XCompose
 .Xauthority
 .Xresources
@@ -179,24 +221,29 @@ kwalletrc
 .xsession-errors
 .pam_environment
 
+# ============================================================
 # Steam
+# ============================================================
 .steam/
 .steampath
 .steampid
 
+# ============================================================
 # VSCode
+# ============================================================
 .vscode/
 .vscode-shared/
 
+# ============================================================
 # Misc apps
+# ============================================================
 .var/
 .fonts/
 .pulse-cookie
 
-# Work dirs
-Work/
-
+# ============================================================
 # System-generated configs
+# ============================================================
 .config/mimeapps.list
 .config/user-dirs.dirs
 .config/xdg-terminals.list
@@ -204,3 +251,8 @@ Work/
 .config/Microsoft/
 .config/hyprland-preview-share-picker/
 steam.desktop
+
+# ============================================================
+# Backup files (obsoletos)
+# ============================================================
+*.fedora-dev-backup
