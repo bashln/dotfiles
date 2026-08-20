@@ -1,0 +1,196 @@
+# ============================================================
+# SEGURANÇA CRÍTICA - NUNCA rastrear dados sensíveis
+# ============================================================
+
+# Credenciais e chaves
+*.pem
+*.key
+*_rsa*
+*_ed25519*
+*.ppk
+*.env
+.secrets/
+
+# Diretórios sensíveis
+.ssh/
+.gnupg/
+.password-store/
+.aws/
+.kube/
+
+# Gemini agent - credenciais e dados de runtime
+.agents/gemini/
+.commandcode/
+
+# Fish shell (contém dados sensíveis)
+.config/fish/conf.d/secrets.fish
+**/fish_variables
+
+# ============================================================
+# Lixo e caches
+# ============================================================
+
+*~
+*.pyc
+*.pyo
+__pycache__/
+node_modules/
+package.json
+bun.lock
+*lock.json
+*.bak
+*.bak.*
+*\(2\)*
+*Zone.Identifier*
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# Neovim / Vim
+*.swp
+*.swo
+undo/
+.netrw*
+
+# Doom Emacs / Emacs
+.dir-locals.el
+.elc
+.projectile
+
+# Python
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Build artifacts
+dist/
+build/
+
+# Caches
+.cache/
+.direnv/
+.envrc
+
+# opencode generated/temp files
+.config/opencode/.codex*
+.config/opencode/.caveman-active
+.config/opencode/.ponytail-active
+
+# Local app caches and installed binaries
+.local/
+
+# Git bare repo itself
+.dotfiles-bare/
+
+# System / Desktop
+.config/BraveSoftware/
+.config/chromium/
+.config/Code/
+.config/google-chrome/
+.config/google-chrome-beta/
+.config/google-chrome-unstable/
+.config/microsoft-edge/
+.config/microsoft-edge-dev/
+.config/pulse/
+.config/wireplumber/
+.config/fontconfig/
+.config/gtk-3.0/
+.config/gtk-4.0/
+.config/dconf/
+.config/systemd/
+.config/foot/
+.config/imv/
+.config/tmux/
+.config/gh/
+.config/git/
+.config/btop/
+.config/obsidian/
+.config/spotify/
+.config/herdr/
+.config/crossnote/
+.config/nautilus/
+.config/yay/
+.config/zed/
+.config/fcitx/
+.config/fcitx5/
+.config/ibus/
+.config/omarchy/
+.config/openchamber/
+.config/Insomnia/
+.config/vscode-sqltools/
+.config/xournalpp/
+.config/meugasto/
+.config/Omacom/
+.config/mise/
+.config/lazygit/
+
+# Android / SDK
+.android/
+.gradle/
+.keystores/
+.nuget/
+
+# Other tools
+.codex/
+.claude/
+.cline/
+.copilot/
+.codeium/
+.dotnet/
+.expo/
+.npm/
+.npmrc
+.pi/
+.pki/
+.azure/
+
+# Home dirs (not configs)
+Documents/
+Downloads/
+Music/
+Pictures/
+Projects/
+Postman/
+
+# Logs
+oc-go-debug.log
+nvim.log
+
+# kwallet
+kwalletd/
+kwalletrc
+
+# Shell state
+.bash_history
+.bash_logout
+.bash_profile
+.zsh_history
+
+# X / Desktop
+.XCompose
+.Xauthority
+.Xresources
+.xinitrc
+.xprofile
+.xsession-errors
+.pam_environment
+
+# Steam
+.steam/
+.steampath
+.steampid
+
+# VSCode
+.vscode/
+.vscode-shared/
+
+# Misc apps
+.var/
+.fonts/
+.pulse-cookie
+
+# Work dirs
+Work/

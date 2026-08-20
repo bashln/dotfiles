@@ -1,0 +1,52 @@
+# matteblack theme for WezTerm
+#
+# Upstream: github.com/tahajan/matteblack.nvim
+#
+# Usage: copy this theme into the `~/.config/wezterm/colors` directory, then
+# select the matteblack 'color_scheme' in your 'wezterm.lua' configuration.
+
+[metadata]
+name = "matteblack"
+origin_url = "https://github.com/bashln/matteblack.wezterm"
+
+[colors]
+background = "#121212"
+foreground = "#EAEAEA"
+cursor_bg = "#121212"
+cursor_fg = "#F59E0B"
+cursor_border = "#F59E0B"
+selection_bg = "#262626"
+selection_fg = "#FFFFFF"
+scrollbar_thumb = "#333333"
+split = "#333333"
+
+ansi = ["#333333", "#B91C1C", "#059669", "#FBBF24", "#3B82F6", "#8D20B2", "#1EA7A0", "#EAEAEA"]
+brights = ["#8A8A8D", "#DC2626", "#10B981", "#EFBF04", "#3B82F6", "#B027DE", "#1EA7A0", "#FFFFFF"]
+
+compose_cursor = "#F59E0B"
+visual_bell = "#FBBF24"
+
+# Tab Bar colors
+[colors.tab_bar]
+background = "#121212"
+inactive_tab_edge = "#333333"
+
+[colors.tab_bar.active_tab]
+bg_color = "#262626"
+fg_color = "#EAEAEA"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#0D0D0D"
+fg_color = "#8A8A8D"
+
+[colors.tab_bar.new_tab]
+bg_color = "#0D0D0D"
+fg_color = "#8A8A8D"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#262626"
+fg_color = "#EAEAEA"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#262626"
+fg_color = "#EAEAEA"

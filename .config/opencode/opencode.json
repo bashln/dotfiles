@@ -1,0 +1,106 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "default_agent": "build",
+  "agent": {
+    "build": {
+      "model": "opencode/big-pickle",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "webfetch": "deny",
+        "task": {
+          "*": "deny",
+          "auditor": "allow",
+          "planner": "allow",
+          "tester": "allow",
+          "codex": "allow",
+          "executor": "allow",
+          "analista": "allow",
+          "debug": "allow",
+          "arquiteto": "allow",
+          "goal-worker": "allow"
+        }
+      }
+    },
+    "goal-worker": {
+      "description": "Executes goal checkpoints autonomously toward a durable objective.",
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "subagent",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "write": "allow"
+      }
+    },
+    "executor": {
+      "description": "Mechanical execution agent.",
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "subagent"
+    },
+    "analista": {
+      "description": "Refactor agent.",
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "subagent"
+    },
+    "debug": {
+      "description": "Debug agent.",
+      "model": "opencode-go/gpt-5.6-luna",
+      "mode": "subagent"
+    },
+    "arquiteto": {
+      "description": "Architecture agent.",
+      "model": "opencode-go/gpt-5.6-luna",
+      "mode": "subagent"
+    },
+    "codex": {
+      "description": "Critical code agent.",
+      "model": "opencode-go/gpt-5.6-luna",
+      "mode": "subagent"
+    },
+    "tester": {
+      "description": "Tester agent.",
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "subagent"
+    },
+    "planner": {
+      "description": "Planning agent.",
+      "model": "opencode-go/qwen3.7-plus",
+      "mode": "subagent"
+    },
+    "auditor": {
+      "description": "Audit and review agent.",
+      "model": "opencode-go/mimo-v2.5-pro",
+      "mode": "subagent"
+    },
+    "cavecrew-investigator": {
+      "model": "opencode-go/mimo-v2.5-pro",
+      "mode": "subagent"
+    },
+    "cavecrew-builder": {
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "subagent"
+    },
+    "cavecrew-reviewer": {
+      "model": "opencode-go/mimo-v2.5-pro",
+      "mode": "subagent"
+    },
+    "tutor": {
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "primary"
+    }
+  },
+  "plugin": [
+    "./plugins/caveman/plugin.js",
+    "./plugins/ponytail/.opencode/plugins/ponytail.mjs",
+    "@cortexkit/opencode-magic-context@0.33.1",
+    "@cortexkit/aft-opencode@latest"
+  ],
+  "compaction": {
+    "auto": false,
+    "prune": false
+  }
+}
