@@ -98,6 +98,9 @@ if status is-interactive
     abbr --add clone 'git clone'
     abbr --add lz lazygit
 
+    # --- Dotfiles (bare repo) ---
+    alias dotfiles 'git --git-dir=$HOME/.dotfiles-bare --work-tree=$HOME'
+
     # --- Navegação ---
     abbr --add .. 'cd ..'
     abbr --add ... 'cd ../..'

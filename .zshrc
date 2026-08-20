@@ -65,8 +65,22 @@ export DOOMDIR="$HOME/.config/doom"
 export NODE_OPTIONS=--no-deprecation
 
 # ------------------------------------------------------------------
+# Dotfiles (bare repo)
+# ------------------------------------------------------------------
+alias dotfiles='git --git-dir="$HOME/.dotfiles-bare" --work-tree="$HOME"'
+
+# ------------------------------------------------------------------
 # Aliases
 # ------------------------------------------------------------------
+
+# LS (eza)
+if command -v eza &>/dev/null; then
+  alias ls='eza -al --color=always --group-directories-first --icons'
+  alias la='eza -a  --color=always --group-directories-first --icons'
+  alias ll='eza -l  --color=always --group-directories-first --icons'
+  alias lt='eza -aT --color=always --group-directories-first --icons'
+  alias l.='eza -a | grep -e "^\\."'
+fi
 
 # Editors
 alias v='nvim'
@@ -109,6 +123,10 @@ alias untar='tar -zxvf '
 alias dotsize='du -sh .git && git count-objects -vH'
 alias cl='clear'
 alias ask='gemini'
+alias srcfish='source ~/.config/fish/config.fish'
+alias exithypr='hyprctl dispatch exit'
+alias doomsync='$HOME/.config/emacs/bin/doom sync'
+alias doomupd='$HOME/.config/emacs/bin/doom upgrade'
 
 # 7-Zip
 alias enc7z='7zz a -t7z -p -mhe=on'
