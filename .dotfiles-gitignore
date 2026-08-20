@@ -126,6 +126,7 @@ build/
 .config/Omacom/
 .config/mise/
 .config/lazygit/
+.config/cosmic/
 
 # Android / SDK
 .android/
@@ -194,3 +195,12 @@ kwalletrc
 
 # Work dirs
 Work/
+
+# System-generated configs
+.config/mimeapps.list
+.config/user-dirs.dirs
+.config/xdg-terminals.list
+.config/chromium-flags.conf
+.config/Microsoft/
+.config/hyprland-preview-share-picker/
+steam.desktop
