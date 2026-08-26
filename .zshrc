@@ -198,3 +198,7 @@ fi
 # >>> fedora-dev:android-sdk >>>
 source "$HOME/.config/dev-environment/android.sh"
 # <<< fedora-dev:android-sdk <<<
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/leonamduarte/.local/bin:$PATH"

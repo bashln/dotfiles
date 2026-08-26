@@ -23,6 +23,14 @@
 -- Disable a default binding without replacing it.
 -- hl.unbind("SUPER + SHIFT + B")
 
+-- Override file manager: Nautilus → Thunar
+hl.unbind("SUPER + SHIFT + F")
+o.bind("SUPER + SHIFT + F", "File manager", o.launch("thunar"))
+
+hl.unbind("SUPER + ALT + SHIFT + F")
+o.bind("SUPER + ALT + SHIFT + F", "File manager (cwd)",
+  o.launch("thunar \"$(omarchy-cmd-terminal-cwd)\""))
+
 -- Logitech MX Keys examples:
 -- o.bind("SUPER + SHIFT + S", nil, "omarchy-capture-screenshot")
 -- o.bind("SUPER + H", nil, "voxtype record toggle")

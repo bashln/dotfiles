@@ -7,11 +7,11 @@ hl.config({
 input = {
 -- US international with dead keys: ~ ' " ` ^ are dead keys
 -- e.g. ~ then a = ã, ' then a = á, ^ then a = â, AltGr + , then c = ç.
--- kb_layout = "us",
--- kb_variant = "intl",
-kb_layout = "br",
-kb_variant = "abnt2",
-kb_options = "compose:caps,shift:both_capslock_cancel",
+kb_layout = "us",
+kb_variant = "altgr-intl",
+-- kb_layout = "br",
+-- kb_variant = "abnt2",
+-- kb_options = "compose:caps,shift:both_capslock_cancel",
 --
 -- Change speed of keyboard repeat.
 repeat_rate = 40,
