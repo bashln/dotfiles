@@ -136,7 +136,11 @@ bun.lockb
 .config/btop/
 .config/obsidian/
 .config/spotify/
-.config/herdr/
+.config/herdr/herdr-client.log
+.config/herdr/herdr-server.log
+.config/herdr/herdr.sock
+.config/herdr/herdr-client.sock
+.config/herdr/session.json
 .config/crossnote/
 .config/nautilus/
 .config/yay/
