@@ -148,7 +148,9 @@ bun.lockb
 .config/fcitx/
 .config/fcitx5/
 .config/ibus/
-.config/omarchy/
+.config/omarchy/*
+!.config/omarchy/shell.json
+!.config/omarchy/plugins/
 .config/openchamber/
 .config/Insomnia/
 .config/vscode-sqltools/
