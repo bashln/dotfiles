@@ -30,9 +30,10 @@
 .agents/gemini/
 .commandcode/
 
-# Fish shell (contém dados sensíveis)
+# Fish shell (contém dados sensíveis ou gerados)
 .config/fish/conf.d/secrets.fish
 **/fish_variables
+.config/fish/completions/copilot.fish
 
 # ============================================================
 # Lixo e caches
@@ -256,6 +257,7 @@ kwalletrc
 .config/chromium-flags.conf
 .config/Microsoft/
 .config/hyprland-preview-share-picker/
+.config/Thunar/accels.scm
 steam.desktop
 
 # ============================================================
