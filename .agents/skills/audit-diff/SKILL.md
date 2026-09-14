@@ -19,7 +19,8 @@ Reviews only what changed.
    - Examine added/changed lines only
    - Check for:
      - Logic bugs (wrong condition, off-by-one, null dereference)
-     - Security issues (injection, path traversal, secret exposure)
+     - Security & secrets (hardcoded API keys/tokens, credentials in client bundle, injections, path traversal)
+     - Supply chain risks (unpinned/suspicious dependencies, unexpected post-install scripts)
      - Edge cases (empty input, missing validation, race condition)
      - Performance regressions (unnecessary loops, duplicate queries)
 4. Report findings:

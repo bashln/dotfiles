@@ -58,7 +58,7 @@ this. If the app is single-tenant, say so and skip the cross-tenant probes.
 
 ## Step 4 — triage the static findings
 
-Go through the scanner results. On a NoSQL/JSON API, most injection/SQLi/PII alerts are false
+Go through the scanner results (from `websec --scan`, or complementary MCP/CLI scanners such as Aikido MCP, Semgrep, or Gitleaks). On a NoSQL/JSON API, most injection/SQLi/PII alerts are false
 positives — say which and why. Surface the real ones (leaked secrets, real CVEs, IaC misconfig)
 with a proposed fix. Each finding carries a calibrated `P(real)` + confidence interval — treat a
 wide CI or `basis: prior` as "thin data, lean on the debate below, not the number."
@@ -83,7 +83,9 @@ Explainer); the Challenger trying to *refute* it is the false-positive killer.
 ## Step 6 — fix and re-verify
 
 For anything not blocked: propose a fix, let the human review the diff, apply it, then **re-run the
-same probe** to confirm it's now blocked. Keep the probes in the repo as a regression suite.
+same probe** to confirm it's now blocked.
+
+**Circuit breaker:** Repeat the fix-and-probe cycle up to a maximum of **3 attempts**. If the probe still fails after 3 tries, stop, summarize the root cause, and ask the human for guidance instead of repeating the same loop. Keep confirmed probes in the repo as a regression suite.
 
 ## Step 7 — hand back a report
 
@@ -94,5 +96,6 @@ probes are now regression tests. Cite `FACTS.json` and `scanners/` as evidence.
 
 - The tool needs no running app; the **probes do**. Keep that seam clear with the human.
 - No credentials get fabricated or committed. Add `websec-out/` to `.gitignore`.
+- Context hygiene: pass file paths instead of dumping entire source files when feeding tools.
 - You are advisory + hands-on-with-approval: the human approves every code change and every probe
   run against a real environment. Production is out of scope without explicit written authorization.

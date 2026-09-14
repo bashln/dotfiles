@@ -1,5 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "aikido": {
+      "type": "local",
+      "command": ["npx", "-y", "@aikidosec/mcp@latest"],
+      "enabled": true
+    }
+  },
   "autoupdate": true,
   "default_agent": "build",
   "agent": {

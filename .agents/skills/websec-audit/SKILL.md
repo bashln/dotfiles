@@ -77,14 +77,23 @@ Review by **risk flow**, not file-by-file:
 7. Config / secrets exposure
 8. Error handling / logging
 
+**Context & Token Efficiency:**
+- When running automated scanners (SAST, secrets, dependency checkers) or checking files on disk, prefer passing target file paths instead of loading full file contents into context.
+- Batch reviews into chunks of at most 50 files per pass to avoid context bloating.
+
 ### Phase 3 — Finding criteria
 
 Each finding must contain:
 
 - **Severity**: P0 (Critical), P1 (High), P2 (Medium), P3 (Low/Hardening)
+- **SLA**:
+  - P0: Immediate / 24h blocker
+  - P1: Current sprint / 7 days
+  - P2: Next sprint / 30 days
+  - P3: Backlog / Hardening
 - **Confidence**: High / Medium / Low
 - **Exploitability**: Immediate / Requires auth / Requires privileged user / Requires user interaction / Theoretical
-- **Category**: OWASP category or PortSwigger class
+- **Category**: OWASP category, PortSwigger class, or supply chain (SAST, Leaked Secret, SCA, IaC)
 - **Location**: file, function, route, or component
 - **Evidence**: code snippet or observed behavior
 - **Impact**: what a malicious user could do
@@ -117,19 +126,19 @@ Rules:
 
 ## Findings
 
-### P0 — Critical
+### P0 — Critical (SLA: 24h)
 
 [findings]
 
-### P1 — High
+### P1 — High (SLA: 7d)
 
 [findings]
 
-### P2 — Medium
+### P2 — Medium (SLA: 30d)
 
 [findings]
 
-### P3 — Low / Hardening
+### P3 — Low / Hardening (SLA: Backlog)
 
 [findings]
 
@@ -143,21 +152,26 @@ Manual or automated tests to validate findings.
 
 ## Remediation Plan
 
-Order by impact + effort:
+Order by SLA and impact + effort:
 
-1. Fix now
-2. Fix this sprint
-3. Future hardening
+1. Immediate (P0 - within 24h)
+2. Sprint backlog (P1 - within 7d)
+3. Technical debt backlog (P2 - within 30d)
+4. Future hardening (P3)
 
 ## Open Questions
 
 Only questions that block confirming a real risk.
 ```
 
-### Phase 5 — Fix (optional)
+### Phase 5 — Fix & Verification (optional)
 
 If the user asks for fixes after the report:
 
-1. Fix in severity order (P0 → P1 → P2 → P3)
-2. One fix per finding, validated
-3. Report resolved/pending items
+1. Fix in severity order (P0 → P1 → P2 → P3).
+2. One fix per finding, validated.
+3. **Fix-and-verify loop & Circuit breaker:**
+   - After applying each fix, re-run the verification test or scan.
+   - If the issue persists or creates an adjacent finding, repeat up to **3 attempts**.
+   - If unresolved after 3 attempts, STOP. Document why the fix didn't hold, state if it is an unexploitable edge case or false positive, and request human guidance instead of looping.
+4. Report resolved/pending items.
