@@ -92,7 +92,7 @@ Este loop é diferente dos outros — ele **edita o código** e usa as skills do
 |---|---|---|
 | Encontrar | `debug` / `audit-and-fix` | Isola bugs, encontra falhas com evidência |
 | Implementar | `implement` / `code-simplifier` | Corrige com a menor mudança possível |
-| Testar | `tdd` / `test-suite` / `quality-checks` | Cria testes, roda lint, typecheck |
+| Testar | `test` / `test-suite` / `quality-checks` | Cria testes, roda lint, typecheck |
 | Validar | `review` | Revisão final de qualidade |
 
 **Fluxo por ciclo:**
@@ -203,7 +203,7 @@ O loop `interactive-improve` carrega skills do diretório `.agents/skills/` em c
 | `architecture` | `.agents/skills/architecture/` | Melhorias arquiteturais e invariantes |
 | `implement` | `.agents/skills/implement/` | Implementar correções |
 | `code-simplifier` | `.agents/skills/code-simplifier/` | Simplificar código |
-| `tdd` | `.agents/skills/tdd/` | Test-driven development |
+| `test` | `.agents/skills/test/` | Test-driven development e estratégia de testes |
 | `test-suite` | `.agents/skills/test-suite/` | Suíte de testes |
 | `quality-checks` | `.agents/skills/quality-checks/` | Lint e typecheck |
 | `review` | `.agents/skills/review/` | Revisão de qualidade |
