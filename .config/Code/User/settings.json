@@ -35,7 +35,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "remote.SSH.remotePlatform": {
-    "192.168.5.130": "linux",
     "pvserver": "linux"
   },
 
@@ -202,13 +201,7 @@
     ".github/instructions": true,
     ".claude/rules": true,
     "~/.copilot/instructions": true,
-    "~/.claude/rules": true,
-    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-collections-post-response.instructions.md": true,
-    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-collections-pre-request.instructions.md": true,
-    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-folder-post-response.instructions.md": true,
-    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
-    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
-    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
+    "~/.claude/rules": true
   },
   "workbench.colorTheme": "cursor-less-dark",
   "explorer.confirmDelete": false,

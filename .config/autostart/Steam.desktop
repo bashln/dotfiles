@@ -1,7 +1,0 @@
-[Desktop Entry]
-Exec=steam -silent %U
-Icon=steam
-Name=Steam
-Path=
-Terminal=False
-Type=Application
