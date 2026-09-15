@@ -145,6 +145,7 @@ bun.lockb
 .config/herdr/herdr.sock
 .config/herdr/herdr-client.sock
 .config/herdr/session.json
+.config/herdr/release-notes.json
 .config/crossnote/
 .config/nautilus/
 .config/yay/
@@ -272,4 +273,5 @@ steam.desktop
 # Agent progress & PowerShell scripts
 # ============================================================
 progress.json
+errors.json
 *.ps1

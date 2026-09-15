@@ -65,6 +65,10 @@
     "lock": 3000,
     "screensaver": 1500
   },
-  "plugins": [],
+  "plugins": [
+    {
+      "id": "fkcodes.key-promoter"
+    }
+  ],
   "version": 1
 }
