@@ -116,8 +116,11 @@ bun.lockb
 # ============================================================
 .config/BraveSoftware/
 .config/chromium/
-.config/Code/
-.config/google-chrome/
+.config/Code/*
+!.config/Code/User/
+.config/Code/User/*
+!.config/Code/User/settings.json
+!.config/Code/User/keybindings.json
 .config/google-chrome-beta/
 .config/google-chrome-unstable/
 .config/microsoft-edge/
@@ -264,3 +267,9 @@ steam.desktop
 # Backup files (obsoletos)
 # ============================================================
 *.fedora-dev-backup
+
+# ============================================================
+# Agent progress & PowerShell scripts
+# ============================================================
+progress.json
+*.ps1

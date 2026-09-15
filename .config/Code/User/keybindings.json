@@ -1,0 +1,29 @@
+// Coloque as suas associações de teclas neste arquivo para substituir os padrões
+[
+  {
+    "key": "ctrl+alt+s",
+    "command": "editor.action.formatDocument.multiple"
+  },
+  {
+    "key": "shift+alt+n",
+    "command": "vscodeMarkdownNotes.newNote"
+  },
+  {
+    "key": "shift+alt+k shift+alt+o",
+    "command": "workbench.action.openWorkspace",
+    "when": "enterMultiRootWorkspaceSupport"
+  },
+  {
+    "key": "shift+alt+k shift+alt+o",
+    "command": "workbench.action.addRootFolder",
+    "when": "enterMultiRootWorkspaceSupport && !isSessionsWindow || !isSessionsWindow && workbenchState == 'workspace'"
+  },
+  {
+    "key": "shift+alt+p",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "ctrl+shift+p",
+    "command": "-workbench.action.showCommands"
+  }
+]
