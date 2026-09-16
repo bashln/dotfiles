@@ -1,6 +1,6 @@
 return {
   "scottmckendry/cyberdream.nvim",
-  lazy = true,
+  lazy = false,
   cmd = { "CyberdreamLoad" },
   opts = {
     -- transparent = true,
