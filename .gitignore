@@ -25,10 +25,12 @@
 .kube/
 .config/rclone/rclone.conf
 .config/lazygit/state.yml
+.safe-chain/
 
 # Gemini agent - credenciais e dados de runtime
 .agents/gemini/
 .commandcode/
+.agents/skills/omarchy
 
 # Fish shell (contém dados sensíveis ou gerados)
 .config/fish/conf.d/secrets.fish
@@ -106,6 +108,7 @@ bun.lockb
 .config/opencode/.codex*
 .config/opencode/.caveman-active
 .config/opencode/.ponytail-active
+.config/opencode/service.json
 .opencode/
 
 # ============================================================
@@ -165,7 +168,6 @@ bun.lockb
 .config/fcitx5/
 .config/ibus/
 .config/omarchy/*
-!.config/omarchy/shell.json
 !.config/omarchy/plugins/
 .config/openchamber/
 .config/Insomnia/
