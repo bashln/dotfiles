@@ -127,4 +127,8 @@ fi
 
 
 # Added by Antigravity CLI installer
-export PATH="/home/leonamduarte/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+if [ -f "$HOME/.safe-chain/scripts/init-posix.sh" ]; then
+    source "$HOME/.safe-chain/scripts/init-posix.sh"
+fi
