@@ -61,6 +61,7 @@ undo/
 # Omarchy-managed nvim theme glue (generated per-machine on Linux, unused on win32)
 .config/nvim/lua/plugins/theme.lua
 .config/nvim/lua/plugins/omarchy-theme-hotreload.lua
+.config/nvim/lua/plugins/all-themes.lua
 
 # Doom Emacs / Emacs
 .dir-locals.el
