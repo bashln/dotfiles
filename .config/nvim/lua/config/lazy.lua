@@ -17,14 +17,73 @@ vim.opt.rtp:prepend(lazypath)
 local spec = {
   -- add LazyVim and import its plugins
   { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+
+  -- AI
+  { import = "lazyvim.plugins.extras.ai.copilot" },
+
+  -- coding
+  { import = "lazyvim.plugins.extras.coding.yanky" },
+  { import = "lazyvim.plugins.extras.coding.luasnip" },
+  { import = "lazyvim.plugins.extras.coding.blink" },
+
+  -- formatting
+  { import = "lazyvim.plugins.extras.formatting.prettier" },
+
+  -- lang
+  { import = "lazyvim.plugins.extras.lang.docker" },
+  { import = "lazyvim.plugins.extras.lang.go" },
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.markdown" },
+  { import = "lazyvim.plugins.extras.lang.python" },
+  { import = "lazyvim.plugins.extras.lang.yaml" },
+  { import = "lazyvim.plugins.extras.lang.terraform" },
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.lang.typescript.biome" },
+  -- { import = "lazyvim.plugins.extras.lang.react-native" },
+  { import = "lazyvim.plugins.extras.lang.helm" },
+  { import = "lazyvim.plugins.extras.lang.toml" },
+  { import = "lazyvim.plugins.extras.lang.tailwind" },
+
+  -- editor
+  { import = "lazyvim.plugins.extras.editor.harpoon2" },
+  { import = "lazyvim.plugins.extras.editor.mini-diff" },
+  { import = "lazyvim.plugins.extras.editor.snacks_picker" },
+  { import = "lazyvim.plugins.extras.editor.snacks_explorer" },
+  { import = "lazyvim.plugins.extras.editor.dial" },
+  { import = "lazyvim.plugins.extras.editor.inc-rename" },
+
+  -- util
+  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
+  -- { import = "lazyvim.plugins.extras.util.project" }, -- disabled: replaced by workspaces.nvim
+  { import = "lazyvim.plugins.extras.util.dot" },
+
+  -- lsp
+  -- { import = "lazyvim.plugins.extras.lsp.none-ls" },
+
+  -- linting
+  { import = "lazyvim.plugins.extras.linting.eslint" },
+
+  -- test
+  { import = "lazyvim.plugins.extras.test.core" },
+
+  -- dap
+  { import = "lazyvim.plugins.extras.dap.core" },
+
+  -- ui
+  -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+
+  -- { import = "lazyvim.plugins.extras.lang.php" },
+  -- { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+
   -- import/override with your plugins
   { import = "plugins" },
+  { import = "plugins/colorscheme" },
 }
 
 -- With the omarchy theme-hotreload disabled on win32, apply the first theme
 -- configured natively in install.colorscheme instead of a LazyVim default.
 if vim.fn.has("win32") == 1 then
-  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "doom-one" } })
+  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "tokyonight" } })
 end
 
 require("lazy").setup({
@@ -38,7 +97,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "doom-one", "cyberdream", "tokyonight", "habamax" } },
+  install = { colorscheme = { "cyberdream", "tokyonight", "doom-one", "habamax" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
