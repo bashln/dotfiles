@@ -108,7 +108,13 @@ bun.lockb
 .config/opencode/.codex*
 .config/opencode/.caveman-active
 .config/opencode/.ponytail-active
-.config/opencode/service.json
+.config/opencode/*.backup
+.config/opencode/plugins/auto-mode/test*.js
+.config/opencode/plugins/auto-mode/deploy-linux.sh
+.config/wezterm/assets/
+.config/wezterm/*.png
+.config/wezterm/analysis.md
+.config/wezterm/analysis.md
 .opencode/
 
 # ============================================================
