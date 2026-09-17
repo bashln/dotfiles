@@ -147,12 +147,12 @@ bun.lockb
 .config/gtk-3.0/
 .config/gtk-4.0/
 .config/dconf/
-.config/systemd/
 .config/foot/
 .config/imv/
 .config/tmux/
-.config/gh/
-.config/git/
+.config/alacritty/
+.config/ghostty/
+.config/kitty/
 .config/btop/
 .config/obsidian/
 .config/spotify/
