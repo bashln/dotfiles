@@ -1,309 +1,89 @@
 # ============================================================
-# SEGURANÇA CRÍTICA - NUNCA rastrear dados sensíveis
+# SEGURANÇA - NUNCA rastrear
 # ============================================================
-
-# Credenciais e chaves
-*.pem
-*.key
-*.p12
-*.pfx
-*.jks
-*_rsa*
-*_ed25519*
-*_ecdsa*
-*.ppk
-.env
-.env.*
-!.env.example
-.secrets/
-
-# Diretórios sensíveis
-.ssh/
-.gnupg/
-.password-store/
-.aws/
-.kube/
-.config/rclone/rclone.conf
-.config/lazygit/state.yml
-.safe-chain/
-
-# Gemini agent - credenciais e dados de runtime
-.agents/gemini/
-.commandcode/
-.agents/skills/omarchy
-
-# Fish shell (contém dados sensíveis ou gerados)
-.config/fish/conf.d/secrets.fish
-**/fish_variables
-.config/fish/completions/copilot.fish
+*.pem *.key *.p12 *.pfx *.jks *_rsa* *_ed25519* *_ecdsa* *.ppk
+.env .env.* !.env.example .secrets/
+.ssh/ .gnupg/ .password-store/ .aws/ .kube/
+.config/rclone/rclone.conf .config/lazygit/state.yml .safe-chain/
+.agents/gemini/ .commandcode/ .agents/skills/omarchy
+.config/fish/conf.d/secrets.fish **/fish_variables
 
 # ============================================================
-# Lixo e caches
+# CACHES / TEMP
 # ============================================================
-*~
-*.pyc
-*.pyo
-__pycache__/
-*.swp
-*.swo
-*.bak
-*.bak.*
-*.old
-*\(\ 2\)*
-*Zone.Identifier*
-.DS_Store
-Thumbs.db
-*.tmp
-*.log
-
-# Neovim / Vim
-undo/
-.netrw*
-
-# Omarchy-managed nvim theme glue (generated per-machine on Linux, unused on win32)
-.config/nvim/lua/plugins/theme.lua
-.config/nvim/lua/plugins/omarchy-theme-hotreload.lua
-.config/nvim/lua/plugins/all-themes.lua
-
-# Doom Emacs / Emacs
-.dir-locals.el
-.elc
-.projectile
-
-# Python
-.venv/
-venv/
-.mypy_cache/
-.pytest_cache/
-.ruff_cache/
-*.egg-info/
-
-# Build artifacts
-dist/
-build/
-*.o
-*.so
-*.dylib
-
-# Caches
-.cache/
-.direnv/
-.envrc
+*~ *.pyc *.pyo __pycache__/ *.swp *.swo *.bak *.bak.* *.old
+*Zone.Identifier* .DS_Store Thumbs.db *.tmp *.log
+.cache/ .direnv/ .envrc .local/ .dotfiles-bare/
 
 # ============================================================
-# Node.js / JavaScript
+# BUILD / NODE
 # ============================================================
-node_modules/
-package.json
-package-lock.json
-bun.lock
-bun.lockb
-*lock.json
-.yarn/
-.pnp.*
+dist/ build/ *.o *.so *.dylib
+node_modules/ package.json package-lock.json bun.lock bun.lockb *lock.json .yarn/ .pnp.*
 
 # ============================================================
-# opencode generated/temp files
+# opencode
 # ============================================================
-.config/opencode/.codex*
-.config/opencode/.caveman-active
-.config/opencode/.ponytail-active
-.config/opencode/*.backup
+.config/opencode/.codex* .config/opencode/.caveman-active
+.config/opencode/.ponytail-active .config/opencode/*.backup
 .config/opencode/plugins/auto-mode/test*.js
 .config/opencode/plugins/auto-mode/deploy-linux.sh
-.config/wezterm/assets/
-.config/wezterm/*.png
-.config/wezterm/analysis.md
-.config/wezterm/analysis.md
 .opencode/
 
 # ============================================================
-# Local app caches and installed binaries
+# TERMINAIS (fontes pessoais)
 # ============================================================
-.local/
+.config/alacritty/ .config/ghostty/ .config/kitty/
+.config/foot/ .config/wezterm/assets/ .config/wezterm/*.png
+.config/wezterm/analysis.md
 
 # ============================================================
-# Git bare repo itself
+# BROWSERS / EDITORS / DESKTOP
 # ============================================================
-.dotfiles-bare/
-
-# ============================================================
-# System / Desktop (não são dotfiles)
-# ============================================================
-.config/BraveSoftware/
-.config/chromium/
-.config/Code/*
-!.config/Code/User/
-.config/Code/User/*
-!.config/Code/User/settings.json
-!.config/Code/User/keybindings.json
-# Agentes globais do Copilot (apenas o que é versionado de propósito)
-!.config/Code/User/prompts/
-.config/Code/User/prompts/*
-!.config/Code/User/prompts/agents/
-.config/Code/User/prompts/agents/*
+.config/BraveSoftware/ .config/chromium/ .config/google-chrome-*/
+.config/microsoft-edge*/ .config/vscode-sqltools/
+.config/Code/* !.config/Code/User/ .config/Code/User/*
+!.config/Code/User/settings.json !.config/Code/User/keybindings.json
+!.config/Code/User/prompts/ .config/Code/User/prompts/*
+!.config/Code/User/prompts/agents/ .config/Code/User/prompts/agents/*
 !.config/Code/User/prompts/agents/executor-seguro.agent.md
-.config/google-chrome-beta/
-.config/google-chrome-unstable/
-.config/microsoft-edge/
-.config/microsoft-edge-dev/
-.config/pulse/
-.config/wireplumber/
-.config/fontconfig/
-.config/gtk-3.0/
-.config/gtk-4.0/
-.config/dconf/
-.config/foot/
-.config/imv/
-.config/tmux/
-.config/alacritty/
-.config/ghostty/
-.config/kitty/
-.config/btop/
-.config/obsidian/
-.config/spotify/
-.config/herdr/herdr-client.log
-.config/herdr/herdr-server.log
-.config/herdr/herdr.sock
-.config/herdr/herdr-client.sock
-.config/herdr/session.json
-.config/herdr/release-notes.json
-.config/herdr/.plugins.lock
-.config/DankMaterialShell/
-.config/niri/
-.config/autostart/
-.config/crossnote/
-.config/nautilus/
-.config/yay/
-.config/zed/
-.config/fcitx/
-.config/fcitx5/
-.config/ibus/
-.config/omarchy/*
-!.config/omarchy/plugins/
-.config/openchamber/
-.config/Insomnia/
-.config/vscode-sqltools/
-.config/xournalpp/
-.config/meugasto/
-.config/Omacom/
-.config/mise/
-.config/lazygit/
-.config/cosmic/
 
 # ============================================================
-# Android / SDK
+# APPS NÃO VERSIONADOS
 # ============================================================
-.android/
-.gradle/
-.keystores/
-.nuget/
-
-# ============================================================
-# Other tools
-# ============================================================
-.codex/
-.claude/
-.cline/
-.copilot/
-# .copilot/: versiona somente o guard de comandos e o README (nunca estado de sessão/logs)
-!.copilot/
-.copilot/*
-!.copilot/hooks/
-.copilot/hooks/*
-!.copilot/hooks/command-guard.js
-!.copilot/README.md
-.codeium/
-.dotnet/
-.expo/
-.npm/
-.npmrc
-.pi/
-.pki/
-.azure/
-
-# ============================================================
-# Home dirs (not configs)
-# ============================================================
-Documents/
-Downloads/
-Music/
-Pictures/
-Projects/
-Postman/
-Work/
-
-# ============================================================
-# Logs
-# ============================================================
-oc-go-debug.log
-nvim.log
-
-# ============================================================
-# kwallet
-# ============================================================
-kwalletd/
-kwalletrc
-
-# ============================================================
-# Shell state
-# ============================================================
-.bash_history
-.bash_logout
-.bash_profile
-.zsh_history
-
-# ============================================================
-# X / Desktop
-# ============================================================
-.XCompose
-.Xauthority
-.Xresources
-.xinitrc
-.xprofile
-.xsession-errors
-.pam_environment
-
-# ============================================================
-# Steam
-# ============================================================
-.steam/
-.steampath
-.steampid
-
-# ============================================================
-# VSCode
-# ============================================================
-.vscode/
-.vscode-shared/
-
-# ============================================================
-# Misc apps
-# ============================================================
-.var/
-.fonts/
-.pulse-cookie
-
-# ============================================================
-# System-generated configs
-# ============================================================
-.config/mimeapps.list
-.config/user-dirs.dirs
-.config/xdg-terminals.list
-.config/chromium-flags.conf
-.config/Microsoft/
-.config/hyprland-preview-share-picker/
+.config/{BraveSoftware,chromium,google-chrome-*,microsoft-edge*,pulse,wireplumber,fontconfig,gtk-3.0,gtk-4.0,dconf,tmux,gh,git,btop,obsidian,spotify,DankMaterialShell,niri,autostart,crossnote,nautilus,yay,zed,fcitx,fcitx5,ibus,openchamber,Insomnia,xournalpp,meugasto,Omacom,mise,lazygit,cosmic,mimeapps.list,user-dirs.dirs,xdg-terminals.list,chromium-flags.conf,Microsoft,hyprland-preview-share-picker}/
 .config/Thunar/accels.scm
-steam.desktop
+.config/herdr/{herdr-client.log,herdr-server.log,herdr.sock,herdr-client.sock,session.json,release-notes.json,.plugins.lock}
 
 # ============================================================
-# Backup files (obsoletos)
+# omarchy (mantém plugins/)
 # ============================================================
-*.fedora-dev-backup
+.config/omarchy/* !.config/omarchy/plugins/
 
 # ============================================================
-# Agent progress & PowerShell scripts
+# ANDROID / SDK
 # ============================================================
-progress.json
-errors.json
-*.ps1
+.android/ .gradle/ .keystores/ .nuget/
+
+# ============================================================
+# TOOLS / AI AGENTS
+# ============================================================
+.codex/ .claude/ .cline/ .codeium/ .dotnet/ .expo/ .npm/ .npmrc .pi/ .pki/ .azure/
+.copilot/* !.copilot/hooks/ .copilot/hooks/* !.copilot/hooks/command-guard.js !.copilot/README.md
+
+# ============================================================
+# HOME / SYSTEM
+# ============================================================
+Documents/ Downloads/ Music/ Pictures/ Projects/ Postman/ Work/
+.bash_history .bash_logout .bash_profile .zsh_history
+.XCompose .Xauthority .Xresources .xinitrc .xprofile .xsession-errors .pam_environment
+.steam/ .steampath .steampid .vscode/ .vscode-shared/
+.var/ .fonts/ .pulse-cookie steam.desktop
+oc-go-debug.log nvim.log progress.json errors.json *.ps1 *.fedora-dev-backup
+
+# ============================================================
+# PYTHON / DOOM
+# ============================================================
+.venv/ venv/ .mypy_cache/ .pytest_cache/ .ruff_cache/ *.egg-info/
+.dir-locals.el .elc .projectile undo/ .netrw*
+.config/nvim/lua/plugins/{theme.lua,omarchy-theme-hotreload.lua,all-themes.lua}
