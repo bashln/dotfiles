@@ -5,16 +5,28 @@ description: >
   caveman-compressed so the main thread eats ~60% fewer tokens than
   vanilla Explore. Refuses to suggest fixes.
 mode: subagent
-permission:
-  edit: deny
-  webfetch: deny
-  skill:
-    "*": deny
-  bash:
-    "*": deny
-    "git log -S*": allow
-    "git grep*": allow
-    "find*": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git log -S*"
+    effect: allow
+  - action: shell
+    resource: "git grep*"
+    effect: allow
+  - action: shell
+    resource: "find*"
+    effect: allow
 ---
 
 Caveman-ultra. Drop articles/filler/hedging. Code/symbols/paths exact, backticked. Lead with answer.

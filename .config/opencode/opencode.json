@@ -1,97 +1,102 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": {
+  "providers": {
     "nvidia": {
-      "npm": "@ai-sdk/openai-compatible",
+      "package": "aisdk:@ai-sdk/openai-compatible",
       "name": "NVIDIA NIM (Free)",
-      "options": {
+      "settings": {
         "baseURL": "https://integrate.api.nvidia.com/v1"
       },
       "models": {
         "nvidia/nemotron-mini-4b-instruct": {
           "name": "Nemotron Mini 4B",
-          "reasoning": false,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/llama-3.1-nemotron-nano-8b-v1": {
           "name": "Llama 3.1 Nemotron Nano 8B",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nvidia-nemotron-nano-9b-v2": {
           "name": "Nemotron Nano 9B v2",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nemotron-nano-12b-v2-vl": {
           "name": "Nemotron Nano 12B VL",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nemotron-3-nano-30b-a3b": {
           "name": "Nemotron 3 Nano 30B",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nemotron-3.5-lightning-30b-a3b": {
           "name": "Nemotron 3.5 Lightning 30B",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "deepseek-ai/deepseek-v4-flash": {
           "name": "DeepSeek V4 Flash",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         }
       }
     }
   },
   "mcp": {
-    "aikido": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@aikidosec/mcp@latest"
-      ],
-      "enabled": true
+    "servers": {
+      "aikido": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "@aikidosec/mcp@latest"
+        ],
+        "disabled": false
+      }
     }
   },
-  "autoupdate": true,
   "default_agent": "build",
-  "agent": {
+  "agents": {
     "build": {
       "model": "opencode/big-pickle",
-      "permission": {
-        "edit": "allow",
-        "bash": "allow",
-        "webfetch": "deny",
-        "task": {
-          "*": "deny",
-          "auditor": "allow",
-          "planner": "allow",
-          "tester": "allow",
-          "codex": "allow",
-          "executor": "allow",
-          "analista": "allow",
-          "debug": "allow",
-          "arquiteto": "allow",
-          "goal-worker": "allow"
-        }
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "shell", "resource": "*", "effect": "allow" },
+        { "action": "webfetch", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "auditor", "effect": "allow" },
+        { "action": "subagent", "resource": "planner", "effect": "allow" },
+        { "action": "subagent", "resource": "tester", "effect": "allow" },
+        { "action": "subagent", "resource": "codex", "effect": "allow" },
+        { "action": "subagent", "resource": "executor", "effect": "allow" },
+        { "action": "subagent", "resource": "analista", "effect": "allow" },
+        { "action": "subagent", "resource": "debug", "effect": "allow" },
+        { "action": "subagent", "resource": "arquiteto", "effect": "allow" },
+        { "action": "subagent", "resource": "goal-worker", "effect": "allow" }
+      ]
     },
     "goal-worker": {
       "description": "Executes goal checkpoints autonomously toward a durable objective.",
       "model": "opencode-go/mimo-v2.5",
       "mode": "subagent",
-      "permission": {
-        "edit": "allow",
-        "bash": "allow",
-        "read": "allow",
-        "glob": "allow",
-        "grep": "allow",
-        "write": "allow"
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "shell", "resource": "*", "effect": "allow" },
+        { "action": "read", "resource": "*", "effect": "allow" },
+        { "action": "glob", "resource": "*", "effect": "allow" },
+        { "action": "grep", "resource": "*", "effect": "allow" }
+      ]
     },
     "executor": {
       "description": "Mechanical execution agent.",
@@ -133,35 +138,6 @@
       "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
     },
-    "auto-mode": {
-      "description": "Auto-review agent for dangerous actions. Intercepts commands that cross safety boundaries.",
-      "model": "opencode-go/mimo-v2.5-pro",
-      "mode": "subagent",
-      "permission": {
-        "edit": "deny",
-        "bash": {
-          "*": "deny",
-          "git status*": "allow",
-          "git diff*": "allow",
-          "cat *": "allow",
-          "ls *": "allow"
-        }
-      }
-    },
-    "safety-checker": {
-      "description": "Safety verification agent for Auto-Mode. Read-only risk assessment.",
-      "model": "opencode-go/mimo-v2.5",
-      "mode": "subagent",
-      "permission": {
-        "edit": "deny",
-        "bash": {
-          "*": "deny",
-          "git status*": "allow",
-          "git diff*": "allow",
-          "cat *": "allow"
-        }
-      }
-    },
     "cavecrew-investigator": {
       "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
@@ -179,34 +155,11 @@
       "mode": "primary"
     }
   },
-  "plugin": [
-    "./plugins/caveman/plugin.js",
-    "./plugins/ponytail/.opencode/plugins/ponytail.mjs",
+  "plugins": [
     "@cortexkit/opencode-magic-context@0.42.5",
-    "@cortexkit/aft-opencode@latest",
-    "./plugins/auto-mode/plugin.js",
-    "./plugins/auto-mode/integration.js",
-    "./plugins/auto-mode/background.js"
+    "@cortexkit/aft-opencode@latest"
   ],
   "compaction": {
-    "auto": false,
-    "prune": false
-  },
-  "auto_mode": {
-    "enabled": true,
-    "policy": "auto-mode-policy.md",
-    "circuit_breaker": {
-      "max_consecutive_denials": 3,
-      "max_denials_in_window": 10,
-      "window_size": 50
-    },
-    "escalation_timeout": 300,
-    "log_file": "~/.opencode/auto-mode.log",
-    "aikido": {
-      "enabled": true,
-      "scan_on_edit": true,
-      "pre_commit_scan": true,
-      "domain_check": true
-    }
+    "auto": false
   }
 }

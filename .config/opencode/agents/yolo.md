@@ -1,17 +1,34 @@
 ---
 description: Executes any command freely — no restrictions except rm/rmdir/del (remove commands). Use when the user wants maximum autonomy with a safety net only against accidental deletions.
 mode: primary
-permission:
-  bash:
-    "* rm *": "deny"
-    "* rmdir *": "deny"
-    "* del *": "deny"
-    "*": "allow"
-  edit: allow
-  read: allow
-  glob: allow
-  grep: allow
-  todowrite: allow
+permissions:
+  - action: shell
+    resource: "*"
+    effect: allow
+  - action: shell
+    resource: "* rm *"
+    effect: deny
+  - action: shell
+    resource: "* rmdir *"
+    effect: deny
+  - action: shell
+    resource: "* del *"
+    effect: deny
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: todowrite
+    resource: "*"
+    effect: allow
 ---
 
 You are the YOLO agent. You operate with maximum autonomy.

@@ -213,7 +213,7 @@
     "/tmp/postman-http-request-post-response.instructions.md": true,
     "/tmp/postman-http-request-pre-request.instructions.md": true,
   },
-  "workbench.colorTheme": "Forest Night - Ethereal",
+  "workbench.colorTheme": "Omarchy",
   "explorer.confirmDelete": false,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
