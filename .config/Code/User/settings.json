@@ -1,42 +1,42 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
-  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontFamily": "AdwaitaMono Nerd Font",
   "editor.fontLigatures": true,
   "mssql.connectionGroups": [
     {
       "name": "ROOT",
-      "id": "ROOT"
-    }
+      "id": "ROOT",
+    },
   ],
   "redhat.telemetry.enabled": false,
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
-      "icon": "terminal-powershell"
+      "icon": "terminal-powershell",
     },
     "Command Prompt": {
       "path": [
         "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
+        "${env:windir}\\System32\\cmd.exe",
       ],
       "args": [],
-      "icon": "terminal-cmd"
+      "icon": "terminal-cmd",
     },
     "Git Bash": {
       "path": "C:\\Program Files\\Git\\bin\\bash.exe",
-      "args": ["--login", "-i"]
-    }
+      "args": ["--login", "-i"],
+    },
   },
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "security.workspace.trust.untrustedFiles": "open",
   "chat.sessionSync.enabled": true,
   "chat.useCustomAgentHooks": true,
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "remote.SSH.remotePlatform": {
-    "pvserver": "linux"
+    "pvserver": "linux",
   },
   "workbench.activityBar.location": "top",
   "window.menuBarVisibility": "compact",
@@ -46,10 +46,10 @@
   "workbench.iconTheme": "vscode-great-icons",
   "mssql.autoDisableNonTSqlLanguageService": true,
   "[go]": {
-    "editor.defaultFormatter": "golang.go"
+    "editor.defaultFormatter": "golang.go",
   },
   "[sql]": {
-    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode",
   },
   "helium-icon-theme.showWelcomeMessage": false,
   "editor.wordWrap": "on",
@@ -183,7 +183,7 @@
     "xargs": false,
     "eval": false,
     "Invoke-Expression": false,
-    "iex": false
+    "iex": false,
   },
   "yaml.disableSchemaDetection": [
     "**/.github/workflows/*.yml",
@@ -191,26 +191,40 @@
     "**/.gitea/workflows/*.yml",
     "**/.gitea/workflows/*.yaml",
     "**/.forgejo/workflows/*.yml",
-    "**/.forgejo/workflows/*.yaml"
+    "**/.forgejo/workflows/*.yaml",
   ],
   "aikido.coreUrl": "https://ide.aikido.dev",
-  "editor.codeLensFontFamily": "JetBrainsMono Nerd Font",
   "terminal.integrated.fontLigatures.enabled": true,
   "chat.instructionsFilesLocations": {
     ".github/instructions": true,
     ".claude/rules": true,
     "~/.copilot/instructions": true,
-    "~/.claude/rules": true
+    "~/.claude/rules": true,
+    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-collections-post-response.instructions.md": true,
+    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-collections-pre-request.instructions.md": true,
+    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-folder-post-response.instructions.md": true,
+    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
+    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
+    "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true,
+    "/tmp/postman-collections-post-response.instructions.md": true,
+    "/tmp/postman-collections-pre-request.instructions.md": true,
+    "/tmp/postman-folder-post-response.instructions.md": true,
+    "/tmp/postman-folder-pre-request.instructions.md": true,
+    "/tmp/postman-http-request-post-response.instructions.md": true,
+    "/tmp/postman-http-request-pre-request.instructions.md": true,
   },
   "workbench.colorTheme": "Forest Night - Ethereal",
   "explorer.confirmDelete": false,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Always follow the Conventional Commits specification (e.g. feat:, fix:, docs:, chore:, refactor:). Keep the first line concise (under 72 chars), in the imperative mood and lowercase. Do not include quotes or markdown formatting in the title."
-    }
+      "text": "Always follow the Conventional Commits specification (e.g. feat:, fix:, docs:, chore:, refactor:). Keep the first line concise (under 72 chars), in the imperative mood and lowercase. Do not include quotes or markdown formatting in the title.",
+    },
   ],
   "extensions.supportAgentsWindow": {
-    "ltmoerdani.opencode-copilot-chat": true
+    "ltmoerdani.opencode-copilot-chat": true,
   },
-  "chat.viewSessions.orientation": "stacked"
+  "chat.viewSessions.orientation": "stacked",
+  "terminal.integrated.fontSize": 12,
+  "editor.codeLensFontFamily": "IoskeleyMono Nerd Font Mono",
+  "editor.fontSize": 13.5,
 }
