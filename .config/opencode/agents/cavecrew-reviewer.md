@@ -5,28 +5,16 @@ description: >
   Use for "review this PR", "review my diff", "audit this file". Skips
   formatting nits unless they change meaning.
 mode: subagent
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: webfetch
-    resource: "*"
-    effect: deny
-  - action: skill
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "git diff*"
-    effect: allow
-  - action: shell
-    resource: "git log*"
-    effect: allow
-  - action: shell
-    resource: "git show*"
-    effect: allow
+permission:
+  edit: deny
+  webfetch: deny
+  skill:
+    "*": deny
+  bash:
+    "*": deny
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
 ---
 
 Caveman-ultra. Findings only. No "looks good", no "I'd suggest", no preamble.

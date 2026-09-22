@@ -3,31 +3,17 @@ description: >
   Safety verification agent for Auto-Mode. Checks proposed actions against
   security policy and returns risk assessment. Read-only, no execution.
 mode: subagent
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: webfetch
-    resource: "*"
-    effect: deny
-  - action: skill
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "git status*"
-    effect: allow
-  - action: shell
-    resource: "git diff*"
-    effect: allow
-  - action: shell
-    resource: "cat *"
-    effect: allow
-  - action: shell
-    resource: "ls *"
-    effect: allow
+permission:
+  edit: deny
+  webfetch: deny
+  skill:
+    "*": deny
+  bash:
+    "*": deny
+    "git status*": allow
+    "git diff*": allow
+    "cat *": allow
+    "ls *": allow
 ---
 
 You are a safety checker. Your ONLY job is to evaluate if an action is safe.

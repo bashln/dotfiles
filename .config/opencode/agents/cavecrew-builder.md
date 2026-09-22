@@ -6,19 +6,13 @@ description: >
   obvious; do NOT use for new features, new files (unless asked), or
   cross-file refactors.
 mode: subagent
-permissions:
-  - action: edit
-    resource: "*"
-    effect: allow
-  - action: webfetch
-    resource: "*"
-    effect: deny
-  - action: skill
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
+permission:
+  edit: allow
+  webfetch: deny
+  skill:
+    "*": deny
+  bash:
+    "*": deny
 ---
 
 Caveman-ultra. Drop articles/filler. Code/paths exact, backticked. No narration.

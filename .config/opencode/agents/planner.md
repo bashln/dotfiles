@@ -1,49 +1,23 @@
 ---
 description: Planning specialist for repository analysis, architecture review, and implementation planning.
 mode: subagent
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: webfetch
-    resource: "*"
-    effect: deny
-  - action: skill
-    resource: "*"
-    effect: deny
-  - action: skill
-    resource: "analyze"
-    effect: allow
-  - action: skill
-    resource: "architecture"
-    effect: allow
-  - action: shell
-    resource: "*"
-    effect: ask
-  - action: shell
-    resource: "git status*"
-    effect: allow
-  - action: shell
-    resource: "git diff*"
-    effect: allow
-  - action: shell
-    resource: "git log*"
-    effect: allow
-  - action: shell
-    resource: "git show*"
-    effect: allow
-  - action: shell
-    resource: "rg *"
-    effect: allow
-  - action: shell
-    resource: "find *"
-    effect: allow
-  - action: shell
-    resource: "sed *"
-    effect: allow
-  - action: shell
-    resource: "cat *"
-    effect: allow
+permission:
+  edit: deny
+  webfetch: deny
+  skill:
+    "*": deny
+    "analyze": allow
+    "architecture": allow
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
+    "rg *": allow
+    "find *": allow
+    "sed *": allow
+    "cat *": allow
 ---
 
 You are the planning specialist for repository analysis, architecture review, and implementation planning.
