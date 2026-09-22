@@ -133,6 +133,35 @@
       "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
     },
+    "auto-mode": {
+      "description": "Auto-review agent for dangerous actions. Intercepts commands that cross safety boundaries.",
+      "model": "opencode-go/mimo-v2.5-pro",
+      "mode": "subagent",
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "cat *": "allow",
+          "ls *": "allow"
+        }
+      }
+    },
+    "safety-checker": {
+      "description": "Safety verification agent for Auto-Mode. Read-only risk assessment.",
+      "model": "opencode-go/mimo-v2.5",
+      "mode": "subagent",
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "cat *": "allow"
+        }
+      }
+    },
     "cavecrew-investigator": {
       "model": "opencode-go/mimo-v2.5-pro",
       "mode": "subagent"
@@ -151,11 +180,25 @@
     }
   },
   "plugin": [
+    "./plugins/caveman/plugin.js",
+    "./plugins/ponytail/.opencode/plugins/ponytail.mjs",
     "@cortexkit/opencode-magic-context@0.42.5",
-    "@cortexkit/aft-opencode@latest"
+    "@cortexkit/aft-opencode@latest",
+    "./plugins/auto-mode/index.mjs"
   ],
   "compaction": {
     "auto": false,
     "prune": false
+  },
+  "auto_mode": {
+    "enabled": true,
+    "policy": "auto-mode-policy.md",
+    "circuit_breaker": {
+      "max_consecutive_denials": 3,
+      "max_denials_in_window": 10,
+      "window_size": 50
+    },
+    "escalation_timeout": 300,
+    "log_file": "~/.opencode/auto-mode.log"
   }
 }
