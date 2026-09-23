@@ -51,7 +51,8 @@
       "type": "local",
       "command": [
         "node",
-        "~/.config/opencode/scripts/aikido-mcp.cjs"
+        "-e",
+        "const{spawn}=require('child_process');const f=require('path').join(require('os').homedir(),'.config','opencode','scripts','aikido-mcp.cjs');const c=spawn(process.execPath,[f],{stdio:'inherit',windowsHide:true});c.on('exit',(x,s)=>process.exit(s?1:(x??0)));"
       ],
       "enabled": true
     }
