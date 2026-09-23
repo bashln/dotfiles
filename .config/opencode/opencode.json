@@ -178,10 +178,7 @@
       "mode": "primary"
     }
   },
-  "plugin": [
-    "@cortexkit/opencode-magic-context@0.42.5",
-    "@cortexkit/aft-opencode@latest"
-  ],
+  "plugin": [],
   "compaction": {
     "auto": false,
     "prune": false
