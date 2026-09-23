@@ -57,7 +57,7 @@
       "enabled": true
     }
   },
-  "autoupdate": true,
+  "autoupdate": false,
   "default_agent": "build",
   "agent": {
     "build": {
@@ -180,11 +180,8 @@
     }
   },
   "plugin": [
-    "./plugins/caveman/plugin.js",
-    "./plugins/ponytail/.opencode/plugins/ponytail.mjs",
     "@cortexkit/opencode-magic-context@0.42.5",
-    "@cortexkit/aft-opencode@latest",
-    "./plugins/auto-mode/index.mjs"
+    "@cortexkit/aft-opencode@latest"
   ],
   "compaction": {
     "auto": false,
