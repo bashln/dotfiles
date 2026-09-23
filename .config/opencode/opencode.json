@@ -51,7 +51,7 @@
       "type": "local",
       "command": [
         "node",
-        "C:\\Users\\itinerario\\AppData\\Roaming\\npm\\node_modules\\@aikidosec\\mcp\\dist\\index.js"
+        "~/.config/opencode/scripts/aikido-mcp.cjs"
       ],
       "enabled": true
     }
@@ -180,8 +180,7 @@
   },
   "plugin": [],
   "compaction": {
-    "auto": false,
-    "prune": false
+    "auto": false
   },
   "auto_mode": {
     "enabled": true,
