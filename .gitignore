@@ -25,9 +25,8 @@ node_modules/ package.json package-lock.json bun.lock bun.lockb *lock.json .yarn
 # opencode
 # ============================================================
 .config/opencode/.codex* .config/opencode/.caveman-active
-.config/opencode/.ponytail-active .config/opencode/*.backup
-.config/opencode/plugins/auto-mode/test*.js
-.config/opencode/plugins/auto-mode/deploy-linux.sh
+.config/opencode/.ponytail-active .config/opencode/*.backup .config/opencode/*.bak*
+.config/opencode/plugins/_disabled/
 .opencode/
 
 # ============================================================
