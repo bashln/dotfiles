@@ -24,3 +24,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
+
+-- Ignore stale swap files (crashed sessions) instead of hitting E325 ATTENTION.
+-- 'o' = open read-only when a swap file exists: safest default, still surfaces
+-- unsaved changes if another nvim instance really holds the file.
+vim.api.nvim_create_autocmd("SwapExists", {
+  group = vim.api.nvim_create_augroup("swap_exists", { clear = true }),
+  callback = function()
+    vim.v.swapchoice = "o"
+  end,
+})

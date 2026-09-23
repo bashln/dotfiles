@@ -51,7 +51,8 @@ node_modules/ package.json package-lock.json bun.lock bun.lockb *lock.json .yarn
 # ============================================================
 # APPS NÃO VERSIONADOS
 # ============================================================
-.config/{BraveSoftware,chromium,google-chrome-*,microsoft-edge*,pulse,wireplumber,fontconfig,gtk-3.0,gtk-4.0,dconf,tmux,gh,git,btop,obsidian,spotify,DankMaterialShell,niri,autostart,crossnote,nautilus,yay,zed,fcitx,fcitx5,ibus,openchamber,Insomnia,xournalpp,meugasto,Omacom,mise,lazygit,cosmic,mimeapps.list,user-dirs.dirs,xdg-terminals.list,chromium-flags.conf,Microsoft,hyprland-preview-share-picker}/
+.config/{BraveSoftware,chromium,google-chrome-*,microsoft-edge*,pulse,wireplumber,fontconfig,gtk-3.0,gtk-4.0,dconf,tmux,gh,git,btop,obsidian,spotify,DankMaterialShell,niri,autostart,crossnote,nautilus,yay,fcitx,fcitx5,ibus,openchamber,Insomnia,xournalpp,meugasto,Omacom,mise,lazygit,cosmic,mimeapps.list,user-dirs.dirs,xdg-terminals.list,chromium-flags.conf,Microsoft,hyprland-preview-share-picker}/
+.config/zed/extensions.json
 .config/Thunar/accels.scm
 .config/herdr/{herdr-client.log,herdr-server.log,herdr.sock,herdr-client.sock,session.json,release-notes.json,.plugins.lock}
 

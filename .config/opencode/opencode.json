@@ -50,9 +50,8 @@
     "aikido": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@aikidosec/mcp@latest"
+        "node",
+        "C:\\Users\\itinerario\\AppData\\Roaming\\npm\\node_modules\\@aikidosec\\mcp\\dist\\index.js"
       ],
       "enabled": true
     }
