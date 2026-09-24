@@ -6,7 +6,9 @@
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
-source "$OMARCHY_PATH/default/bash/rc"
+if [ -n "$OMARCHY_PATH" ] && [ -f "$OMARCHY_PATH/default/bash/rc" ]; then
+  source "$OMARCHY_PATH/default/bash/rc"
+fi
 
 # Add your own exports, aliases, and functions here.
 #
@@ -128,6 +130,9 @@ fi
 
 # Added by Antigravity CLI installer
 export PATH="$HOME/.local/bin:$PATH"
+
+# Starship prompt
+eval "$(starship init bash)"
 
 if [ -f "$HOME/.safe-chain/scripts/init-posix.sh" ]; then
     source "$HOME/.safe-chain/scripts/init-posix.sh"

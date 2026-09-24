@@ -83,7 +83,7 @@ local spec = {
 -- With the omarchy theme-hotreload disabled on win32, apply the first theme
 -- configured natively in install.colorscheme instead of a LazyVim default.
 if vim.fn.has("win32") == 1 then
-  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "cursor-dark" } })
+  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "dracula" } })
 end
 
 require("lazy").setup({
@@ -97,7 +97,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "cursor-dark", "tokyonight", "doom-one", "habamax" } },
+  install = { colorscheme = { "dracula", "tokyonight", "doom-one", "habamax" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
