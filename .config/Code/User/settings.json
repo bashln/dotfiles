@@ -1,7 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
-  "editor.fontFamily": "AdwaitaMono Nerd Font",
+  "editor.fontFamily": "IoskeleyMono Nerd Font Mono",
   "editor.fontLigatures": true,
   "mssql.connectionGroups": [
     {
@@ -213,7 +213,6 @@
     "/tmp/postman-http-request-post-response.instructions.md": true,
     "/tmp/postman-http-request-pre-request.instructions.md": true,
   },
-  "workbench.colorTheme": "Omarchy",
   "explorer.confirmDelete": false,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
@@ -227,4 +226,9 @@
   "terminal.integrated.fontSize": 12,
   "editor.codeLensFontFamily": "IoskeleyMono Nerd Font Mono",
   "editor.fontSize": 13.5,
+  "chat.pluginLocations": {
+    "/home/leonamduarte/.cache/plugins/.install-staging/68f4c11ce3a259d801f0015bdb9c9dddabc6e8b0/vscode/repo": true,
+  },
+  "git.autofetch": true,
+  "workbench.colorTheme": "Omarchy",
 }
