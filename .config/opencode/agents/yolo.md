@@ -1,6 +1,7 @@
 ---
 description: Executes any command freely — no restrictions except rm/rmdir/del (remove commands). Use when the user wants maximum autonomy with a safety net only against accidental deletions.
 mode: primary
+hidden: true
 permissions:
   - action: shell
     resource: "*"

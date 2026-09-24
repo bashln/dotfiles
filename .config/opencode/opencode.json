@@ -110,7 +110,20 @@
         { "action": "subagent", "resource": "analista", "effect": "allow" },
         { "action": "subagent", "resource": "debug", "effect": "allow" },
         { "action": "subagent", "resource": "arquiteto", "effect": "allow" },
-        { "action": "subagent", "resource": "goal-worker", "effect": "allow" }
+        { "action": "subagent", "resource": "goal-worker", "effect": "allow" },
+        { "action": "shell", "resource": "rm *", "effect": "deny" },
+        { "action": "shell", "resource": "rmdir *", "effect": "deny" },
+        { "action": "shell", "resource": "del *", "effect": "deny" },
+        { "action": "shell", "resource": "erase *", "effect": "deny" },
+        { "action": "shell", "resource": "unlink *", "effect": "deny" },
+        { "action": "shell", "resource": "shred *", "effect": "deny" },
+        { "action": "shell", "resource": "Remove-Item *", "effect": "deny" },
+        { "action": "shell", "resource": "Remove-ItemProperty *", "effect": "deny" },
+        { "action": "shell", "resource": "*/rm *", "effect": "deny" },
+        { "action": "shell", "resource": "*/rmdir *", "effect": "deny" },
+        { "action": "shell", "resource": "* rm *", "effect": "deny" },
+        { "action": "shell", "resource": "* rmdir *", "effect": "deny" },
+        { "action": "shell", "resource": "* del *", "effect": "deny" }
       ]
     },
     "goal-worker": {
