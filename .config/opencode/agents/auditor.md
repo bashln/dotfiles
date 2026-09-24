@@ -1,30 +1,70 @@
 ---
 description: Review-first specialist for technical audits, merge readiness, and audit follow-up.
 mode: subagent
-permission:
-  edit: deny
-  webfetch: deny
-  skill:
-    "*": deny
-    "audit-and-fix": allow
-    "review": allow
-  bash:
-    "*": ask
-    "git status*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git show*": allow
-    "rg *": allow
-    "find *": allow
-    "sed *": allow
-    "cat *": allow
-    "go test*": allow
-    "cargo test*": allow
-    "npm test*": allow
-    "npm run test*": allow
-    "pnpm test*": allow
-    "bun test*": allow
-    "yarn test*": allow
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "*"
+    effect: deny
+  - action: skill
+    resource: "audit-and-fix"
+    effect: allow
+  - action: skill
+    resource: "review"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: shell
+    resource: "git status*"
+    effect: allow
+  - action: shell
+    resource: "git diff*"
+    effect: allow
+  - action: shell
+    resource: "git log*"
+    effect: allow
+  - action: shell
+    resource: "git show*"
+    effect: allow
+  - action: shell
+    resource: "rg *"
+    effect: allow
+  - action: shell
+    resource: "find *"
+    effect: allow
+  - action: shell
+    resource: "sed *"
+    effect: allow
+  - action: shell
+    resource: "cat *"
+    effect: allow
+  - action: shell
+    resource: "go test*"
+    effect: allow
+  - action: shell
+    resource: "cargo test*"
+    effect: allow
+  - action: shell
+    resource: "npm test*"
+    effect: allow
+  - action: shell
+    resource: "npm run test*"
+    effect: allow
+  - action: shell
+    resource: "pnpm test*"
+    effect: allow
+  - action: shell
+    resource: "bun test*"
+    effect: allow
+  - action: shell
+    resource: "yarn test*"
+    effect: allow
 ---
 
 You are a review-first specialist. Your job is to inspect code or diffs and report the highest-value findings without drifting into implementation.

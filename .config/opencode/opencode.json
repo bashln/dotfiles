@@ -1,106 +1,138 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "provider": {
+  "providers": {
     "nvidia": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "NVIDIA NIM (Free)",
-      "options": {
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
         "baseURL": "https://integrate.api.nvidia.com/v1"
       },
       "models": {
         "nvidia/nemotron-mini-4b-instruct": {
           "name": "Nemotron Mini 4B",
-          "reasoning": false,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/llama-3.1-nemotron-nano-8b-v1": {
           "name": "Llama 3.1 Nemotron Nano 8B",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nvidia-nemotron-nano-9b-v2": {
           "name": "Nemotron Nano 9B v2",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
-        "nvidia/nemotron-nano-12b-v2-vl": {
+        "nvidia/nvidia-nemotron-nano-12b-v2-vl": {
           "name": "Nemotron Nano 12B VL",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nemotron-3-nano-30b-a3b": {
-          "name": "Nemotron 3 Nano 30B",
-          "reasoning": true,
-          "tool_call": true
+          "name": "Nemotron 3 Nano 30B A3B",
+          "capabilities": {
+            "tools": true
+          }
         },
         "nvidia/nemotron-3.5-lightning-30b-a3b": {
-          "name": "Nemotron 3.5 Lightning 30B",
-          "reasoning": true,
-          "tool_call": true
+          "name": "Nemotron 3.5 Lightning 30B A3B",
+          "capabilities": {
+            "tools": true
+          }
         },
         "deepseek-ai/deepseek-v4-flash": {
           "name": "DeepSeek V4 Flash",
-          "reasoning": true,
-          "tool_call": true
+          "capabilities": {
+            "tools": true
+          }
         }
       }
     }
   },
   "mcp": {
-    "aikido": {
-      "type": "local",
-      "command": [
-        "node",
-        "-e",
-        "const{spawn}=require('child_process');const f=require('path').join(require('os').homedir(),'.config','opencode','scripts','aikido-mcp.cjs');const c=spawn(process.execPath,[f],{stdio:'inherit',windowsHide:true});c.on('exit',(x,s)=>process.exit(s?1:(x??0)));"
-      ],
-      "enabled": true
+    "servers": {
+      "aikido": {
+        "type": "local",
+        "command": [
+          "node",
+          "-e",
+          "const{spawn}=require('child_process');const f=require('path').join(require('os').homedir(),'.config','opencode','scripts','aikido-mcp.cjs');const c=spawn(process.execPath,[f],{stdio:'inherit',windowsHide:true});c.on('exit',(x,s)=>process.exit(s?1:(x??0)));"
+        ],
+        "disabled": false
+      }
     }
   },
-  "autoupdate": false,
+  "update": "disable",
   "default_agent": "build",
-  "agent": {
+  "agents": {
+    "plan": {
+      "permissions": [
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "git status*", "effect": "allow" },
+        { "action": "shell", "resource": "git log*", "effect": "allow" },
+        { "action": "shell", "resource": "git diff*", "effect": "allow" },
+        { "action": "shell", "resource": "git show*", "effect": "allow" },
+        { "action": "shell", "resource": "ls *", "effect": "allow" },
+        { "action": "shell", "resource": "dir *", "effect": "allow" },
+        { "action": "shell", "resource": "cat *", "effect": "allow" },
+        { "action": "shell", "resource": "head *", "effect": "allow" },
+        { "action": "shell", "resource": "tail *", "effect": "allow" },
+        { "action": "shell", "resource": "grep *", "effect": "allow" },
+        { "action": "shell", "resource": "rg *", "effect": "allow" },
+        { "action": "shell", "resource": "find *", "effect": "allow" },
+        { "action": "shell", "resource": "wc *", "effect": "allow" },
+        { "action": "shell", "resource": "pwd*", "effect": "allow" },
+        { "action": "shell", "resource": "npm test*", "effect": "ask" },
+        { "action": "shell", "resource": "npx jest*", "effect": "ask" },
+        { "action": "shell", "resource": "go test*", "effect": "ask" },
+        { "action": "shell", "resource": "cargo test*", "effect": "ask" },
+        { "action": "shell", "resource": "pytest*", "effect": "ask" },
+        { "action": "shell", "resource": "bun test*", "effect": "ask" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "execute", "resource": "*", "effect": "deny" }
+      ]
+    },
     "build": {
-      "model": "opencode/big-pickle",
-      "permission": {
-        "edit": "allow",
-        "bash": "allow",
-        "webfetch": "deny",
-        "task": {
-          "*": "deny",
-          "auditor": "allow",
-          "planner": "allow",
-          "tester": "allow",
-          "codex": "allow",
-          "executor": "allow",
-          "analista": "allow",
-          "debug": "allow",
-          "arquiteto": "allow",
-          "goal-worker": "allow"
-        }
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "shell", "resource": "*", "effect": "allow" },
+        { "action": "webfetch", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "auditor", "effect": "allow" },
+        { "action": "subagent", "resource": "planner", "effect": "allow" },
+        { "action": "subagent", "resource": "tester", "effect": "allow" },
+        { "action": "subagent", "resource": "codex", "effect": "allow" },
+        { "action": "subagent", "resource": "executor", "effect": "allow" },
+        { "action": "subagent", "resource": "analista", "effect": "allow" },
+        { "action": "subagent", "resource": "debug", "effect": "allow" },
+        { "action": "subagent", "resource": "arquiteto", "effect": "allow" },
+        { "action": "subagent", "resource": "goal-worker", "effect": "allow" }
+      ]
     },
     "goal-worker": {
       "description": "Executes goal checkpoints autonomously toward a durable objective.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent",
-      "permission": {
-        "edit": "allow",
-        "bash": "allow",
-        "read": "allow",
-        "glob": "allow",
-        "grep": "allow",
-        "write": "allow"
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "shell", "resource": "*", "effect": "allow" },
+        { "action": "read", "resource": "*", "effect": "allow" },
+        { "action": "glob", "resource": "*", "effect": "allow" },
+        { "action": "grep", "resource": "*", "effect": "allow" }
+      ]
     },
     "executor": {
       "description": "Mechanical execution agent.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "analista": {
       "description": "Refactor agent.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "debug": {
@@ -120,7 +152,7 @@
     },
     "tester": {
       "description": "Tester agent.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "planner": {
@@ -130,56 +162,52 @@
     },
     "auditor": {
       "description": "Audit and review agent.",
-      "model": "opencode-go/mimo-v2.5-pro",
+      "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "auto-mode": {
       "description": "Auto-review agent for dangerous actions. Intercepts commands that cross safety boundaries.",
-      "model": "opencode-go/mimo-v2.5-pro",
+      "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent",
-      "permission": {
-        "edit": "deny",
-        "bash": {
-          "*": "deny",
-          "git status*": "allow",
-          "git diff*": "allow",
-          "cat *": "allow",
-          "ls *": "allow"
-        }
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "git status*", "effect": "allow" },
+        { "action": "shell", "resource": "git diff*", "effect": "allow" },
+        { "action": "shell", "resource": "cat *", "effect": "allow" },
+        { "action": "shell", "resource": "ls *", "effect": "allow" }
+      ]
     },
     "safety-checker": {
       "description": "Safety verification agent for Auto-Mode. Read-only risk assessment.",
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent",
-      "permission": {
-        "edit": "deny",
-        "bash": {
-          "*": "deny",
-          "git status*": "allow",
-          "git diff*": "allow",
-          "cat *": "allow"
-        }
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "git status*", "effect": "allow" },
+        { "action": "shell", "resource": "git diff*", "effect": "allow" },
+        { "action": "shell", "resource": "cat *", "effect": "allow" }
+      ]
     },
     "cavecrew-investigator": {
-      "model": "opencode-go/mimo-v2.5-pro",
+      "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "cavecrew-builder": {
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "cavecrew-reviewer": {
-      "model": "opencode-go/mimo-v2.5-pro",
+      "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "tutor": {
-      "model": "opencode-go/mimo-v2.5",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "primary"
     }
   },
-  "plugin": [],
+  "plugins": [],
   "compaction": {
     "auto": false
   },
