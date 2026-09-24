@@ -71,7 +71,7 @@
   "agents": {
     "plan": {
       "permissions": [
-        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "ask" },
         { "action": "shell", "resource": "git status*", "effect": "allow" },
         { "action": "shell", "resource": "git log*", "effect": "allow" },
         { "action": "shell", "resource": "git diff*", "effect": "allow" },
@@ -86,6 +86,28 @@
         { "action": "shell", "resource": "find *", "effect": "allow" },
         { "action": "shell", "resource": "wc *", "effect": "allow" },
         { "action": "shell", "resource": "pwd*", "effect": "allow" },
+        { "action": "shell", "resource": "echo *", "effect": "allow" },
+        { "action": "shell", "resource": "sed -n *", "effect": "allow" },
+        { "action": "shell", "resource": "awk *", "effect": "allow" },
+        { "action": "shell", "resource": "sort *", "effect": "allow" },
+        { "action": "shell", "resource": "uniq *", "effect": "allow" },
+        { "action": "shell", "resource": "cut *", "effect": "allow" },
+        { "action": "shell", "resource": "diff *", "effect": "allow" },
+        { "action": "shell", "resource": "tree *", "effect": "allow" },
+        { "action": "shell", "resource": "stat *", "effect": "allow" },
+        { "action": "shell", "resource": "file *", "effect": "allow" },
+        { "action": "shell", "resource": "du *", "effect": "allow" },
+        { "action": "shell", "resource": "which *", "effect": "allow" },
+        { "action": "shell", "resource": "jq *", "effect": "allow" },
+        { "action": "shell", "resource": "git ls-files*", "effect": "allow" },
+        { "action": "shell", "resource": "git blame*", "effect": "allow" },
+        { "action": "shell", "resource": "git rev-parse*", "effect": "allow" },
+        { "action": "shell", "resource": "git shortlog*", "effect": "allow" },
+        { "action": "shell", "resource": "git submodule status*", "effect": "allow" },
+        { "action": "shell", "resource": "git branch*", "effect": "allow" },
+        { "action": "shell", "resource": "npm ls*", "effect": "allow" },
+        { "action": "shell", "resource": "cd * && git *", "effect": "allow" },
+        { "action": "shell", "resource": "bash /home/leonamduarte/Projects/akita-skills/security-audit/scripts/security-surface.sh*", "effect": "allow" },
         { "action": "shell", "resource": "npm test*", "effect": "ask" },
         { "action": "shell", "resource": "npx jest*", "effect": "ask" },
         { "action": "shell", "resource": "go test*", "effect": "ask" },
@@ -93,7 +115,13 @@
         { "action": "shell", "resource": "pytest*", "effect": "ask" },
         { "action": "shell", "resource": "bun test*", "effect": "ask" },
         { "action": "subagent", "resource": "*", "effect": "deny" },
-        { "action": "execute", "resource": "*", "effect": "deny" }
+        { "action": "execute", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "* rm *", "effect": "deny" },
+        { "action": "shell", "resource": "* rmdir *", "effect": "deny" },
+        { "action": "shell", "resource": "* mv *", "effect": "deny" },
+        { "action": "shell", "resource": "* mkdir *", "effect": "deny" },
+        { "action": "shell", "resource": "*git push*", "effect": "deny" },
+        { "action": "shell", "resource": "*git commit*", "effect": "deny" }
       ]
     },
     "build": {
