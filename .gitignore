@@ -188,11 +188,7 @@ bun.lockb
 .pi/
 .pki/
 .azure/
-.copilot/*
-!.copilot/hooks/
-.copilot/hooks/*
-!.copilot/hooks/command-guard.js
-!.copilot/README.md
+.copilot/
 
 # ============================================================
 # HOME / SYSTEM
