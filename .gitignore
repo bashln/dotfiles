@@ -1,89 +1,250 @@
 # ============================================================
 # SEGURANÇA - NUNCA rastrear
 # ============================================================
-*.pem *.key *.p12 *.pfx *.jks *_rsa* *_ed25519* *_ecdsa* *.ppk
-.env .env.* !.env.example .secrets/
-.ssh/ .gnupg/ .password-store/ .aws/ .kube/
-.config/rclone/rclone.conf .config/lazygit/state.yml .safe-chain/
-.agents/gemini/ .commandcode/ .agents/skills/omarchy
-.config/fish/conf.d/secrets.fish **/fish_variables
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*_rsa*
+*_ed25519*
+*_ecdsa*
+*.ppk
+.env
+.env.*
+!.env.example
+.secrets/
+.ssh/
+.gnupg/
+.password-store/
+.aws/
+.kube/
+.config/rclone/rclone.conf
+.config/lazygit/state.yml
+.safe-chain/
+.agents/gemini/
+.commandcode/
+.agents/skills/omarchy
+.config/fish/conf.d/secrets.fish
+**/fish_variables
 
 # ============================================================
 # CACHES / TEMP
 # ============================================================
-*~ *.pyc *.pyo __pycache__/ *.swp *.swo *.bak *.bak.* *.old
-*Zone.Identifier* .DS_Store Thumbs.db *.tmp *.log
-.cache/ .direnv/ .envrc .local/ .dotfiles-bare/
+*~
+*.pyc
+*.pyo
+__pycache__/
+*.swp
+*.swo
+*.bak
+*.bak.*
+*.old
+*Zone.Identifier*
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+.cache/
+.direnv/
+.envrc
+.local/
+.dotfiles-bare/
 
 # ============================================================
 # BUILD / NODE
 # ============================================================
-dist/ build/ *.o *.so *.dylib
-node_modules/ package.json package-lock.json bun.lock bun.lockb *lock.json .yarn/ .pnp.*
+dist/
+build/
+*.o
+*.so
+*.dylib
+node_modules/
+package.json
+package-lock.json
+bun.lock
+bun.lockb
+*lock.json
+.yarn/
+.pnp.*
 
 # ============================================================
 # opencode
 # ============================================================
-.config/opencode/.codex* .config/opencode/.caveman-active
-.config/opencode/.ponytail-active .config/opencode/*.backup
-.config/opencode/plugins/auto-mode/test*.js
-.config/opencode/plugins/auto-mode/deploy-linux.sh
+.config/opencode/.codex*
+.config/opencode/.caveman-active
+.config/opencode/.ponytail-active
+.config/opencode/*.backup
+.config/opencode/*.bak*
+.config/opencode/plugins/_disabled/
 .opencode/
 
 # ============================================================
 # TERMINAIS (fontes pessoais)
 # ============================================================
-.config/alacritty/ .config/ghostty/ .config/kitty/
-.config/foot/ .config/wezterm/assets/ .config/wezterm/*.png
+.config/alacritty/
+.config/ghostty/
+.config/kitty/
+.config/foot/
+.config/wezterm/assets/
+.config/wezterm/*.png
 .config/wezterm/analysis.md
 
 # ============================================================
 # BROWSERS / EDITORS / DESKTOP
 # ============================================================
-.config/BraveSoftware/ .config/chromium/ .config/google-chrome-*/
-.config/microsoft-edge*/ .config/vscode-sqltools/
-.config/Code/* !.config/Code/User/ .config/Code/User/*
-!.config/Code/User/settings.json !.config/Code/User/keybindings.json
-!.config/Code/User/prompts/ .config/Code/User/prompts/*
-!.config/Code/User/prompts/agents/ .config/Code/User/prompts/agents/*
+.config/BraveSoftware/
+.config/chromium/
+.config/google-chrome-*/
+.config/microsoft-edge*/
+.config/vscode-sqltools/
+.config/Code/*
+!.config/Code/User/
+.config/Code/User/*
+!.config/Code/User/settings.json
+!.config/Code/User/keybindings.json
+!.config/Code/User/prompts/
+.config/Code/User/prompts/*
+!.config/Code/User/prompts/agents/
+.config/Code/User/prompts/agents/*
 !.config/Code/User/prompts/agents/executor-seguro.agent.md
 
 # ============================================================
 # APPS NÃO VERSIONADOS
 # ============================================================
-.config/{BraveSoftware,chromium,google-chrome-*,microsoft-edge*,pulse,wireplumber,fontconfig,gtk-3.0,gtk-4.0,dconf,tmux,gh,git,btop,obsidian,spotify,DankMaterialShell,niri,autostart,crossnote,nautilus,yay,zed,fcitx,fcitx5,ibus,openchamber,Insomnia,xournalpp,meugasto,Omacom,mise,lazygit,cosmic,mimeapps.list,user-dirs.dirs,xdg-terminals.list,chromium-flags.conf,Microsoft,hyprland-preview-share-picker}/
+.config/BraveSoftware/
+.config/chromium/
+.config/google-chrome-*/
+.config/pulse/
+.config/wireplumber/
+.config/fontconfig/
+.config/gtk-3.0/
+.config/gtk-4.0/
+.config/dconf/
+.config/tmux/
+.config/gh/
+.config/git/
+.config/btop/
+.config/obsidian/
+.config/spotify/
+.config/DankMaterialShell/
+.config/niri/
+.config/autostart/
+.config/crossnote/
+.config/nautilus/
+.config/yay/
+.config/fcitx/
+.config/fcitx5/
+.config/ibus/
+.config/openchamber/
+.config/Insomnia/
+.config/xournalpp/
+.config/meugasto/
+.config/Omacom/
+.config/mise/
+.config/lazygit/
+.config/cosmic/
+.config/mimeapps.list
+.config/user-dirs.dirs
+.config/xdg-terminals.list
+.config/chromium-flags.conf
+.config/Microsoft/
+.config/hyprland-preview-share-picker/
+.config/zed/extensions.json
 .config/Thunar/accels.scm
-.config/herdr/{herdr-client.log,herdr-server.log,herdr.sock,herdr-client.sock,session.json,release-notes.json,.plugins.lock}
+.config/herdr/herdr-client.log
+.config/herdr/herdr-server.log
+.config/herdr/herdr.sock
+.config/herdr/herdr-client.sock
+.config/herdr/session.json
+.config/herdr/release-notes.json
+.config/herdr/.plugins.lock
 
 # ============================================================
 # omarchy (mantém plugins/)
 # ============================================================
-.config/omarchy/* !.config/omarchy/plugins/
+.config/omarchy/*
+!.config/omarchy/plugins/
 
 # ============================================================
 # ANDROID / SDK
 # ============================================================
-.android/ .gradle/ .keystores/ .nuget/
+.android/
+.gradle/
+.keystores/
+.nuget/
 
 # ============================================================
 # TOOLS / AI AGENTS
 # ============================================================
-.codex/ .claude/ .cline/ .codeium/ .dotnet/ .expo/ .npm/ .npmrc .pi/ .pki/ .azure/
-.copilot/* !.copilot/hooks/ .copilot/hooks/* !.copilot/hooks/command-guard.js !.copilot/README.md
+.codex/
+.claude/
+.cline/
+.codeium/
+.dotnet/
+.expo/
+.npm/
+.npmrc
+.pi/
+.pki/
+.azure/
+.copilot/*
+!.copilot/hooks/
+.copilot/hooks/*
+!.copilot/hooks/command-guard.js
+!.copilot/README.md
 
 # ============================================================
 # HOME / SYSTEM
 # ============================================================
-Documents/ Downloads/ Music/ Pictures/ Projects/ Postman/ Work/
-.bash_history .bash_logout .bash_profile .zsh_history
-.XCompose .Xauthority .Xresources .xinitrc .xprofile .xsession-errors .pam_environment
-.steam/ .steampath .steampid .vscode/ .vscode-shared/
-.var/ .fonts/ .pulse-cookie steam.desktop
-oc-go-debug.log nvim.log progress.json errors.json *.ps1 *.fedora-dev-backup
+Documents/
+Downloads/
+Music/
+Pictures/
+Projects/
+Postman/
+Work/
+.bash_history
+.bash_logout
+.bash_profile
+.zsh_history
+.XCompose
+.Xauthority
+.Xresources
+.xinitrc
+.xprofile
+.xsession-errors
+.pam_environment
+.steam/
+.steampath
+.steamid
+.vscode/
+.vscode-shared/
+.var/
+.fonts/
+.pulse-cookie
+steam.desktop
+oc-go-debug.log
+nvim.log
+progress.json
+errors.json
+*.ps1
+*.fedora-dev-backup
 
 # ============================================================
 # PYTHON / DOOM
 # ============================================================
-.venv/ venv/ .mypy_cache/ .pytest_cache/ .ruff_cache/ *.egg-info/
-.dir-locals.el .elc .projectile undo/ .netrw*
-.config/nvim/lua/plugins/{theme.lua,omarchy-theme-hotreload.lua,all-themes.lua}
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.dir-locals.el
+.elc
+.projectile
+undo/
+.netrw*
+.config/nvim/lua/plugins/theme.lua
+.config/nvim/lua/plugins/omarchy-theme-hotreload.lua
+.config/nvim/lua/plugins/all-themes.lua

@@ -1,0 +1,221 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "markdown_preview": {
+    "open_markdown_files_in_preview": true
+  },
+  "cursor_animation": {
+    "enabled": true
+  },
+  "toolbar": {
+    "code_actions": true
+  },
+  "agent_ui_font_size": 16.0,
+  "agent_buffer_font_size": 13.0,
+  "buffer_font_size": 13.0,
+  "load_extensions": true,
+  "buffer_font_family": "CommitMono Nerd Font",
+  "edit_predictions": {
+    "allow_data_collection": "no",
+  },
+  "prettier": {
+    "allowed": true,
+  },
+  "format_on_save": "on",
+  "buffer_font_weight": 400.0,
+  "buffer_line_height": "comfortable",
+  "diff_view_style": "split",
+  "preview_tabs": {
+    "enable_preview_from_file_finder": false,
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": false,
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": false,
+    "show": true,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_status_icon": false,
+  },
+  "status_bar": {
+    "show_active_file": false,
+    "line_endings_button": false,
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+    },
+  },
+  "semantic_tokens": "combined",
+  "icon_theme": "Base Charmed Icons",
+  "auto_install_extensions": {
+    "charmed-icons": true,
+    "codebook": true,
+    "colored-zed-icons-theme": true,
+    "csharp": true,
+    "csv": true,
+    "cursor": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "doom-one-theme": true,
+    "elisp": true,
+    "git-firefly": true,
+    "html": true,
+    "java": true,
+    "jetbrains-new-ui-icons": true,
+    "log": true,
+    "lua": true,
+    "markdown-oxide": true,
+    "markdown-snippets": true,
+    "markdownlint": true,
+    "material-icon-theme": true,
+    "path-server-lsp": true,
+    "powershell": true,
+    "rainbow-csv": true,
+    "sql": true,
+    "toml": true,
+    "vscode-great-icons": true,
+    "vscode-icons": true,
+    "vue": true,
+    "windows-batch": true
+  },
+  "terminal": {
+    "font_size": 13.0,
+    "font_family": "CommitMono Nerd Font",
+    "font_weight": 500.0,
+  },
+  "project_panel": {
+    "git_status_indicator": false,
+    "diagnostic_badges": false,
+    "git_status": true,
+    "file_icons": true,
+    "entry_spacing": "comfortable",
+    "hide_gitignore": false,
+    "dock": "right",
+  },
+  "outline_panel": {
+    "indent_guides": {
+      "show": "always",
+    },
+    "auto_fold_dirs": true,
+    "dock": "right",
+  },
+  "collaboration_panel": {
+    "dock": "right",
+  },
+  "git_panel": {
+    "show_count_badge": false,
+    "status_style": "icon",
+    "collapse_untracked_diff": false,
+    "file_icons": true,
+    "tree_view": true,
+    "dock": "right",
+  },
+  "cli_default_open_behavior": "existing_window",
+  "agent": {
+    "default_model": {
+      "provider": "opencode",
+      "model": "go/mimo-v2.5",
+      "enable_thinking": true,
+      "effort": "medium"
+    },
+    "thinking_display": "always_collapsed",
+    "sandbox_permissions": {
+      "network_hosts": ["biomejs.dev", "raw.githubusercontent.com"],
+    },
+    "profiles": {
+      "ask": {
+        "name": "Ask",
+        "tools": {
+          "create_thread": true,
+          "diagnostics": true,
+          "fetch": true,
+          "list_agents_and_models": true,
+          "list_directory": true,
+          "find_path": true,
+          "find_references": true,
+          "get_code_actions": true,
+          "go_to_definition": true,
+          "read_file": true,
+          "grep": true,
+          "skill": true,
+          "spawn_agent": true,
+          "search_web": true,
+          "terminal": false,
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {},
+      },
+    },
+    "default_profile": "write",
+    "dock": "left",
+    "tool_permissions": {
+      "tools": {
+        "skill": {
+          "default": "allow",
+        },
+        "delete_path": {
+          "always_allow": [
+            {
+              "pattern": "^ATE-INV-31800/",
+            },
+          ],
+        },
+        "terminal": {
+          "default": "allow",
+          "always_allow": [
+            {
+              "pattern": "^git\\b",
+            },
+            {
+              "pattern": "^node\\b",
+            },
+            {
+              "pattern": "^head\\b",
+            },
+            {
+              "pattern": "^GIT_EDITOR=true\\s+git\\s+commit(\\s|$)",
+            },
+          ],
+        },
+      },
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "vim": {
+    "show_edit_predictions_in_normal_mode": true,
+    "toggle_relative_line_numbers": true,
+  },
+  "vim_mode": false,
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+    "antigravity-acp": {
+      "default_config_options": {
+        "mode": "yolo",
+        "model": "gemini-3.8-flash-medium",
+      },
+      "type": "registry",
+    },
+    "opencode": {
+      "type": "registry",
+    },
+  },
+  "base_keymap": "VSCode",
+  "theme": {
+    "mode": "system",
+    "light": "Doom One Light",
+    "dark": "Cursor Dark",
+  },
+}

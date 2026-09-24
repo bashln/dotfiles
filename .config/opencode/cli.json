@@ -1,6 +1,6 @@
 {
   "theme": {
-    "name": "cursor"
+    "name": "dracula"
   },
   "animations": true,
   "session": {
@@ -8,19 +8,24 @@
     "terminal": true,
     "scrollbar": true,
     "thinking": "hide",
-    "grouping": "auto"
+    "grouping": "auto",
+    "permissions": "prompt"
   },
   "tabs": {
     "layout": "horizontal",
-    "indicators": "status"
+    "indicators": "status",
+    "mode": "on"
   },
   "diffs": {
     "view": "auto"
   },
   "attention": {
-    "enabled": true
+    "enabled": true,
+    "notifications": true,
+    "sound": true
   },
   "terminal": {
-    "title": true
+    "title": true,
+    "copy": "select"
   }
 }
