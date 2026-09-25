@@ -1,6 +1,6 @@
 return {
   "Mofiqul/dracula.nvim",
-  lazy = false,
+  lazy = true,
   priority = 1000,
   opts = {
     -- show the '~' characters after the end of buffers
