@@ -236,6 +236,7 @@ venv/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
+.config/emacs/
 .dir-locals.el
 .elc
 .projectile

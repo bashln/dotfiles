@@ -20,7 +20,7 @@
   "agent_buffer_font_size": 13.0,
   "buffer_font_size": 13.0,
   "load_extensions": true,
-  "buffer_font_family": "CommitMono Nerd Font",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "edit_predictions": {
     "allow_data_collection": "no",
   },
@@ -216,6 +216,6 @@
   "theme": {
     "mode": "system",
     "light": "Doom One Light",
-    "dark": "Cursor Dark",
+    "dark": "Omazed",
   },
 }
