@@ -84,15 +84,15 @@ Avalia 5 pilares: testes (✅/❌), types (✅/❌), lint (✅/❌), formataçã
 
 **Propósito:** Melhoria contínua com permissão de edição, usando skills especializadas em cada etapa.
 
-**Agente:** `build` | **Edição:** ✅ | **Skills:** ✅ 8 skills | **Ideal para:** Sessões de melhoria com tempo determinado
+**Agente:** `build` | **Edição:** ✅ | **Skills:** ✅ 6 skills | **Ideal para:** Sessões de melhoria com tempo determinado
 
 Este loop é diferente dos outros — ele **edita o código** e usa as skills do repositório para cada fase do ciclo:
 
 | Fase | Skill | O que faz |
 |---|---|---|
-| Encontrar | `debug` / `audit-and-fix` | Isola bugs, encontra falhas com evidência |
-| Implementar | `implement` / `code-simplifier` | Corrige com a menor mudança possível |
-| Testar | `test` / `test-suite` / `quality-checks` | Cria testes, roda lint, typecheck |
+| Encontrar | `debug` / `review` | Isola bugs, revisa falhas com evidência |
+| Implementar | `implement` / `/ponytail` | Corrige com a menor mudança possível |
+| Testar | `test` | Cria testes, roda lint, typecheck |
 | Validar | `review` | Revisão final de qualidade |
 
 **Fluxo por ciclo:**
@@ -194,18 +194,15 @@ ai-cron-rm <l>      # remover cron
 
 ## Skills usadas
 
-O loop `interactive-improve` carrega skills do diretório `.agents/skills/` em cada fase:
+O loop `interactive-improve` carrega skills do diretório `.agents/skills/` (e usa o comando `/ponytail` do plugin ponytail) em cada fase:
 
 | Skill | Localização | Uso |
 |---|---|---|
 | `debug` | `.agents/skills/debug/` | Isolar bugs com evidência |
-| `audit-and-fix` | `.agents/skills/audit-and-fix/` | Auditoria geral de código |
 | `architecture` | `.agents/skills/architecture/` | Melhorias arquiteturais e invariantes |
 | `implement` | `.agents/skills/implement/` | Implementar correções |
-| `code-simplifier` | `.agents/skills/code-simplifier/` | Simplificar código |
-| `test` | `.agents/skills/test/` | Test-driven development e estratégia de testes |
-| `test-suite` | `.agents/skills/test-suite/` | Suíte de testes |
-| `quality-checks` | `.agents/skills/quality-checks/` | Lint e typecheck |
+| `ponytail` | plugin ponytail (`/ponytail`) | Simplificar código / remover over-engineering |
+| `test` | `.agents/skills/test/` | TDD, estratégia de testes, lint e typecheck |
 | `review` | `.agents/skills/review/` | Revisão de qualidade |
 
 ## Diferença entre `loop` e `timed`

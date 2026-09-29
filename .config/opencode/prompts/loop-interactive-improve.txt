@@ -14,7 +14,7 @@ MANDATO:
 SKILLS DISPONÍVEIS
 =====================================================================
 
-Carregue a skill certa para cada fase do ciclo usando `skill <nome>`:
+Carregue a skill (via `skill <nome>`) ou o comando (via `/<comando>`) certo para cada fase do ciclo:
 
 --- FASE 1: ENCONTRAR PROBLEMAS ---
 
@@ -22,17 +22,13 @@ Skill: `debug`
   Quando usar: teste falhando, runtime error, stack trace, regressão
   O que faz: reproduz sintoma, isola causa raiz, sugere correção
 
-Skill: `audit-and-fix`
-  Quando usar: busca geral por bugs, lógica suspeita, edge cases
-  O que faz: varre código, encontra falhas com evidência, classifica severidade
+Skill: `review`
+  Quando usar: busca geral por bugs, lógica suspeita, edge cases, mudanças a revisar
+  O que faz: revisa contra padrões e spec, aponta falhas com evidência
 
 Skill: `architecture`
-  Quando usar: acoplamento excessivo, violação de camadas, estrutura frágil
-  O que faz: analisa arquitetura, identifica pontos de melhoria
-
-Skill: `architecture`
-  Quando usar: suspeita de violação de invariantes estruturais
-  O que faz: verifica regras de arquitetura, reporta violações
+  Quando usar: acoplamento excessivo, violação de camadas, invariantes estruturais, estrutura frágil
+  O que faz: analisa arquitetura, identifica pontos de melhoria e violações
 
 --- FASE 2: IMPLEMENTAR CORREÇÃO ---
 
@@ -40,27 +36,23 @@ Skill: `implement`
   Quando usar: precisa adicionar funcionalidade ou corrigir bug
   O que faz: implementa a menor mudança completa, valida proporcionalmente
 
-Skill: `code-simplifier`
-  Quando usar: código muito complexo, duplicado, difícil de manter
-  O que faz: reduz complexidade mantendo comportamento
+Comando: `/ponytail` (plugin ponytail)
+  Quando usar: código muito complexo, duplicado, over-engineered, difícil de manter
+  O que faz: modo "lazy senior dev" — YAGNI, stdlib/plataforma antes de código, reduz complexidade
 
-Skill: `design-interface`
-  Quando usar: precisa redesenhar interface ou API
-  O que faz: gera opções de design para comparação
+Comando: `/ponytail-review` (plugin ponytail)
+  Quando usar: revisar mudanças caçando over-engineering
+  O que faz: lista por linha o que deletar/simplificar e quanto encolhe
+
+Skill: `architecture`
+  Quando usar: precisa redesenhar interface ou API, projetar módulos
+  O que faz: projeta módulos profundos e opções de design para comparação
 
 --- FASE 3: TESTAR ---
 
-Skill: `tdd`
-  Quando usar: nova funcionalidade ou correção com teste primeiro
-  O que faz: red → green → refactor
-
-Skill: `test-suite`
-  Quando usar: precisa de testes unitários, integração, componente ou e2e
-  O que faz: cria a suíte de testes adequada ao tipo
-
-Skill: `quality-checks`
-  Quando usar: precisa verificar lint, typecheck, formatação
-  O que faz: roda ferramentas de qualidade e reporta resultados
+Skill: `test`
+  Quando usar: nova funcionalidade ou correção com teste primeiro; testes unitários, integração, componente ou e2e; lint, typecheck, formatação
+  O que faz: escolhe a menor validação útil, aplica TDD e roda as ferramentas de qualidade
 
 --- FASE 4: VALIDAR ---
 
@@ -76,21 +68,21 @@ Para cada ciclo:
 
 1. ENCONTRAR
    a. Carregue `debug` se há sintoma de bug
-   b. Ou carregue `audit-and-fix` para varredura geral
+   b. Ou carregue `review` para varredura geral
    c. Identifique o problema com evidência (arquivo:linha)
 
 2. IMPLEMENTAR
    a. Carregue `implement` para a correção
-   b. Ou carregue `code-simplifier` se for simplificação
+   b. Ou ative `/ponytail` se for simplificação
    c. Faça a menor mudança possível (máx 5 arquivos)
 
 3. TESTAR
-   a. Carregue `tdd` ou `test-suite` conforme o tipo
+   a. Carregue `test` conforme o tipo
    b. Escreva ou atualize testes para cobrir o cenário
    c. Rode os testes e confirme que passam
 
 4. VALIDAR
-   a. Carregue `quality-checks` para lint/typecheck
+   a. Carregue `test` para lint/typecheck
    b. Carregue `review` para revisão final do ciclo
    c. Confirme que tudo passa
 

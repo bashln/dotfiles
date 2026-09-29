@@ -55,9 +55,9 @@ Interactive improvement loop with skills.
 
 Workflow:
 1. Load skill for current phase
-2. Find problems (debug, audit-and-fix)
-3. Implement fixes (code-simplifier, implement)
-4. Test and validate (tdd, test, quality-checks)
+2. Find problems (debug, review)
+3. Implement fixes (implement, /ponytail)
+4. Test and validate (test)
 5. Commit atomically
 6. Repeat until no more improvements
 

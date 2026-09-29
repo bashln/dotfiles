@@ -55,7 +55,7 @@ Constraints: Must integrate with existing user model.
 
 ### Skills Loaded
 - implement (primary)
-- quality-checks (validation)
+- test (validation)
 
 ### Tools Called
 - read: 12 calls
