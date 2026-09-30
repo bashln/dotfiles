@@ -82,6 +82,7 @@ bun.lockb
 # ============================================================
 # TERMINAIS (fontes pessoais)
 # ============================================================
+.config/starship.toml
 .config/alacritty/
 .config/ghostty/
 .config/kitty/
