@@ -1,6 +1,6 @@
 ---
 name: pdf-modbus-datasheet
-description: Use when converting an INV controller datasheet PDF into an n-smart/datasheet JSON (the UID_0014 3.json format) for import into modbus-monitor.exe or the n-smart app — or when a PDF Modbus address table must become a register map. Triggers: datasheet PDF, tabela de endereços Modbus, mapa de registradores, UID json, importar registradores, converter PDF de registradores, eMB_REG.
+description: "Use when converting an INV controller datasheet PDF into an n-smart/datasheet JSON (the UID_0014 3.json format) for import into modbus-monitor.exe or the n-smart app — or when a PDF Modbus address table must become a register map. Triggers: datasheet PDF, tabela de endereços Modbus, mapa de registradores, UID json, importar registradores, converter PDF de registradores, eMB_REG."
 ---
 
 # PDF Modbus datasheet → UID JSON
