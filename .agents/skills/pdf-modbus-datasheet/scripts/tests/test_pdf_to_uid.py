@@ -335,6 +335,88 @@ class ReportTest(unittest.TestCase):
             self.assertEqual(expected, len(body), f"{pdf.name}: linhas no relatório")
 
 
+class OutputNameTest(unittest.TestCase):
+    """Nome de saída = `<Modelo> <version>.json` (padrão do UID_0014 3.json)."""
+
+    def test_uses_model_with_version_suffix(self):
+        self.assertEqual(
+            "INV-318.22 1.json",
+            pdf_to_uid.default_output_name(pdf_to_uid.convert_pdf(PDF_318_22).meta, "1"),
+        )
+
+    def test_keeps_the_whole_model_string(self):
+        name = pdf_to_uid.default_output_name(
+            pdf_to_uid.convert_pdf(PDF_318_10_01).meta, "1"
+        )
+        self.assertEqual("INV-318.10-01 ESPANHOL 1.json", name)
+
+    def test_version_changes_the_suffix(self):
+        meta = pdf_to_uid.convert_pdf(PDF_318_22).meta
+        self.assertEqual("INV-318.22 2.json", pdf_to_uid.default_output_name(meta, "2"))
+
+    def test_sanitizes_windows_illegal_chars(self):
+        meta = pdf_to_uid.Meta(name='INV/318:22*A?B"C<D>E|F', uid="0170")
+        self.assertEqual("INV-318-22-A-B-C-D-E-F 1.json",
+                         pdf_to_uid.default_output_name(meta, "1"))
+
+    def test_strips_trailing_dot_and_space(self):
+        meta = pdf_to_uid.Meta(name="INV-318.22. ", uid="0170")
+        self.assertEqual("INV-318.22 1.json", pdf_to_uid.default_output_name(meta, "1"))
+
+    def test_falls_back_to_uid_when_model_missing(self):
+        meta = pdf_to_uid.Meta(name="", uid="0170")
+        self.assertEqual("UID_0170 1.json", pdf_to_uid.default_output_name(meta, "1"))
+
+
+class CliTest(unittest.TestCase):
+    """Contrato da linha de comando: nome padrão e falha alta."""
+
+    def test_writes_model_named_file_without_flags(self):
+        import os
+        import tempfile
+
+        cwd = os.getcwd()
+        with tempfile.TemporaryDirectory() as tmp:
+            os.chdir(tmp)
+            try:
+                code = pdf_to_uid.main([str(PDF_318_22)])
+            finally:
+                os.chdir(cwd)
+            self.assertEqual(0, code)
+            out = pathlib.Path(tmp) / "INV-318.22 1.json"
+            self.assertTrue(out.exists(), "nome do arquivo deve vir do Modelo do PDF")
+            self.assertTrue((pathlib.Path(tmp) / "INV-318.22 1.json.relatorio.md").exists())
+            data = json.loads(out.read_text(encoding="utf-8-sig"))
+            self.assertEqual("0170", data["UID"], "zero à esquerda preservado")
+            self.assertEqual("INV-318.22", data["name"])
+
+    def test_suspect_aborts_without_writing_json(self):
+        import os
+        import tempfile
+
+        import fitz
+
+        cwd = os.getcwd()
+        with tempfile.TemporaryDirectory() as tmp:
+            pdf = pathlib.Path(tmp) / "sem-tabela.pdf"
+            doc = fitz.open()
+            page = doc.new_page()
+            page.insert_text((72, 72), "Datasheet sem tabela modbus nenhuma.")
+            doc.save(pdf)
+            doc.close()
+
+            work = pathlib.Path(tmp) / "saida"
+            work.mkdir()
+            os.chdir(work)
+            try:
+                code = pdf_to_uid.main([str(pdf)])
+            finally:
+                os.chdir(cwd)
+            self.assertEqual(1, code)
+            self.assertEqual([], sorted(p.name for p in work.iterdir()),
+                             "falha alta não pode deixar JSON para trás")
+
+
 class SuspectTest(unittest.TestCase):
     """Gate 6.4: sem tabela de endereços -> falha alta, nada escrito."""
 

@@ -86,6 +86,27 @@ reportar, porque é a única trilha da origem do nome.
 | `Volts` | `Volts` |
 | `dias`, `days` | `days` |
 
+## Nome do arquivo
+
+`<Modelo> <version>.json` — o `Modelo:` inteiro, como está no PDF (inclusive
+sufixos como `ESPANHOL`). O número é a versão gravada em
+`technicalsInfo[].version`, espelhando o `UID_0014 3.json` do ecossistema, cujo
+sufixo `3` é a versão 3.
+
+```
+318.22.pdf / --version 1     →  INV-318.22 1.json
+318.10-01.pdf / --version 1  →  INV-318.10-01 ESPANHOL 1.json
+```
+
+Como o sufixo é a **versão mais nova** e o arquivo acumula as anteriores
+(`UID_0014 3.json` contém as versões 1, 2 e 3), o ciclo de firmware novo é:
+
+```
+--version 2 --merge "INV-318.22 1.json"   →   INV-318.22 2.json  (v1 + v2)
+```
+
+O arquivo antigo não é apagado. `--out` sempre vence o nome padrão.
+
 ## Convenções de bytes
 
 `UID_0014 3.json`: UTF-8 **com BOM** (`EF BB BF`) + **CRLF**, indent 2.

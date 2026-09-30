@@ -27,9 +27,26 @@ o nome do arquivo de saída. Gera três artefatos:
 
 | Arquivo | Para que serve |
 |---|---|
-| `UID_<uid> <version>.json` | o datasheet importável |
+| `<Modelo> <version>.json` | o datasheet importável |
 | `<out>.relatorio.md` | conferência lado a lado: cada linha do PDF ↔ registro emitido |
 | `<out>.warnings.txt` | avisos não bloqueantes |
+
+O nome sai do **`Modelo:` do PDF** (inteiro, ex. `INV-318.10-01 ESPANHOL`), e o
+número é a mesma versão de `technicalsInfo[].version` — o mesmo padrão do
+`UID_0014 3.json` do ecossistema:
+
+```
+318.22.pdf      →  INV-318.22 1.json
+318.10-01.pdf   →  INV-318.10-01 ESPANHOL 1.json
+```
+
+Como o número é a versão, cada firmware novo ganha o seu arquivo, acumulando as
+versões anteriores:
+
+```
+--version 1                          → INV-318.22 1.json
+--version 2 --merge "INV-318.22 1.json"  → INV-318.22 2.json   (v1 + v2)
+```
 
 Depois de rodar, **sempre**:
 
@@ -89,8 +106,8 @@ Ajuste à mão quando importar para a UI do app — mas nunca apagando a origem.
 
 ```
 python scripts/pdf_to_uid.py <pdf>
-  --out ARQUIVO              # destino explícito
-  --version N                # entrada em technicalsInfo (default 1)
+  --out ARQUIVO              # destino explícito (vence o nome padrão)
+  --version N                # entrada em technicalsInfo e sufixo do arquivo (default 1)
   --merge UID_existente.json # nova versão de firmware, preservando as antigas
   --uid / --name / --firmware / --baud   # override do que não veio no PDF
   --dry-run                  # imprime e não escreve nada
@@ -98,6 +115,14 @@ python scripts/pdf_to_uid.py <pdf>
 ```
 
 Exit codes: `0` ok, `1` suspeita bloqueante, `2` erro de uso.
+
+## Nome do arquivo
+
+`<Modelo> <version>.json`, com o `Modelo:` inteiro do PDF. Caracteres ilegais no
+Windows (`\ / : * ? " < > |`) viram `-`, espaços colapsam, e ponto/espaço no fim
+sai (o Windows não aceita). Sem `Modelo:` no PDF o nome cai para
+`UID_<uid> <version>.json` — mas na prática isso não acontece pela CLI, porque
+metadado ausente já bloqueia antes de escrever.
 
 ## Convenções de bytes
 

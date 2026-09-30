@@ -15,6 +15,9 @@ Uso:
     python pdf_to_uid.py <pdf> [--out ARQ] [--version N] [--merge JSON]
                                [--uid U] [--name N] [--firmware F] [--baud B]
                                [--dry-run]
+
+Sem --out, o arquivo sai como `<Modelo> <version>.json`, com o `Modelo:` do PDF
+(ex. `INV-318.10-01 ESPANHOL 1.json`).
 """
 
 from __future__ import annotations
@@ -923,6 +926,34 @@ def merge_into(existing_path: Path, datasheet: dict) -> dict:
     return existing
 
 
+_ILLEGAL_FILENAME_CHARS = re.compile(r'[\\/:*?"<>|]')
+
+
+def _sanitize_filename(text: str) -> str:
+    """Deixa o nome seguro para o Windows sem perder informação legível."""
+    cleaned = _ILLEGAL_FILENAME_CHARS.sub("-", text or "")
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned.rstrip(". ")   # Windows não aceita terminar em ponto/espaço
+
+
+def default_output_name(meta: "Meta", version: str = "1") -> str:
+    """Nome do arquivo de saída: `<Modelo> <version>.json`.
+
+    Modelo vem da linha `Modelo:` do PDF (ex. `INV-318.10-01 ESPANHOL`), e o
+    número é a mesma versão gravada em `technicalsInfo[].version` — o mesmo
+    padrão do `UID_0014 3.json` do ecossistema, onde o sufixo é a versão.
+
+    Sem `Modelo:` no PDF, cai para `UID_<uid> <version>.json`. Na prática esse
+    fallback quase não é alcançado pela CLI, porque metadado ausente já vira
+    suspeita bloqueante antes de escrever qualquer coisa.
+    """
+    model = _sanitize_filename(meta.name)
+    if model:
+        return f"{model} {_sanitize_filename(version)}.json"
+    uid = _sanitize_filename(meta.uid) or "sem-uid"
+    return f"UID_{uid} {_sanitize_filename(version)}.json"
+
+
 def write_json(path: Path, data: dict, bom: bool = True, crlf: bool = True) -> None:
     """Grava o datasheet.
 
@@ -981,7 +1012,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"suspeitas gravadas em {sus_path}", file=sys.stderr)
         return 1
 
-    out = args.out or Path(f"UID_{result.meta.uid} {args.version}.json")
+    out = args.out or Path(default_output_name(result.meta, args.version))
 
     print(f"produto : {result.meta.name}")
     print(f"UID     : {result.meta.uid}")
