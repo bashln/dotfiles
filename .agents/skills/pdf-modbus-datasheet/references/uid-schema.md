@@ -91,5 +91,39 @@ reportar, porque é a única trilha da origem do nome.
 `UID_0014 3.json`: UTF-8 **com BOM** (`EF BB BF`) + **CRLF**, indent 2.
 O script espelha por padrão; `--no-bom` e `--lf` desligam.
 
-`UID_0014 3.json` também não tem `viewRegistersGroup` obrigatório preenchido em
-todas as versões — mas o tipo TS exige a chave, então emitimos stub.
+Cuidado com `Path.write_text` no Windows: ele converte `\n` em `\r\n` e o
+resultado vira `\r\r\n`. `write_json` abre com `newline=""` e há teste travando
+isso (`\r\r\n` ausente, `count(CRLF) == count(LF)`).
+
+## Consumidor: `modbus-monitor.exe`
+
+Evidência verificada (ambiente `INV-YB3-15 — UID 14` no Local Storage do app,
+comparado com este datasheet versão 3):
+
+| App (`schema.rows[]`) | Vem de | Verificado |
+|---|---|---|
+| `register` | `addr` | 100/100 endereços idênticos |
+| `name` | `name` | usado (texto exibido) |
+| `kind` (`holding`/`input`) | `type` | 0 divergências |
+| `groupId` (`uid-group-N`) | ordem de `modbusRegistersGroup` | 0 divergências |
+| `schema.groups[]` | `name` do grupo | 13/13 |
+| `writeRows[]` | todo registro `holding-register` | exato (83/83 no caso real) |
+| `cyclic`, `bitField`, `interval` | estado da UI | **não** vêm do datasheet |
+| `nodeAddress` | escravo (PDF) | campo do ambiente |
+
+O app guarda tudo em **Local Storage** (WebView2/LevelDB em
+`%LOCALAPPDATA%\com.kroth.serial-monitor\EBWebView\Default\Local Storage\leveldb`),
+ou seja: **não existe drop-in por arquivo**; o import passa pela UI. O backend
+(Tauri 2.11.1, id `com.kroth.serial-monitor`) expõe apenas
+`connect`/`disconnect`/`read_register`/`write_register`/`identify_device` — nada
+de importar arquivo; quem faz isso é o frontend (plugin `fs`).
+
+Consequência prática: `homeScreen`, `public`, `appPublic*`, `webPublic*`,
+`viewRegistersGroup` são irrelevantes para o import. `dataType`, `min`, `max`,
+`unity` também não são usados pelo app hoje — emitimos porque documentam o PDF e
+porque o schema é o mesmo do n-smart.
+
+Se o app não mostrar os registradores, o suspeito é a escolha de versão do
+datasheet (`technicalsInfo[].version`): o arquivo de referência tinha 3 versões e
+o app usou a 3. Com uma única entrada, conferir se a UI pede seleção de versão.
+

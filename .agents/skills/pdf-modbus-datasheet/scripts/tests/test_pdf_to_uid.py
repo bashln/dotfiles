@@ -248,7 +248,14 @@ class ReferenceShapeTest(unittest.TestCase):
             raw = out.read_bytes()
             self.assertTrue(raw.startswith(b"\xef\xbb\xbf"))
             self.assertIn(b"\r\n", raw)
+            self.assertNotIn(b"\r\r\n", raw, "write_text/newline duplicaria o CR")
+            self.assertEqual(raw.count(b"\r\n"), raw.count(b"\n"))
             json.loads(raw.decode("utf-8-sig"))  # continua parseável
+            # LF puro quando pedido: sem CR nenhum
+            pdf_to_uid.write_json(out, result.datasheet, bom=False, crlf=False)
+            plain = out.read_bytes()
+            self.assertNotIn(b"\r", plain)
+            self.assertFalse(plain.startswith(b"\xef\xbb\xbf"))
 
 
 class PreservationTest(unittest.TestCase):

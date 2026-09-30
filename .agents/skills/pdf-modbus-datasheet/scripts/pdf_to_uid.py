@@ -929,12 +929,15 @@ def write_json(path: Path, data: dict, bom: bool = True, crlf: bool = True) -> N
     O arquivo de referência do ecossistema (`UID_0014 3.json`) é UTF-8 **com BOM**
     e **CRLF**. Espelhamos essa convenção por padrão para não introduzir uma
     diferença de bytes entre o JSON gerado e o que a ferramenta já consome.
+
+    `newline=""` é obrigatório: sem ele o Python converte o `\\n` que já
+    escrevemos em `\\r\\n`, produzindo `\\r\\r\\n`.
     """
-    text = json.dumps(data, ensure_ascii=False, indent=2)
+    text = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     if crlf:
         text = text.replace("\n", "\r\n")
-    text += "\r\n" if crlf else "\n"
-    path.write_text(text, encoding="utf-8-sig" if bom else "utf-8")
+    with path.open("w", encoding="utf-8-sig" if bom else "utf-8", newline="") as fh:
+        fh.write(text)
 
 
 def main(argv: list[str] | None = None) -> int:
