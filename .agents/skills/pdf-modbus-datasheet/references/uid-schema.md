@@ -144,7 +144,21 @@ Consequência prática: `homeScreen`, `public`, `appPublic*`, `webPublic*`,
 `unity` também não são usados pelo app hoje — emitimos porque documentam o PDF e
 porque o schema é o mesmo do n-smart.
 
-Se o app não mostrar os registradores, o suspeito é a escolha de versão do
-datasheet (`technicalsInfo[].version`): o arquivo de referência tinha 3 versões e
-o app usou a 3. Com uma única entrada, conferir se a UI pede seleção de versão.
+### Verificado em campo (2026-09-30)
+
+Import de um datasheet gerado por esta skill **funcionou** na UI do app:
+`INV-318.22 1.json` (fw 318v15, 7 grupos, 50 registradores) foi importado sem
+ajuste.
+
+Isso resolve três dúvidas que estavam em aberto:
+
+- `technicalsInfo` com **uma única entrada**, `version: "1"` — funciona. O app
+  não exige o sufixo alto do `UID_0014 3.json` nem seleção de versão.
+- o campo `description` extra no registrador (que não existe na referência) é
+  **tolerado** — não precisa de flag para removê-lo.
+- o nome do arquivo vindo do `Modelo:` do PDF não interfere no import.
+
+Import continua **manual na UI**: não existe drop-in por arquivo (estado fica em
+Local Storage), e este skill não automatiza o `.exe`.
+
 

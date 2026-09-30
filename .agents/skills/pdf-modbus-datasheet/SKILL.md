@@ -143,4 +143,16 @@ python scripts/tests/test_pdf_to_uid.py
 
 Fixtures reais em `scripts/tests/fixtures/` (2 datasheets + o JSON de referência).
 Cobrem cobertura reversa, contagens, campos verificados, duplicata, continuidade
-serial, convenções de bytes, `--merge` e o caso de PDF sem tabela.
+serial, convenções de bytes, nome do arquivo, `--merge`/versões, CLI ponta a ponta
+e o caso de PDF sem tabela.
+
+## Resultado em uso
+
+Fluxo completo rodado no produto real: `318.22.pdf` → `INV-318.22 1.json` →
+import na UI do `modbus-monitor.exe` **funcionou** (7 grupos, 50 registradores).
+Detalhes e o que ficou provado em `references/uid-schema.md`.
+
+O que continua manual:
+
+- marcar `cyclic`/`bitField` por linha na UI (o datasheet não traz essa informação);
+- conferir o `relatorio.md` linha a linha contra o PDF.
