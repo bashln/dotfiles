@@ -990,6 +990,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--firmware")
     parser.add_argument("--baud")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--relatorio", action="store_true",
+                        help="grava tambem <out>.relatorio.md e <out>.warnings.txt "
+                             "(conferencia linha a linha; por padrao so o JSON e escrito)")
     parser.add_argument("--no-bom", action="store_true",
                         help="grava UTF-8 sem BOM (padrão espelha o UID_0014 3.json: com BOM)")
     parser.add_argument("--lf", action="store_true",
@@ -1042,12 +1045,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.merge:
         datasheet = merge_into(args.merge, datasheet)
     write_json(out, datasheet, bom=not args.no_bom, crlf=not args.lf)
-    out.with_suffix(out.suffix + ".relatorio.md").write_text(result.report, encoding="utf-8")
-    if result.warnings:
-        out.with_suffix(out.suffix + ".warnings.txt").write_text(
-            "\n".join(result.warnings) + "\n", encoding="utf-8"
-        )
-    print(f"\nok: {out} + {out.name}.relatorio.md")
+    if args.relatorio:
+        out.with_suffix(out.suffix + ".relatorio.md").write_text(result.report, encoding="utf-8")
+        if result.warnings:
+            out.with_suffix(out.suffix + ".warnings.txt").write_text(
+                "\n".join(result.warnings) + "\n", encoding="utf-8"
+            )
+        print(f"\nok: {out} + {out.name}.relatorio.md")
+    else:
+        print(f"\nok: {out} (relatorio e warnings sob demanda: --relatorio)")
     return 0
 
 

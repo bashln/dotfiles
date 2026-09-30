@@ -23,13 +23,16 @@ python scripts/pdf_to_uid.py <arquivo.pdf>
 ```
 
 Sem flags ele já descobre produto, UID (endereço do escravo), firmware, versão e
-o nome do arquivo de saída. Gera três artefatos:
+o nome do arquivo de saída, e grava **só o JSON importável**:
 
-| Arquivo | Para que serve |
-|---|---|
-| `<Modelo> <version>.json` | o datasheet importável |
-| `<out>.relatorio.md` | conferência lado a lado: cada linha do PDF ↔ registro emitido |
-| `<out>.warnings.txt` | avisos não bloqueantes |
+| Arquivo | Quando é gravado | Para que serve |
+|---|---|---|
+| `<Modelo> <version>.json` | sempre | o datasheet importável |
+| `<out>.relatorio.md` | com `--relatorio` | conferência lado a lado: cada linha do PDF ↔ registro emitido |
+| `<out>.warnings.txt` | com `--relatorio` | avisos não bloqueantes (sem a flag, saem no terminal) |
+
+O padrão é PDF → JSON. O relatório existe para auditoria/conferência linha a linha e é
+**sob demanda** (`--relatorio`); os warnings sempre aparecem no stdout.
 
 O nome sai do **`Modelo:` do PDF** (inteiro, ex. `INV-318.10-01 ESPANHOL`), e o
 número é a mesma versão de `technicalsInfo[].version` — o mesmo padrão do
@@ -50,11 +53,15 @@ versões anteriores:
 
 Depois de rodar, **sempre**:
 
-1. Leia `<out>.relatorio.md` e confira as linhas contra o PDF.
-2. Leia os `warnings`.
-3. `suspeitas` vazias? Declare pronto e mostre o resumo.
-4. `suspeitas` não vazias? O script **não escreveu nada** (exit 1) e gravou
+1. Olhe os `warnings` no terminal (e, se usou `--relatorio`, confira o relatório
+   linha a linha contra o PDF).
+2. `suspeitas` vazias? Declare pronto e mostre o resumo.
+3. `suspeitas` não vazias? O script **não escreveu nada** (exit 1) e gravou
    `<pdf>.suspeitas.txt`. Resolva antes de declarar qualquer coisa.
+
+A verificação **não** é opcional e não depende de flag: a cobertura reversa (todo
+endereço do PDF no JSON e vice-versa) roda sempre e aborta antes de escrever. O que é
+sob demanda é apenas o **arquivo** de relatório.
 
 ## O que o script decide sozinho (e por quê)
 
@@ -89,8 +96,9 @@ Ajuste à mão quando importar para a UI do app — mas nunca apagando a origem.
 - **Não escreva o JSON em cima de arquivo existente sem `--merge`** (senão você
   apaga a versão de firmware anterior).
 - **Não grave artefato no diretório do usuário** por padrão: use `--out`.
-- **Não declare pronto** sem ler o relatório. "Conferi estruturalmente" não é
-  verificação: a verificação que vale é a cobertura reversa + a leitura do relatório.
+- **Não declare pronto** sem olhar a verificação. "Conferi estruturalmente" não é
+  verificação: a verificação que vale é a cobertura reversa (que roda sempre) + os
+  warnings do stdout + a leitura do relatório quando usar `--relatorio`.
 
 ## Armadilhas já conhecidas nos PDFs
 
@@ -110,9 +118,13 @@ python scripts/pdf_to_uid.py <pdf>
   --version N                # entrada em technicalsInfo e sufixo do arquivo (default 1)
   --merge UID_existente.json # nova versão de firmware, preservando as antigas
   --uid / --name / --firmware / --baud   # override do que não veio no PDF
+  --relatorio                # grava também <out>.relatorio.md e <out>.warnings.txt
   --dry-run                  # imprime e não escreve nada
   --no-bom / --lf            # convenções de bytes (padrão espelha o alvo)
 ```
+
+Padrão: PDF → JSON. `--relatorio` acrescenta o relatório de conferência e os warnings
+em arquivo (os warnings sempre saem no terminal).
 
 Exit codes: `0` ok, `1` suspeita bloqueante, `2` erro de uso.
 
@@ -155,4 +167,4 @@ Detalhes e o que ficou provado em `references/uid-schema.md`.
 O que continua manual:
 
 - marcar `cyclic`/`bitField` por linha na UI (o datasheet não traz essa informação);
-- conferir o `relatorio.md` linha a linha contra o PDF.
+- conferir o `relatorio.md` linha a linha contra o PDF — quando usar `--relatorio`.

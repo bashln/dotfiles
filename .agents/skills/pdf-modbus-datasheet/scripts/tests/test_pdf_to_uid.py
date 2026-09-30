@@ -385,10 +385,36 @@ class CliTest(unittest.TestCase):
             self.assertEqual(0, code)
             out = pathlib.Path(tmp) / "INV-318.22 1.json"
             self.assertTrue(out.exists(), "nome do arquivo deve vir do Modelo do PDF")
-            self.assertTrue((pathlib.Path(tmp) / "INV-318.22 1.json.relatorio.md").exists())
+            self.assertFalse((pathlib.Path(tmp) / "INV-318.22 1.json.relatorio.md").exists(),
+                             "por padrao so o JSON: relatorio e sob demanda")
+            self.assertFalse((pathlib.Path(tmp) / "INV-318.22 1.json.warnings.txt").exists(),
+                             "por padrao so o JSON: warnings so no stdout")
             data = json.loads(out.read_text(encoding="utf-8-sig"))
             self.assertEqual("0170", data["UID"], "zero à esquerda preservado")
             self.assertEqual("INV-318.22", data["name"])
+
+    def test_relatorio_flag_escreve_relatorio_e_warnings(self):
+        import os
+        import tempfile
+
+        cwd = os.getcwd()
+        with tempfile.TemporaryDirectory() as tmp:
+            os.chdir(tmp)
+            try:
+                code = pdf_to_uid.main([str(PDF_318_22), "--relatorio"])
+            finally:
+                os.chdir(cwd)
+            self.assertEqual(0, code)
+            saida = pathlib.Path(tmp) / "INV-318.22 1.json"
+            self.assertTrue(saida.exists())
+            relatorio = pathlib.Path(tmp) / "INV-318.22 1.json.relatorio.md"
+            self.assertTrue(relatorio.exists(), "--relatorio deve gravar o relatorio")
+            self.assertIn("Relatório de conversão", relatorio.read_text(encoding="utf-8"),
+                          "relatorio deve trazer o cabecalho da conversao")
+            self.assertIn("0x3000", relatorio.read_text(encoding="utf-8"),
+                          "relatorio deve trazer as linhas do PDF")
+            self.assertTrue((pathlib.Path(tmp) / "INV-318.22 1.json.warnings.txt").exists(),
+                            "--relatorio tambem grava os warnings")
 
     def test_suspect_aborts_without_writing_json(self):
         import os
