@@ -21,8 +21,8 @@
 
 ;; Fontes
 (let ((font-family (if (eq system-type 'windows-nt) "JetBrainsMono NF" "JetBrainsMono Nerd Font")))
-  (setq doom-font (font-spec :family font-family :size 14)
-        doom-variable-pitch-font (font-spec :family font-family :size 14)))
+  (setq doom-font (font-spec :family font-family :size 12)
+        doom-variable-pitch-font (font-spec :family font-family :size 12)))
 
 ;; Tema
 ;; (setq doom-theme 'doom-rose-pine-moon)
@@ -142,7 +142,7 @@
   :config
   (setq copilot-indent-offset-warning-disable t)
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-  (map! :leader "t c" #'copilot-mode))
+  (map! :leader "t C" #'copilot-mode))  ; `t c` é do Doom (fill-column-indicator)
 
 (use-package! kdl-mode
   :mode "\\.kdl\\'")
@@ -150,46 +150,29 @@
 ;; -------------------------------
 ;; 3. COMPLETION CUSTOMIZATIONS (Vertico/Corfu)
 ;; -------------------------------
+;; Apenas o que diverge dos defaults do módulo :completion corfu (+orderless).
+;; `corfu-auto`, cycle, preselect, quit-no-match, popupinfo-delay e os keymaps
+;; TAB/S-TAB já vêm do módulo corfu e de :config default.
 (after! corfu
-  (setq corfu-auto t
-        corfu-auto-delay 0.05
+  (setq corfu-auto-delay 0.05
         corfu-auto-prefix 1
-        corfu-cycle t
-        corfu-quit-no-match 'separator
-        corfu-preselect 'prompt
-        corfu-popupinfo-delay 0.5
-        corfu-popupinfo-max-height 6)
-  (map! :map corfu-map
-        "TAB" #'corfu-next
-        [tab] #'corfu-next
-        "S-TAB" #'corfu-previous
-        [backtab] #'corfu-previous))
-
-(after! orderless
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles basic partial-completion)))))
+        corfu-popupinfo-max-height 6))
 
 (after! eldoc
   (setq eldoc-echo-area-use-multiline-p nil
         eldoc-display-functions '(eldoc-display-in-echo-area)))
 
-(map! :leader
-      "b b" #'consult-buffer
-      "f r" #'consult-recent-file)
+;; `SPC b b` (switch buffer) e `SPC f r` (recent files -> consult-recent-file)
+;; já são nativos do Doom/vertico.
 
 (map! "C-." #'embark-act)
 
 ;; -------------------------------
 ;; 5. FORMATAÇÃO & AUTO-SAVE
 ;; -------------------------------
-;; Hooks de Limpeza (Igual ao Nvim)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(setq require-final-newline t)
-
-;; Org-mode: indentação automática (não precisa de formatter externo)
-(setq org-startup-indented t)
+;; Trim de trailing whitespace vem do módulo nativo :editor whitespace (+trim,
+;; via ws-butler). `require-final-newline` e `org-startup-indented` já são
+;; defaults do core do Doom e do módulo :lang org, respectivamente.
 
 ;; -------------------------------
 ;; 4. LSP TUNING & BOOSTER
@@ -247,12 +230,9 @@
 ;; -------------------------------
 ;; 7. EXTRA TOOLS & KEYBINDINGS
 ;; -------------------------------
-;; Toggle vterm (Toggleterm equivalent)
-(map! :leader
-      :desc "Toggle vterm" "t v" #'+vterm/toggle)
+;; vterm: Doom já binda `SPC o t` (+vterm/toggle) e `SPC o T` (+vterm/here).
 
-;; Treemacs (Doom default SPC o p)
-;; Configuração Neovim-like: SPC e para toggle, h/l para navegar, backspace para subir
+;; Treemacs (Doom nativo: `SPC o p` toggle, `SPC o P` find file)
 (after! treemacs
   ;; Navegação tipo Neovim no treemacs
   (map! :map treemacs-mode-map
@@ -268,19 +248,14 @@
         :n "Y" #'treemacs-copy-absolute-path-at-point ;; Copiar path
         :n "s" #'treemacs-visit-node-ace     ;; Abrir em split
         :n "v" #'treemacs-visit-node-ace-horizontal ;; Abrir em vsplit
-        :n "w" #'treemacs-set-width)
-  ;; Abrir/fechar treemacs com SPC e (como nvim-tree)
-  (map! :leader
-        :desc "Toggle Treemacs (Neovim-style)" "e" #'treemacs))
+        :n "w" #'treemacs-set-width))
 
 ;; Search files with fd (Telescope-like)
 (map! :leader
       :desc "Search files (fd)" "s z" #'consult-fd)
 
-;; File explorer atalhos (Neovim-style)
-(map! :leader
-      :desc "Dired here (Oil.nvim style)" "f e" #'dired-jump
-      :desc "Dired at root" "f E" (lambda () (interactive) (dired (or (projectile-project-root) default-directory))))
+;; Dired/dirvish já são nativos: `SPC o -` (dired-jump), `SPC o /` (dirvish),
+;; `SPC o p` (dirvish-side).
 
 ;; Otimização de Garbage Collection (GCMH)
 (use-package! gcmh
@@ -289,54 +264,17 @@
   (setq gcmh-idle-delay 5
         gcmh-high-cons-threshold (* 16 1024 1024)))
 
-;; Otimização de Scrolling
-(setq fast-but-imprecise-scrolling t)
-
+;; Scrolling (`fast-but-imprecise-scrolling' já é default do core do Doom)
 (setq scroll-conservatively 101
       scroll-margin 5
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
 
 ;; Personal Keybindings
-;; Buffer management (Neovim-style: SPC b d para delete, SPC b D para delete force)
 (map! :leader
-      :desc "Kill buffer (force)" "b D" #'kill-buffer-and-window
-      :desc "Kill other buffers" "b O" #'doom/kill-other-buffers)
+      :desc "Kill buffer (force)" "b D" #'kill-buffer-and-window)
 
-(defun +leo/windows-mounted-path-p (&optional path)
-  "Return non-nil when PATH points to a Windows-mounted /mnt filesystem."
-  (let ((target (if path (expand-file-name path) (or buffer-file-name default-directory))))
-    (and target
-         (string-prefix-p "/mnt/" target))))
-
-;; Navegação de janelas tipo Neovim (C-w hjkl)
-(map! :n "C-w h" #'evil-window-left
-      :n "C-w j" #'evil-window-down
-      :n "C-w k" #'evil-window-up
-      :n "C-w l" #'evil-window-right
-      :n "C-w w" #'evil-window-next
-      :n "C-w c" #'evil-window-delete
-      :n "C-w o" #'doom/window-maximize-buffer)
-
-;; Dired com navegação tipo Oil.nvim
-(after! dired
-  (setq dired-dwim-target t)
-  (map! :map dired-mode-map
-        :n "h" #'dired-up-directory
-        :n "l" #'dired-find-file
-        :n "<backspace>" #'dired-up-directory
-        :n "." #'dired-hide-details-mode
-        :n "y" #'dired-copy-filename-as-kill
-        :n "Y" #'dired-do-copy
-        :n "d" #'dired-do-delete
-        :n "D" #'dired-do-delete
-        :n "r" #'dired-do-rename
-        :n "c" #'dired-do-copy
-        :n "m" #'dired-mark
-        :n "u" #'dired-unmark
-        :n "U" #'dired-unmark-all-marks
-        :n "v" #'dired-view-file
-        :n "s" #'dired-sort-toggle-or-edit))
+;; Navegação de janelas: `C-w h/j/k/l/w/c/o` já vêm do evil-window-map.
 
 ;; Mover linha ou região usando ALT + J e ALT + K, similar ao comportamento do Neovim
 (defun +leo/move-line-up ()
@@ -397,9 +335,7 @@
 
 (map! :n "x" "\"_x")                ;; x deleta para o black hole register
 
-;; Visual Mode: Indent com reselect (como no Neovim)
-(map! :v "<" (lambda () (interactive) (evil-shift-left (region-beginning) (region-end)) (evil-normal-state) (evil-visual-restore))
-      :v ">" (lambda () (interactive) (evil-shift-right (region-beginning) (region-end)) (evil-normal-state) (evil-visual-restore)))
+;; Indent visual com reselect já vem do módulo evil (+evil/shift-left/right).
 
 ;; Harpoon (Quick file access)
 (use-package! harpoon
@@ -412,12 +348,8 @@
         :desc "Harpoon 3"            "j 3" #'harpoon-go-to-3
         :desc "Harpoon 4"            "j 4" #'harpoon-go-to-4))
 
-;; Trouble-like (Diagnostics)
-(map! :leader
-      (:prefix-map ("x" . "diagnostics/trouble")
-       :desc "Document diagnostics" "x" #'consult-lsp-diagnostics
-       :desc "Project diagnostics"  "X" (lambda () (interactive) (consult-lsp-diagnostics t))
-       :desc "Flycheck list"        "l" #'flycheck-list-errors))
+;; Trouble-like (Diagnostics): use o prefixo nativo `SPC c x` (+default/diagnostics)
+;; e `SPC x` (scratch buffer) do Doom.
 
 ;; Popup Rules (Trouble-like Panel)
 (set-popup-rule! "^\\*Flycheck errors\\*$" :side 'bottom :size 0.25 :select nil :quit nil :ttl nil)
@@ -425,8 +357,7 @@
 (after! flycheck
   (setq flycheck-global-modes nil))
 
-(map! :leader
-      :desc "LSP Rename (Inc Rename)" "c r" #'lsp-rename)
+;; `SPC c r` (lsp-rename) já é nativo do Doom.
 
 ;; =============================================================================
 ;; NEOVIM FULL PARITY - NOVAS CONFIGURAÇÕES
@@ -434,49 +365,11 @@
 ;; -----------------------------
 ;; 9. DIRVISH - FILE MANAGER OIL.NVIM-LIKE
 ;; -----------------------------
-;; NOTA: Configurado para trabalhar junto com o módulo :emacs dired
-(use-package! dirvish
-  :commands (dirvish dirvish-quick-access dirvish-side)
-  :init
-  ;; Ativar dirvish ao entrar em dired, adicionando o hook ao final da lista.
-  (add-hook 'dired-mode-hook #'dirvish-override-dired-mode t)
-  :config
-  (setq dirvish-attributes '(vc-state subtree-state all-the-icons collapse))
-  (setq dirvish-mode-line-format '(:left (sort symlink) :right (omit yank index)))
-  (setq dirvish-subtree-state-style 'arrow)
-  ;; Keymaps Oil.nvim-like
-  (map! :map dirvish-mode-map
-        :n "h" #'dirvish-up-directory           ;; Subir diretório
-        :n "l" #'dirvish-find-file             ;; Entrar/arquivo
-        :n "<backspace>" #'dirvish-up-directory ;; Subir (como no nvim-tree)
-        :n "q" #'dirvish-quit                   ;; Fechar com q
-        :n "y" #'dirvish-copy-file-path         ;; Copiar path
-        :n "Y" #'dirvish-yank-paths             ;; Yank múltiplos
-        :n "d" #'dirvish-delete-files           ;; Deletar
-        :n "r" #'dirvish-rename-file            ;; Renomear
-        :n "c" #'dirvish-create-file            ;; Criar arquivo
-        :n "C" #'dirvish-create-directory       ;; Criar diretório
-        :n "." #'dired-hide-details-mode         ;; Toggle detalhes
-        :n "TAB" #'dirvish-subtree-toggle       ;; Expandir/colapsar
-        :n "<return>" #'dirvish-find-file      ;; Enter
-        :n "v" #'dirvish-preview-toggle         ;; Toggle preview
-        :n "s" #'dirvish-split-file-here        ;; Abrir em split
-        :n "S" #'dirvish-vsplit-file-here       ;; Abrir em vsplit
-        :n "g." #'dired-omit-mode)              ;; Toggle hidden files
-  ;; Atalhos de líder
-  (map! :leader
-        :desc "Dirvish here (Oil style)" "-" (lambda () (interactive) (dirvish (or default-directory "~")))
-        :desc "Dirvish side panel" "o d" #'dirvish-side
-        :desc "Dirvish quick access" "f a" #'dirvish-quick-access))
-
-;; Dired subtree (expandir/colapsar diretórios)
-(use-package! dired-subtree
-  :after dired
-  :config
-  (setq dired-subtree-use-backgrounds nil)
-  (map! :map dired-mode-map
-        :n "TAB" #'dired-subtree-toggle
-        :n "<backtab>" #'dired-subtree-remove))
+;; 100% nativo no módulo `:emacs dired +dirvish`: pacote, hook
+;; `dirvish-override-dired-mode`, atributos e keymaps (`h`/`l`, TAB, `?`, `q`,
+;; `b`, `F`, prefixos `y`/`s`). Atalhos de líder: `SPC o /` (dirvish),
+;; `SPC o -` (dired-jump), `SPC o p` (dirvish-side), `SPC o P`
+;; (+dired/dirvish-side-and-follow).
 
 ;; -----------------------------
 ;; 10. MARKDOWN FOLDING (Neovim zj/zk/zl/zu/zi)
@@ -517,30 +410,8 @@
 ;; -----------------------------
 ;; 11. AUTOCMDS (LazyVim parity)
 ;; -----------------------------
-;; Fechar buffers de utilidade com 'q'
-(defun +close-buffer-with-q ()
-  "Close buffer with 'q' key in utility modes."
-  (when (and (boundp 'buffer-file-name)
-             (not buffer-file-name)
-             (or (derived-mode-p 'help-mode)
-                 (derived-mode-p 'man-mode)
-                 (derived-mode-p 'apropos-mode)
-                 (derived-mode-p 'Info-mode)
-                 (derived-mode-p 'flycheck-error-list-mode)
-                 (derived-mode-p 'compilation-mode)))
-    (local-set-key (kbd "q") #'quit-window)))
-
-(add-hook 'help-mode-hook #'+close-buffer-with-q)
-
-(add-hook 'man-mode-hook #'+close-buffer-with-q)
-
-(add-hook 'apropos-mode-hook #'+close-buffer-with-q)
-
-(add-hook 'Info-mode-hook #'+close-buffer-with-q)
-
-(add-hook 'flycheck-error-list-mode-hook #'+close-buffer-with-q)
-
-(add-hook 'compilation-mode-hook #'+close-buffer-with-q)
+;; `q` fecha buffers de utilidade nativamente: `special-mode' já binda
+;; `q`->quit-window (help/info/apropos/compilation) e evil-collection idem.
 
 ;; Conceallevel para arquivos específicos
 (setq-hook! 'json-mode-hook conceal-level 0)
@@ -560,28 +431,16 @@
         "C-g" #'iedit-quit
         "ESC" #'iedit-quit))
 
-;; Inc-rename com preview em tempo real
+;; Inc-rename com preview em tempo real (`c D` é +lookup/references no Doom).
 (map! :leader
-      :desc "Incremental rename (iedit)" "c R" #'iedit-mode
-      :desc "Rename in defun" "c D" #'iedit-mode-toggle-on-function)
+      :desc "Incremental rename (iedit)" "c R" #'iedit-mode)
 
 ;; -----------------------------
 ;; 13. DIFF-HL (Git gutter)
 ;; -----------------------------
-(use-package! diff-hl
-  :hook ((prog-mode . diff-hl-mode)
-         (dired-mode . diff-hl-dired-mode))
-  :config
-  (diff-hl-margin-mode)
-  (diff-hl-flydiff-mode)
-  ;; Keymaps para git actions
-  (map! :leader
-        (:prefix ("g" . "git")
-         :desc "Git gutter next" "n" #'diff-hl-next-hunk
-         :desc "Git gutter prev" "p" #'diff-hl-previous-hunk
-         :desc "Git gutter stage" "s" #'diff-hl-stage-current-hunk
-         :desc "Git gutter revert" "r" #'diff-hl-revert-hunk
-         :desc "Git gutter show" "d" #'diff-hl-show-hunk)))
+;; 100% nativo no módulo `:ui vc-gutter +pretty`: hooks (global-diff-hl-mode,
+;; diff-hl-dired-mode, flydiff) e atalhos de hunk em `SPC g` (`g s` stage,
+;; `g r` revert, `g ]` next, `g [` prev), além de `]d`/`[d`.
 
 ;; -----------------------------
 ;; 15. EVIL-ESCAPE (jk/kj)
@@ -591,8 +450,7 @@
   :config
   (setq evil-escape-key-sequence "jk"
         evil-escape-delay 0.1
-        evil-escape-unordered-key-sequence t)
-  (evil-escape-mode 1))
+        evil-escape-unordered-key-sequence t))
 
 ;; -----------------------------
 ;; 16. PULSAR (Highlight após movimentos)
@@ -613,13 +471,8 @@
 ;; -----------------------------
 ;; 17. CONSULT-DIR (Navegação rápida)
 ;; -----------------------------
-(use-package! consult-dir
-  :after consult
-  :config
-  (setq consult-dir-project-list-function #'consult-dir-projectile-dirs)
-  (map! :leader
-        :desc "Jump directory" "f d" #'consult-dir
-        :desc "Jump directory (other window)" "f D" #'consult-dir-jump-file))
+;; Nativo no módulo vertico: `consult-dir-project-list-function`, remap de
+;; `list-directory` e atalhos `C-x C-d` / `C-x C-j`.
 
 ;; -----------------------------
 ;; 18. PATH NAVIGATION (Windows/UNC)
@@ -679,28 +532,14 @@
       which-key-max-display-columns 6
       which-key-min-display-lines 4)
 
-;; Auto-save improvements
-(setq auto-save-default t
-      auto-save-interval 300
+;; Auto-save improvements (`auto-save-default' já é do core do Doom)
+(setq auto-save-interval 300
       auto-save-timeout 30)
 
-;; Better grep/fd integration
-(setq consult-fd-args "fd --hidden --color=never --full-path")
+;; `consult-fd-args' já é configurado pelo módulo vertico (com suporte Windows).
 
-;; Final popup rules
-(set-popup-rule! "^\*Dirvish" :side 'left :size 0.3 :select t :quit t)
-
+;; Popup rules: dirvish já é tratado pelo módulo dired.
 (set-popup-rule! "^\*harpoon" :side 'bottom :size 0.25 :select t)
 
-;; Org face sizes (migrated from custom.el)
-(custom-set-faces
- '(org-checkbox ((t (:height 1.5))))
- '(org-document-title ((t (:height 1.5 :bold t :underline nil))))
- '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.4))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.3))))
- '(org-level-4 ((t (:inherit outline-3 :height 1.3))))
- '(org-level-5 ((t (:inherit outline-3 :height 1.2))))
- '(org-level-6 ((t (:inherit outline-3 :height 1.2))))
- '(org-level-7 ((t (:inherit outline-3 :height 1.1))))
- '(org-level-8 ((t (:inherit outline-3 :height 1.1)))))
+;; As faces do org migraram para custom.el (custom-file do Doom).
+
