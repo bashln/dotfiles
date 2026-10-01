@@ -174,6 +174,34 @@
 ;; via ws-butler). `require-final-newline` e `org-startup-indented` já são
 ;; defaults do core do Doom e do módulo :lang org, respectivamente.
 
+;; FIX Windows: apheleia roda os formatters prettier-* via helper `apheleia-npx`
+;; (script com shebang `#!/usr/bin/env bash`). No Windows o apheleia prefixa o
+;; interpretador da shebang e chama `bash`, que resolve pro WSL (sem distro
+;; instalada) e falha com "Failed to run bash: exit status 1". Aqui rodamos
+;; `node` + prettier.cjs direto, sem shell. Restrito ao Windows: o Linux
+;; (mesma config versionada) fica inalterado.
+(when (eq system-type 'windows-nt)
+  (after! apheleia
+    (dolist (name '(prettier prettier-css prettier-html prettier-graphql
+                    prettier-javascript prettier-json prettier-json-stringify
+                    prettier-markdown prettier-ruby prettier-scss
+                    prettier-svelte prettier-typescript prettier-yaml))
+      (let ((cmd (alist-get name apheleia-formatters)))
+        (when (and (consp cmd) (equal (car cmd) "apheleia-npx"))
+          (setf (alist-get name apheleia-formatters)
+                (append
+                 (list "node"
+                       ;; prettier do projeto tem prioridade; senão o global.
+                       (or (when-let* ((proj (locate-dominating-file
+                                              default-directory "node_modules")))
+                             (let ((p (expand-file-name
+                                       "node_modules/prettier/bin/prettier.cjs" proj)))
+                               (when (file-exists-p p) p)))
+                           (expand-file-name
+                            "npm/node_modules/prettier/bin/prettier.cjs"
+                            (or (getenv "APPDATA") (getenv "USERPROFILE") ""))))
+                 (cddr cmd))))))))
+
 ;; -------------------------------
 ;; 4. LSP TUNING & BOOSTER
 ;; -------------------------------
