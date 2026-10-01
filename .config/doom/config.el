@@ -12,6 +12,17 @@
        (setq-default explicit-shell-file-name (or (executable-find "fish") (executable-find "bash") "/bin/bash"))
        (setq-default vterm-shell (or (executable-find "fish") (executable-find "bash") "/bin/bash"))))
 
+;; Windows: o Emacs não traz `diff`. apheleia (aplica o resultado via patch
+;; RCS `diff --rcs`) e diff-hl-flydiff (gutter) dependem dele. Git for Windows
+;; fornece diff/patch em <git>/usr/bin. Windows-only: Linux intocado.
+(when (eq system-type 'windows-nt)
+  (when-let* ((git (executable-find "git")))
+    (let ((git-usr-bin (expand-file-name
+                        "../usr/bin" (file-name-directory git))))
+      (when (and (file-directory-p git-usr-bin)
+                 (not (member git-usr-bin exec-path)))
+        (push git-usr-bin exec-path)))))
+
 ;; Go tools PATH (cross-platform)
 (let* ((home (or (getenv "HOME") (getenv "USERPROFILE") ""))
        (go-bin (expand-file-name "go/bin" home)))
