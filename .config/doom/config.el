@@ -75,6 +75,11 @@
 ;; -------------------------------
 ;; 1. ORG MODE CUSTOMIZATIONS
 ;; -------------------------------
+;; Vault de notas (Markdown -> Org). Ver Documents/leo/notes.
+;; So sobrescreve o default se o vault existir (mantem portabilidade).
+(let ((vault (expand-file-name "~/Documents/leo/notes/org")))
+  (when (file-directory-p vault)
+    (setq org-directory vault)))
 (after! org
   (setq org-default-notes-file (expand-file-name "inbox.org" org-directory)
         org-ellipsis " ◉ "
