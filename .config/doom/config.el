@@ -23,6 +23,37 @@
                  (not (member git-usr-bin exec-path)))
         (push git-usr-bin exec-path)))))
 
+;; Windows: `M-x doom/reload' exporta a env EMACS escapando espacos com "\ "
+;; (escape de shell POSIX). O PowerShell nao entende e o sync falha com
+;; "...emacs nao e reconhecido...". Normaliza a env so durante o reload.
+(when (eq system-type 'windows-nt)
+  (require 'cl-lib)
+  (defun +leo/win-normalize-emacs-env (value)
+    "Corrige o valor de $EMACS setado por `doom/reload' no Windows."
+    (when (and (stringp value)
+               (string-match-p (regexp-quote "\\ ") value))
+      (setq value (replace-regexp-in-string (regexp-quote "\\ ") " " value))
+      (unless (file-exists-p value)
+        (let ((exe (concat value ".exe")))
+          (when (file-exists-p exe)
+            (setq value exe)))))
+    value)
+
+  (defun +leo/doom-reload-emacs-env-a (old-fn &rest args)
+    "Corrige $EMACS antes de `doom/reload' (Windows + PowerShell)."
+    (let ((orig-setenv (symbol-function #'setenv)))
+      (cl-letf (((symbol-function #'setenv)
+                 (lambda (var &optional value)
+                   (funcall orig-setenv
+                            var
+                            (if (equal var "EMACS")
+                                (+leo/win-normalize-emacs-env value)
+                              value)))))
+        (apply old-fn args))))
+
+  (when (fboundp 'doom/reload)
+    (advice-add 'doom/reload :around #'+leo/doom-reload-emacs-env-a)))
+
 ;; Go tools PATH (cross-platform)
 (let* ((home (or (getenv "HOME") (getenv "USERPROFILE") ""))
        (go-bin (expand-file-name "go/bin" home)))
