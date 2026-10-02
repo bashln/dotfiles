@@ -58,7 +58,7 @@ wezterm.on("augment-command-palette", function(window, pane)
 end)
 
 -- ===== Fontes e Cores =====
-config.font_size = 10
+config.font_size = 09
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 config.force_reverse_video_cursor = true
