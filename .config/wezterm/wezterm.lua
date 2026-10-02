@@ -59,12 +59,7 @@ end)
 
 -- ===== Fontes e Cores =====
 config.font_size = 10
-config.font = wezterm.font_with_fallback({
-    "IoskeleyMono Nerd Font",
-	"JetBrainsMono Nerd Font",
-	"Terminess Nerd Font Mono",
-	"BlexMono Nerd Font Mono",
-})
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 config.force_reverse_video_cursor = true
 config.color_scheme = "Eldritch"
