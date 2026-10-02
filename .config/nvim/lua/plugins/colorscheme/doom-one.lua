@@ -1,6 +1,6 @@
 return {
   "bashln/Doom-One.nvim",
-  lazy = false,
+  lazy = true,
   priority = 1000,
   opts = {
     transparent = false, -- desabilita o fundo para transparência do terminal

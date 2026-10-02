@@ -1,9 +1,9 @@
 return {
   "scottmckendry/cyberdream.nvim",
-  lazy = false,
+  lazy = true,
   cmd = { "CyberdreamLoad" },
   opts = {
-    -- transparent = true,
+    transparent = true,
     -- italic_comments = true,
     -- terminal_colors = true,
   },
