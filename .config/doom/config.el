@@ -62,9 +62,9 @@
     (push go-bin exec-path)))
 
 ;; Fontes
-(let ((font-family (if (eq system-type 'windows-nt) "AdwaitaMono Nerd Font" "JetBrainsMono Nerd Font")))
-  (setq doom-font (font-spec :family font-family :size 13)
-        doom-variable-pitch-font (font-spec :family font-family :size 13)))
+(let ((font-family (if (eq system-type 'windows-nt) "MartianMono NF" "JetBrainsMono Nerd Font")))
+  (setq doom-font (font-spec :family font-family :size 12)
+        doom-variable-pitch-font (font-spec :family font-family :size 12)))
 
 ;; Tema
 ;; (setq doom-theme 'doom-rose-pine-moon)

@@ -58,8 +58,8 @@ wezterm.on("augment-command-palette", function(window, pane)
 end)
 
 -- ===== Fontes e Cores =====
-config.font_size = 10
-config.font = wezterm.font("AdwaitaMono Nerd Font")
+config.font_size = 9
+config.font = wezterm.font("MartianMono Nerd Font")
 
 config.force_reverse_video_cursor = true
 config.color_scheme = "Eldritch"
