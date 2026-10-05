@@ -59,14 +59,13 @@ end)
 
 -- ===== Fontes e Cores =====
 config.font_size = 10
-config.font = wezterm.font("MartianMono Nerd Font")
-config.font = wezterm.font("CommitMono Nerd Font")
-config.font = wezterm.font("SauceCodePro Nerd Font")
-config.font = wezterm.font("FiraCode Nerd Font")
-config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font = wezterm.font("RobotoMono Nerd Font")
-config.font = wezterm.font("CaskaydiaCove Nerd Font")
-config.font = wezterm.font("0xProto Nerd Font")
+config.font = wezterm.font_with_fallback({
+  "JetBrainsMono Nerd Font",
+  "Martian Mono Nerd Font",
+  "IoskeleyMono Nerd Font",
+	"Terminess Nerd Font Mono",
+	"BlexMono Nerd Font Mono",
+})
 
 config.force_reverse_video_cursor = true
 config.color_scheme = "Eldritch"
