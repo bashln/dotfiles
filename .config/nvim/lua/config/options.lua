@@ -6,6 +6,8 @@ vim.g.autoformat = false
 
 -- PowerShell no Windows
 if vim.fn.has("win32") == 1 then
+  -- Forward slashes in paths; orgmode recommends this on Windows
+  vim.o.shellslash = true
   vim.o.shell = [[C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe]]
   vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
   vim.o.shellredir = '2>&1 | Out-File -Encoding utf8 %s'
