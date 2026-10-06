@@ -1,7 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
-  "editor.fontFamily": "MartianMono NF",
+  "editor.fontFamily": "SauceCodePro Nerd Font",
   "editor.fontLigatures": true,
   "mssql.connectionGroups": [
     {
@@ -224,8 +224,7 @@
   },
   "chat.viewSessions.orientation": "stacked",
   "terminal.integrated.fontSize": 12,
-  "editor.codeLensFontFamily": "MartianMono NF",
-  "editor.fontSize": 12,
+  "editor.codeLensFontFamily": "SauceCodePro Nerd Font",
   "chat.pluginLocations": {
     "/home/leonamduarte/.cache/plugins/.install-staging/68f4c11ce3a259d801f0015bdb9c9dddabc6e8b0/vscode/repo": true,
   },

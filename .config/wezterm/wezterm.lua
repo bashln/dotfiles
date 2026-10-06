@@ -58,8 +58,14 @@ wezterm.on("augment-command-palette", function(window, pane)
 end)
 
 -- ===== Fontes e Cores =====
-config.font_size = 9
+config.font_size = 10
+config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("CommitMono Nerd Font")
 config.font = wezterm.font("MartianMono Nerd Font")
+config.font = wezterm.font("CaskaydiaCove Nerd Font")
+config.font = wezterm.font("FiraCode Nerd Font")
+config.font = wezterm.font("RobotoMono Nerd Font")
+config.font = wezterm.font("SauceCodePro Nerd Font")
 
 config.force_reverse_video_cursor = true
 config.color_scheme = "Eldritch"
