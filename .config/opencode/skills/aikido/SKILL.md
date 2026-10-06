@@ -100,5 +100,5 @@ Use quando o usuário solicitar configuração, alternância de contas ou quando
 
 Se o servidor `aikido-mcp` não estiver disponível ou falhar na inicialização:
 - Avise o usuário: *"O servidor Aikido MCP é necessário para esta operação, mas não está carregado no ambiente."*
-- Oriente o usuário a verificar se o `aikido-mcp` está configurado nas opções MCP do cliente (ou no `opencode.json` / `.agents/gemini/mcp.toml` conforme o [mcp-bootstrap](file:///c:/Users/itinerario/Documents/leo/development/dotfiles/.agents/skills/mcp-bootstrap/SKILL.md)).
+- Oriente o usuário a verificar se o `aikido-mcp` está configurado nas opções MCP do cliente (ou no `opencode.json` / `.agents/gemini/mcp.toml`).
 

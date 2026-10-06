@@ -84,16 +84,16 @@ Avalia 5 pilares: testes (✅/❌), types (✅/❌), lint (✅/❌), formataçã
 
 **Propósito:** Melhoria contínua com permissão de edição, usando skills especializadas em cada etapa.
 
-**Agente:** `build` | **Edição:** ✅ | **Skills:** ✅ 6 skills | **Ideal para:** Sessões de melhoria com tempo determinado
+**Agente:** `build` | **Edição:** ✅ | **Skills:** ✅ pstack | **Ideal para:** Sessões de melhoria com tempo determinado
 
 Este loop é diferente dos outros — ele **edita o código** e usa as skills do repositório para cada fase do ciclo:
 
 | Fase | Skill | O que faz |
 |---|---|---|
-| Encontrar | `debug` / `review` | Isola bugs, revisa falhas com evidência |
-| Implementar | `implement` / `/ponytail` | Corrige com a menor mudança possível |
-| Testar | `test` | Cria testes, roda lint, typecheck |
-| Validar | `review` | Revisão final de qualidade |
+| Encontrar | `principle-fix-root-causes` / `thermo-nuclear-code-quality-review` | Isola bugs até a causa raiz, revisa manutenibilidade com evidência |
+| Implementar | `poteto-mode` / `/ponytail` | Corrige com a menor mudança possível, código simples |
+| Testar | `tdd` / `principle-test-behavior-not-implementation` | Teste que falha primeiro, asserções de comportamento |
+| Validar | `principle-prove-it-works` / `thermo-nuclear-code-quality-review` | Prova contra o artefato real, revisão final |
 
 **Fluxo por ciclo:**
 1. Carrega skill → encontra problema
@@ -198,12 +198,13 @@ O loop `interactive-improve` carrega skills do diretório `.agents/skills/` (e u
 
 | Skill | Localização | Uso |
 |---|---|---|
-| `debug` | `.agents/skills/debug/` | Isolar bugs com evidência |
-| `architecture` | `.agents/skills/architecture/` | Melhorias arquiteturais e invariantes |
-| `implement` | `.agents/skills/implement/` | Implementar correções |
+| `principle-fix-root-causes` | `.agents/skills/principle-fix-root-causes/` | Isolar bugs até a causa raiz |
+| `architect` | `.agents/skills/architect/` | Melhorias arquiteturais e invariantes |
+| `poteto-mode` | `.agents/skills/poteto-mode/` | Implementar correções com código simples |
 | `ponytail` | plugin ponytail (`/ponytail`) | Simplificar código / remover over-engineering |
-| `test` | `.agents/skills/test/` | TDD, estratégia de testes, lint e typecheck |
-| `review` | `.agents/skills/review/` | Revisão de qualidade |
+| `tdd` | `.agents/skills/tdd/` | Teste primeiro, estratégia de testes |
+| `thermo-nuclear-code-quality-review` | `.agents/skills/thermo-nuclear-code-quality-review/` | Revisão de qualidade rígida |
+| `principle-prove-it-works` | `.agents/skills/principle-prove-it-works/` | Verificar contra o artefato real |
 
 ## Diferença entre `loop` e `timed`
 

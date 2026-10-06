@@ -18,23 +18,23 @@ Carregue a skill (via `skill <nome>`) ou o comando (via `/<comando>`) certo para
 
 --- FASE 1: ENCONTRAR PROBLEMAS ---
 
-Skill: `debug`
+Skill: `principle-fix-root-causes`
   Quando usar: teste falhando, runtime error, stack trace, regressão
-  O que faz: reproduz sintoma, isola causa raiz, sugere correção
+  O que faz: reproduz o sintoma, rastreia cada sintoma até a causa raiz e corrige lá
 
-Skill: `review`
+Skill: `thermo-nuclear-code-quality-review`
   Quando usar: busca geral por bugs, lógica suspeita, edge cases, mudanças a revisar
-  O que faz: revisa contra padrões e spec, aponta falhas com evidência
+  O que faz: revisão de manutenibilidade rígida; abstrações, arquivos gigantes, condições espaguete
 
-Skill: `architecture`
+Skill: `architect`
   Quando usar: acoplamento excessivo, violação de camadas, invariantes estruturais, estrutura frágil
-  O que faz: analisa arquitetura, identifica pontos de melhoria e violações
+  O que faz: esboça tipos, assinaturas e módulos antes do código e mantém o desenho vivo durante a implementação
 
 --- FASE 2: IMPLEMENTAR CORREÇÃO ---
 
-Skill: `implement`
+Skill: `poteto-mode`
   Quando usar: precisa adicionar funcionalidade ou corrigir bug
-  O que faz: implementa a menor mudança completa, valida proporcionalmente
+  O que faz: estilo de execução concisa, código simples, subagentes deliberados e trabalho verificado
 
 Comando: `/ponytail` (plugin ponytail)
   Quando usar: código muito complexo, duplicado, over-engineered, difícil de manter
@@ -44,21 +44,29 @@ Comando: `/ponytail-review` (plugin ponytail)
   Quando usar: revisar mudanças caçando over-engineering
   O que faz: lista por linha o que deletar/simplificar e quanto encolhe
 
-Skill: `architecture`
+Skill: `architect`
   Quando usar: precisa redesenhar interface ou API, projetar módulos
   O que faz: projeta módulos profundos e opções de design para comparação
 
 --- FASE 3: TESTAR ---
 
-Skill: `test`
-  Quando usar: nova funcionalidade ou correção com teste primeiro; testes unitários, integração, componente ou e2e; lint, typecheck, formatação
-  O que faz: escolhe a menor validação útil, aplica TDD e roda as ferramentas de qualidade
+Skill: `tdd`
+  Quando usar: correção com teste primeiro, teste de regressão, ou bug com alvo de teste local barato
+  O que faz: escreve primeiro o teste que falha, depois a implementação mínima
+
+Skill: `principle-test-behavior-not-implementation`
+  Quando usar: escolher o que asserir; lint, typecheck e formatação via comandos do projeto
+  O que faz: garante que o teste detecta um defeito real e assere comportamento observável, não implementação
 
 --- FASE 4: VALIDAR ---
 
-Skill: `review`
+Skill: `thermo-nuclear-code-quality-review`
   Quando usar: antes de finalizar o ciclo, para revisão de qualidade
-  O que faz: revisa prontidão, testes, docs, e dá recomendação final
+  O que faz: revisão rígida de abstração, tamanho de arquivo e complexidade condicional
+
+Skill: `principle-prove-it-works`
+  Quando usar: antes de declarar o ciclo pronto
+  O que faz: verifica contra o artefato real (rodar a feature, ler o valor, inspecionar o diff), não contra um proxy
 
 =====================================================================
 WORKFLOW (repita em ciclo)
@@ -67,24 +75,25 @@ WORKFLOW (repita em ciclo)
 Para cada ciclo:
 
 1. ENCONTRAR
-   a. Carregue `debug` se há sintoma de bug
-   b. Ou carregue `review` para varredura geral
+   a. Carregue `principle-fix-root-causes` se há sintoma de bug
+   b. Ou carregue `thermo-nuclear-code-quality-review` para varredura geral
    c. Identifique o problema com evidência (arquivo:linha)
 
 2. IMPLEMENTAR
-   a. Carregue `implement` para a correção
+   a. Carregue `poteto-mode` para a correção
    b. Ou ative `/ponytail` se for simplificação
    c. Faça a menor mudança possível (máx 5 arquivos)
 
 3. TESTAR
-   a. Carregue `test` conforme o tipo
+   a. Carregue `tdd` conforme o tipo
    b. Escreva ou atualize testes para cobrir o cenário
    c. Rode os testes e confirme que passam
 
 4. VALIDAR
-   a. Carregue `test` para lint/typecheck
-   b. Carregue `review` para revisão final do ciclo
-   c. Confirme que tudo passa
+   a. Rode as ferramentas de qualidade do projeto para lint/typecheck
+   b. Carregue `principle-prove-it-works` para conferir contra o artefato real
+   c. Carregue `thermo-nuclear-code-quality-review` para revisão final do ciclo
+   d. Confirme que tudo passa
 
 5. COMMIT
    a. `git add -A` (apenas arquivos relevantes)

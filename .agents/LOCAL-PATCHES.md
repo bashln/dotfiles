@@ -1,29 +1,26 @@
-# LOCAL-PATCHES — ui-ux-pro-max bundle
+# LOCAL-PATCHES — obsoleto
 
-Patches locais aplicados em 2026-09-29 por cima das skills instaladas do bundle
+> **OBSOLETO desde 2026-10-06.** O bundle `ui-ux-pro-max` foi removido de
+> `.agents/skills/` na limpeza que migrou para o pstack.
+>
+> Os arquivos patchados estão preservados (com os patches aplicados) em
+> `skills-old-20261006.zip`, na raiz do repo dotfiles.
+>
+> Não reaplicar nada daqui. Se o bundle voltar um dia, o conteúdo do zip é a
+> referência do estado final, patches já inclusos.
+
+## Histórico (mantido só para contexto)
+
+Patches locais aplicados em 2026-09-29 sobre as skills do bundle
 `ui-ux-pro-max` (instaladas via `uipro`/`ui-ux-pro-max-cli`).
 
-Motivo: o bundle referencia skills externas que **não** vêm no pacote
+Motivo: o bundle referenciava skills externas que não vêm no pacote
 (`ai-artist`, `ai-multimodal`, `chrome-devtools`, `frontend-design`) e 2 skills
 internas inexistentes (`project-management`, `assets-organizing`). As refs foram
 suavizadas para "use se instalado, senão degrade para HTML/CSS / screenshot
 manual". Também foram corrigidos paths `~/.claude/skills` → `~/.agents/skills`
 e namespaces `/ck:`/`/ckm:`.
 
-⚠️ `uipro update` / reinstalação sobrescreve estes arquivos. Reaplicar após update.
-
-## Arquivos patchados
-
-| Arquivo | O que mudou |
-|---|---|
-| `design/SKILL.md` | deps opcionais suavizadas, paths `.agents`, nota de topo |
-| `banner-design/SKILL.md` | bloco AI marcado opcional, paths neutros `<skill>/...` |
-| `design/references/social-photos-design.md` | chrome-devtools como opcional + fallback |
-| `brand/scripts/extract-colors.cjs` | comentários/mensagem (sem mudança de lógica) |
-| `design`, `brand`, `slides`, `banner-design` (todos) | paths `~/.claude/skills` → `~/.agents/skills` |
-
-## Regenerar do zero
-
-Se reinstalar o bundle, reaplicar:
-1. `sed 's|~/.claude/skills|~/.agents/skills|g; s|\.claude/skills|.agents/skills|g'`
-2. Suavizar refs a `ai-artist|ai-multimodal|chrome-devtools|frontend-design|project-management|assets-organizing`.
+Arquivos que estavam patchados: `design/SKILL.md`, `banner-design/SKILL.md`,
+`design/references/social-photos-design.md`, `brand/scripts/extract-colors.cjs`,
+e todos os paths de `design`, `brand`, `slides`, `banner-design`.
