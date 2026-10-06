@@ -9,7 +9,7 @@
     "scrollbar": true,
     "thinking": "hide",
     "grouping": "auto",
-    "permissions": "prompt"
+    "permissions": "autoaccept"
   },
   "tabs": {
     "layout": "horizontal",
