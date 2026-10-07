@@ -1,6 +1,6 @@
 {
   "theme": {
-    "name": "system"
+    "name": "cursor"
   },
   "animations": true,
   "session": {
@@ -22,8 +22,9 @@
   },
   "attention": {
     "enabled": true,
-    "notifications": true,
-    "sound": true
+    "notifications": false,
+    "sound": true,
+    "volume": 0.6
   },
   "terminal": {
     "title": true,

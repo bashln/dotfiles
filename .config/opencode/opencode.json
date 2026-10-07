@@ -74,11 +74,11 @@
                 { "action": "shell", "resource": "*", "effect": "ask" },
                 { "action": "subagent", "resource": "*", "effect": "deny" },
                 { "action": "execute", "resource": "*", "effect": "deny" },
-                { "action": "shell", "resource": "* rm *", "effect": "deny" },
+                { "action": "shell", "resource": "* rm *", "effect": "ask" },
                 {
                     "action": "shell",
                     "resource": "* rmdir *",
-                    "effect": "deny"
+                    "effect": "ask"
                 },
                 { "action": "shell", "resource": "* mv *", "effect": "deny" },
                 {
@@ -100,35 +100,35 @@
         },
         "build": {
             "permissions": [
-                { "action": "shell", "resource": "rm *", "effect": "deny" },
-                { "action": "shell", "resource": "rmdir *", "effect": "deny" },
-                { "action": "shell", "resource": "del *", "effect": "deny" },
-                { "action": "shell", "resource": "erase *", "effect": "deny" },
-                { "action": "shell", "resource": "unlink *", "effect": "deny" },
-                { "action": "shell", "resource": "shred *", "effect": "deny" },
+                { "action": "shell", "resource": "rm *", "effect": "ask" },
+                { "action": "shell", "resource": "rmdir *", "effect": "ask" },
+                { "action": "shell", "resource": "del *", "effect": "ask" },
+                { "action": "shell", "resource": "erase *", "effect": "ask" },
+                { "action": "shell", "resource": "unlink *", "effect": "ask" },
+                { "action": "shell", "resource": "shred *", "effect": "ask" },
                 {
                     "action": "shell",
                     "resource": "Remove-Item *",
-                    "effect": "deny"
+                    "effect": "ask"
                 },
                 {
                     "action": "shell",
                     "resource": "Remove-ItemProperty *",
-                    "effect": "deny"
+                    "effect": "ask"
                 },
-                { "action": "shell", "resource": "*/rm *", "effect": "deny" },
+                { "action": "shell", "resource": "*/rm *", "effect": "ask" },
                 {
                     "action": "shell",
                     "resource": "*/rmdir *",
-                    "effect": "deny"
+                    "effect": "ask"
                 },
-                { "action": "shell", "resource": "* rm *", "effect": "deny" },
+                { "action": "shell", "resource": "* rm *", "effect": "ask" },
                 {
                     "action": "shell",
                     "resource": "* rmdir *",
-                    "effect": "deny"
+                    "effect": "ask"
                 },
-                { "action": "shell", "resource": "* del *", "effect": "deny" }
+                { "action": "shell", "resource": "* del *", "effect": "ask" }
             ]
         },
         "goal-worker": {

@@ -1,7 +1,7 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
-  "editor.fontFamily": "CaskaydiaCove Nerd Font",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontLigatures": true,
   "mssql.connectionGroups": [
     {
@@ -203,7 +203,7 @@
     "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
     "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
     "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true,
-    "/tmp/postman-http-request-pre-request.instructions.md": true
+    "/tmp/postman-http-request-pre-request.instructions.md": true,
   },
   "explorer.confirmDelete": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
@@ -216,14 +216,14 @@
   },
   "chat.viewSessions.orientation": "stacked",
   "terminal.integrated.fontSize": 12,
-  "editor.codeLensFontFamily": "CaskaydiaCove Nerd Font",
+  "editor.codeLensFontFamily": "JetBrainsMono Nerd Font",
   "chat.pluginLocations": {
     "/home/leonamduarte/.cache/plugins/.install-staging/68f4c11ce3a259d801f0015bdb9c9dddabc6e8b0/vscode/repo": true,
   },
   "git.autofetch": true,
-  "workbench.colorTheme": "Kanagawa",
+  "workbench.colorTheme": "cursor-dark",
   "editor.fontSize": 13,
   "chat.editor.fontSize": 12,
   "chat.agent.sandbox.enabledWindows": "on",
-  "workbench.sideBar.location": "right"
+  "workbench.sideBar.location": "right",
 }

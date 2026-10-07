@@ -58,18 +58,19 @@ wezterm.on("augment-command-palette", function(window, pane)
 end)
 
 -- ===== Fontes e Cores =====
-config.font_size = 10.5
-config.font = wezterm.font("MartianMono Nerd Font")
-config.font = wezterm.font("SauceCodePro Nerd Font")
-config.font = wezterm.font("0xProto Nerd Font")
-config.font = wezterm.font("FiraCode Nerd Font")
+config.font_size = 10
 config.font = wezterm.font("RobotoMono Nerd Font")
+config.font = wezterm.font("SauceCodePro Nerd Font")
+config.font = wezterm.font("FiraCode Nerd Font")
 config.font = wezterm.font("CaskaydiaCove Nerd Font")
+config.font = wezterm.font("0xProto Nerd Font")
 config.font = wezterm.font("CommitMono Nerd Font")
+config.font = wezterm.font("MartianMono Nerd Font")
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 
 config.force_reverse_video_cursor = true
-config.color_scheme = "Eldritch"
+-- config.color_scheme = "Eldritch"
+config.color_scheme = 'Dark+'
 
 -- ===== Renderizacao =====
 config.enable_wayland = true
@@ -92,10 +93,10 @@ config.prefer_to_spawn_tabs = false
 -- Path simples e direto - não depende do nome do arquivo de config
 local bg_path = (os.getenv("HOME") or "") .. "/.config/wezterm/bg-blurred.png"
 
-if file_exists(bg_path) then
-	config.window_background_image = bg_path
-	config.window_background_opacity = 1.00
-end
+-- if file_exists(bg_path) then
+-- 	config.window_background_image = bg_path
+-- 	config.window_background_opacity = 1.00
+-- end
 
 -- ============================================================================
 -- OVERRIDE: Windows (excecoes pontuais)
