@@ -22,27 +22,47 @@ const path = require('node:path');
 
 const PKG = ['@aikidosec', 'mcp', 'dist', 'index.js'];
 
+function npxRoots() {
+  // `npx @aikidosec/mcp` installs into ~/.npm/_npx/<hash>/node_modules.
+  const list = [];
+  try {
+    const base = path.join(os.homedir(), '.npm', '_npx');
+    for (const name of fs.readdirSync(base)) {
+      list.push(path.join(base, name, 'node_modules'));
+    }
+  } catch {
+    // no npx cache on this machine
+  }
+  return list;
+}
+
 function roots() {
   const list = [];
+  // Config-local install (npm install inside ~/.config/opencode). Checked
+  // first so a pinned install wins over any global/npx copy.
+  list.push(path.join(__dirname, '..', 'node_modules'));
+  list.push(path.join(os.homedir(), '.config', 'opencode', 'node_modules'));
   // Per-machine npm global roots.
   if (process.env.APPDATA) {
     list.push(path.join(process.env.APPDATA, 'npm', 'node_modules'));
   }
   if (process.env.npm_config_prefix) {
     list.push(path.join(process.env.npm_config_prefix, 'lib', 'node_modules'));
+    list.push(path.join(process.env.npm_config_prefix, 'node_modules'));
   }
   if (process.platform !== 'win32') {
     list.push('/usr/lib/node_modules');
     list.push('/usr/local/lib/node_modules');
     list.push(path.join(os.homedir(), '.npm-global', 'lib', 'node_modules'));
     list.push(path.join(os.homedir(), '.local', 'share', 'npm', 'node_modules'));
+    // npm's default per-user prefix (npm prefix -g == ~/.local on many distros).
+    list.push(path.join(os.homedir(), '.local', 'lib', 'node_modules'));
   }
   if (process.env.ProgramFiles) {
     list.push(path.join(process.env.ProgramFiles, 'nodejs', 'node_modules'));
   }
-  // Config-local install (npm install inside ~/.config/opencode).
-  list.push(path.join(__dirname, '..', 'node_modules'));
-  list.push(path.join(os.homedir(), '.config', 'opencode', 'node_modules'));
+  // Cached npx installs, so a machine that only ever ran `npx` still resolves.
+  list.push(...npxRoots());
   return list;
 }
 
@@ -74,7 +94,7 @@ if (process.argv.includes('--check')) {
 
 if (!entry) {
   process.stderr.write(
-    `aikido-mcp: @aikidosec/mcp not found. Install it (npm i -g @aikidosec/mcp) or add its root to candidates.\n`
+    `aikido-mcp: @aikidosec/mcp not found. Install it with "npm i @aikidosec/mcp" inside ~/.config/opencode (preferred) or "npm i -g @aikidosec/mcp", then retry.\n`
   );
   process.exit(1);
 }
