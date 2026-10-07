@@ -59,19 +59,31 @@ end)
 
 -- ===== Fontes e Cores =====
 config.font_size = 10
-config.font = wezterm.font("RobotoMono Nerd Font")
-config.font = wezterm.font("SauceCodePro Nerd Font")
-config.font = wezterm.font("FiraCode Nerd Font")
-config.font = wezterm.font("CaskaydiaCove Nerd Font")
-config.font = wezterm.font("0xProto Nerd Font")
-config.font = wezterm.font("CommitMono Nerd Font")
-config.font = wezterm.font("MartianMono Nerd Font")
-config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font = wezterm.font("MesloLGM Nerd Font Mono")
+
+-- Segue tema e fonte do Omarchy (Linux/WSLg). O bloco Windows, no final,
+-- sobrescreve com a fonte e o esquema fixos.
+local omarchy_theme_dir = get_home_dir() .. "/.local/state/omarchy/current/theme"
+local omarchy_scheme = omarchy_theme_dir .. "/wezterm-colors.toml"
+
+if file_exists(omarchy_scheme) then
+	config.colors = wezterm.color.load_scheme(omarchy_scheme)
+	wezterm.add_to_config_reload_watch_list(omarchy_scheme)
+end
+
+do
+	local ok, success, stdout = pcall(wezterm.run_child_process, { "fc-match", "monospace", "-f", "%{family[0]}" })
+	local family = ok and success and stdout and stdout:gsub("%s+$", "")
+	if family and family ~= "" then
+		config.font = wezterm.font(family)
+	end
+end
+
+local omarchy_fontconfig = get_home_dir() .. "/.config/fontconfig/fonts.conf"
+if file_exists(omarchy_fontconfig) then
+	wezterm.add_to_config_reload_watch_list(omarchy_fontconfig)
+end
 
 config.force_reverse_video_cursor = true
--- config.color_scheme = "Eldritch"
-config.color_scheme = 'Dark+'
 
 -- ===== Renderizacao =====
 config.enable_wayland = true
@@ -107,6 +119,18 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.initial_rows = 35
 	config.initial_cols = 120
 	config.default_prog = { "powershell.exe", "-NoLogo" }
+
+	-- Fonte e esquema fixos apenas no Windows (o Linux segue o Omarchy).
+	config.font = wezterm.font("RobotoMono Nerd Font")
+	config.font = wezterm.font("SauceCodePro Nerd Font")
+	config.font = wezterm.font("FiraCode Nerd Font")
+	config.font = wezterm.font("CaskaydiaCove Nerd Font")
+	config.font = wezterm.font("0xProto Nerd Font")
+	config.font = wezterm.font("CommitMono Nerd Font")
+	config.font = wezterm.font("MartianMono Nerd Font")
+	config.font = wezterm.font("JetBrainsMono Nerd Font")
+	config.font = wezterm.font("MesloLGM Nerd Font Mono")
+	config.color_scheme = 'Dark+'
 
 	-- config.window_background_image = nil
 

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Recarrega o WezTerm apos troca de fonte (omarchy font set).
+[[ -f $HOME/.config/wezterm/wezterm.lua ]] || exit 0
+touch "$HOME/.config/wezterm/wezterm.lua"

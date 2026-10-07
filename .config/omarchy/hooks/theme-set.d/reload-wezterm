@@ -1,0 +1,7 @@
+#!/bin/bash
+# Recarrega o WezTerm apos troca de tema.
+# O wezterm.lua assiste o esquema gerado (~/.local/state/omarchy/current/theme/
+# wezterm-colors.toml). Como o diretorio do tema e substituido a cada troca, o
+# watch pode nao disparar; tocar o wezterm.lua forca o automatically_reload_config.
+[[ -f $HOME/.config/wezterm/wezterm.lua ]] || exit 0
+touch "$HOME/.config/wezterm/wezterm.lua"
