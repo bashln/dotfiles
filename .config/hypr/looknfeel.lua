@@ -48,3 +48,12 @@ dim_strength = 0.15,
 --     column_width = 0.97,
 --   },
 -- })
+
+-- macOS-style glass for the Stealth Dock (Quickshell layer namespace:
+-- "quickshelldock"). ignore_alpha skips the transparent parts of the oversized
+-- dock surface so only the translucent bar gets blurred.
+hl.layer_rule({
+  match = { namespace = "quickshelldock" },
+  blur = true,
+  ignore_alpha = 0.5,
+})

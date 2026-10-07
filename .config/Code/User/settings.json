@@ -29,12 +29,9 @@
     },
   },
   "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "security.workspace.trust.untrustedFiles": "open",
+  "security.workspace.trust.untrustedFiles": "prompt",
   "chat.sessionSync.enabled": true,
   "chat.useCustomAgentHooks": true,
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-  },
   "remote.SSH.remotePlatform": {
     "pvserver": "linux",
   },
@@ -129,9 +126,9 @@
     "/^pnpm\\s+licenses\\b/": true,
     "/^pnpm\\s+audit\\b(?!.*\\bfix\\b)/": true,
     "/^pnpm\\s+config\\s+(list|get)\\b/": true,
-    "npm ci": true,
-    "/^yarn\\s+install\\s+--frozen-lockfile\\b/": true,
-    "/^pnpm\\s+install\\s+--frozen-lockfile\\b/": true,
+    "npm ci": false,
+    "/^yarn\\s+install\\s+--frozen-lockfile\\b/": false,
+    "/^pnpm\\s+install\\s+--frozen-lockfile\\b/": false,
     "column": true,
     "/^column\\b.*\\s-c\\s+[0-9]{4,}/": false,
     "date": true,
@@ -140,7 +137,7 @@
     "/^find\\b.*\\s-(delete|exec|execdir|fprint|fprintf|fls|ok|okdir)\\b/": false,
     "rg": true,
     "/^rg\\b.*\\s(--pre|--hostname-bin)\\b/": false,
-    "sed": true,
+    "sed": false,
     "/^sed\\b.*\\s(-[a-zA-Z]*(e|f)[a-zA-Z]*|--expression|--file)\\b/": false,
     "/^sed\\b.*s\\/.*\\/.*\\/[ew]/": false,
     "/^sed\\b(?:\\s+(?:(?:-l|--line-length)\\s+\\S+|--line-length=\\S+|-\\S+))*\\s+(['\"])\\s*(?:(?:\\d+|\\$|\\/(?:\\\\.|[^\\/])*\\/)(?:\\s*,\\s*(?:\\d+|\\$|\\/(?:\\\\.|[^\\/])*\\/))?)?\\s*!?\\s*[erRwW](?:\\s|\\1)/": false,
@@ -206,14 +203,9 @@
     "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
     "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
     "C:\\Users\\ITINER~1\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true,
-    "/tmp/postman-collections-post-response.instructions.md": true,
-    "/tmp/postman-collections-pre-request.instructions.md": true,
-    "/tmp/postman-folder-post-response.instructions.md": true,
-    "/tmp/postman-folder-pre-request.instructions.md": true,
-    "/tmp/postman-http-request-post-response.instructions.md": true,
     "/tmp/postman-http-request-pre-request.instructions.md": true
   },
-  "explorer.confirmDelete": false,
+  "explorer.confirmDelete": true,
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
       "text": "Always follow the Conventional Commits specification (e.g. feat:, fix:, docs:, chore:, refactor:). Keep the first line concise (under 72 chars), in the imperative mood and lowercase. Do not include quotes or markdown formatting in the title.",
@@ -231,4 +223,7 @@
   "git.autofetch": true,
   "workbench.colorTheme": "Kanagawa",
   "editor.fontSize": 13,
+  "chat.editor.fontSize": 12,
+  "chat.agent.sandbox.enabledWindows": "on",
+  "workbench.sideBar.location": "right"
 }
