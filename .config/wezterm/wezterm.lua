@@ -67,6 +67,7 @@ config.font = wezterm.font("0xProto Nerd Font")
 config.font = wezterm.font("CommitMono Nerd Font")
 config.font = wezterm.font("MartianMono Nerd Font")
 config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("MesloLGM Nerd Font Mono")
 
 config.force_reverse_video_cursor = true
 -- config.color_scheme = "Eldritch"
@@ -83,7 +84,7 @@ config.front_end = "OpenGL"
 config.window_decorations = "NONE"
 config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 config.window_close_confirmation = "NeverPrompt"
 config.use_resize_increments = false
 config.adjust_window_size_when_changing_font_size = false
