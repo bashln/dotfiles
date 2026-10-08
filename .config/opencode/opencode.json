@@ -73,6 +73,163 @@
   },
   "update": "disable",
   "default_agent": "build",
+  "permissions": [
+    {
+      "action": "shell",
+      "resource": "rm *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/rm *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "sudo rm *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "rmdir *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/rmdir *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "sudo rmdir *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "unlink *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/unlink *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "sudo unlink *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "shred *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/shred *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "sudo shred *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "del *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/del *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "erase *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/erase *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "rd *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/rd *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "Remove-Item *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/Remove-Item *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "Remove-ItemProperty *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/Remove-ItemProperty *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "ri *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "*/ri *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "find * -delete*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "find * -exec rm*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git clean *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git rm *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git reset --hard*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git checkout -- *",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git restore *",
+      "effect": "deny"
+    }
+  ],
   "agents": {
     "plan": {
       "permissions": [
@@ -119,6 +276,161 @@
         {
           "action": "shell",
           "resource": "*git commit*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "rmdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/rmdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo rmdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "unlink *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/unlink *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo unlink *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "shred *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/shred *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo shred *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "del *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/del *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "erase *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/erase *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "rd *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/rd *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "Remove-Item *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/Remove-Item *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "Remove-ItemProperty *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/Remove-ItemProperty *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "ri *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/ri *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "find * -delete*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "find * -exec rm*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git clean *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git reset --hard*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git checkout -- *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git restore *",
           "effect": "deny"
         }
       ]
@@ -189,6 +501,161 @@
           "action": "shell",
           "resource": "* del *",
           "effect": "ask"
+        },
+        {
+          "action": "shell",
+          "resource": "rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "rmdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/rmdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo rmdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "unlink *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/unlink *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo unlink *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "shred *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/shred *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "sudo shred *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "del *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/del *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "erase *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/erase *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "rd *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/rd *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "Remove-Item *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/Remove-Item *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "Remove-ItemProperty *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/Remove-ItemProperty *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "ri *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*/ri *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "find * -delete*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "find * -exec rm*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git clean *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git rm *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git reset --hard*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git checkout -- *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "git restore *",
+          "effect": "deny"
         }
       ]
     },

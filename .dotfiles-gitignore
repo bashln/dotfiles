@@ -1,0 +1,9 @@
+# Ignorar explicitamente configurações locais do Omarchy
+.config/hypr/hyprsunset.conf
+.config/hypr/xdph.conf
+.config/ghostty/
+.config/foot/
+.config/kitty/
+
+# itens movidos para ./trash/ ficam fora do git
+trash/
