@@ -221,7 +221,7 @@
     "/home/leonamduarte/.cache/plugins/.install-staging/68f4c11ce3a259d801f0015bdb9c9dddabc6e8b0/vscode/repo": true,
   },
   "git.autofetch": true,
-  "workbench.colorTheme": "cursor-dark",
+  "workbench.colorTheme": "Omarchy",
   "editor.fontSize": 13,
   "chat.editor.fontSize": 12,
   "chat.agent.sandbox.enabledWindows": "on",

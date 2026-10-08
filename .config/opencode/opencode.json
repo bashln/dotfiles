@@ -1,215 +1,294 @@
 {
-    "$schema": "https://opencode.ai/config.json",
-    "providers": {
-        "nvidia": {
-            "name": "NVIDIA NIM (Free)",
-            "package": "aisdk:@ai-sdk/openai-compatible",
-            "settings": {
-                "baseURL": "https://integrate.api.nvidia.com/v1"
-            },
-            "models": {
-                "nvidia/nemotron-mini-4b-instruct": {
-                    "name": "Nemotron Mini 4B",
-                    "capabilities": {
-                        "tools": true
-                    }
-                },
-                "nvidia/llama-3.1-nemotron-nano-8b-v1": {
-                    "name": "Llama 3.1 Nemotron Nano 8B",
-                    "capabilities": {
-                        "tools": true
-                    }
-                },
-                "nvidia/nvidia-nemotron-nano-9b-v2": {
-                    "name": "Nemotron Nano 9B v2",
-                    "capabilities": {
-                        "tools": true
-                    }
-                },
-                "nvidia/nvidia-nemotron-nano-12b-v2-vl": {
-                    "name": "Nemotron Nano 12B VL",
-                    "capabilities": {
-                        "tools": true
-                    }
-                },
-                "nvidia/nemotron-3-nano-30b-a3b": {
-                    "name": "Nemotron 3 Nano 30B A3B",
-                    "capabilities": {
-                        "tools": true
-                    }
-                },
-                "nvidia/nemotron-3.5-lightning-30b-a3b": {
-                    "name": "Nemotron 3.5 Lightning 30B A3B",
-                    "capabilities": {
-                        "tools": true
-                    }
-                },
-                "deepseek-ai/deepseek-v4-flash": {
-                    "name": "DeepSeek V4 Flash",
-                    "capabilities": {
-                        "tools": true
-                    }
-                }
-            }
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    "nvidia": {
+      "name": "NVIDIA NIM (Free)",
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "settings": {
+        "baseURL": "https://integrate.api.nvidia.com/v1"
+      },
+      "models": {
+        "nvidia/nemotron-mini-4b-instruct": {
+          "name": "Nemotron Mini 4B",
+          "capabilities": {
+            "tools": true
+          }
+        },
+        "nvidia/llama-3.1-nemotron-nano-8b-v1": {
+          "name": "Llama 3.1 Nemotron Nano 8B",
+          "capabilities": {
+            "tools": true
+          }
+        },
+        "nvidia/nvidia-nemotron-nano-9b-v2": {
+          "name": "Nemotron Nano 9B v2",
+          "capabilities": {
+            "tools": true
+          }
+        },
+        "nvidia/nvidia-nemotron-nano-12b-v2-vl": {
+          "name": "Nemotron Nano 12B VL",
+          "capabilities": {
+            "tools": true
+          }
+        },
+        "nvidia/nemotron-3-nano-30b-a3b": {
+          "name": "Nemotron 3 Nano 30B A3B",
+          "capabilities": {
+            "tools": true
+          }
+        },
+        "nvidia/nemotron-3.5-lightning-30b-a3b": {
+          "name": "Nemotron 3.5 Lightning 30B A3B",
+          "capabilities": {
+            "tools": true
+          }
+        },
+        "deepseek-ai/deepseek-v4-flash": {
+          "name": "DeepSeek V4 Flash",
+          "capabilities": {
+            "tools": true
+          }
         }
-    },
-    "mcp": {
-        "servers": {
-            "aikido": {
-                "type": "local",
-                "command": [
-                    "node",
-                    "-e",
-                    "const{spawn}=require('child_process');const f=require('path').join(require('os').homedir(),'.config','opencode','scripts','aikido-mcp.cjs');const c=spawn(process.execPath,[f],{stdio:'inherit',windowsHide:true});c.on('exit',(x,s)=>process.exit(s?1:(x??0)));"
-                ],
-                "disabled": false
-            }
+      }
+    }
+  },
+  "mcp": {
+    "servers": {
+      "aikido": {
+        "type": "local",
+        "command": [
+          "node",
+          "-e",
+          "const{spawn}=require('child_process');const f=require('path').join(require('os').homedir(),'.config','opencode','scripts','aikido-mcp.cjs');const c=spawn(process.execPath,[f],{stdio:'inherit',windowsHide:true});c.on('exit',(x,s)=>process.exit(s?1:(x??0)));"
+        ],
+        "disabled": false
+      },
+      "ai-memory": {
+        "type": "remote",
+        "url": "http://127.0.0.1:49375/mcp",
+        "oauth": false
+      }
+    }
+  },
+  "update": "disable",
+  "default_agent": "build",
+  "agents": {
+    "plan": {
+      "permissions": [
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "ask"
+        },
+        {
+          "action": "subagent",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "execute",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "* rm *",
+          "effect": "ask"
+        },
+        {
+          "action": "shell",
+          "resource": "* rmdir *",
+          "effect": "ask"
+        },
+        {
+          "action": "shell",
+          "resource": "* mv *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "* mkdir *",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*git push*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*git commit*",
+          "effect": "deny"
         }
+      ]
     },
-    "update": "disable",
-    "default_agent": "build",
-    "agents": {
-        "plan": {
-            "permissions": [
-                { "action": "shell", "resource": "*", "effect": "ask" },
-                { "action": "subagent", "resource": "*", "effect": "deny" },
-                { "action": "execute", "resource": "*", "effect": "deny" },
-                { "action": "shell", "resource": "* rm *", "effect": "ask" },
-                {
-                    "action": "shell",
-                    "resource": "* rmdir *",
-                    "effect": "ask"
-                },
-                { "action": "shell", "resource": "* mv *", "effect": "deny" },
-                {
-                    "action": "shell",
-                    "resource": "* mkdir *",
-                    "effect": "deny"
-                },
-                {
-                    "action": "shell",
-                    "resource": "*git push*",
-                    "effect": "deny"
-                },
-                {
-                    "action": "shell",
-                    "resource": "*git commit*",
-                    "effect": "deny"
-                }
-            ]
+    "build": {
+      "permissions": [
+        {
+          "action": "shell",
+          "resource": "rm *",
+          "effect": "ask"
         },
-        "build": {
-            "permissions": [
-                { "action": "shell", "resource": "rm *", "effect": "ask" },
-                { "action": "shell", "resource": "rmdir *", "effect": "ask" },
-                { "action": "shell", "resource": "del *", "effect": "ask" },
-                { "action": "shell", "resource": "erase *", "effect": "ask" },
-                { "action": "shell", "resource": "unlink *", "effect": "ask" },
-                { "action": "shell", "resource": "shred *", "effect": "ask" },
-                {
-                    "action": "shell",
-                    "resource": "Remove-Item *",
-                    "effect": "ask"
-                },
-                {
-                    "action": "shell",
-                    "resource": "Remove-ItemProperty *",
-                    "effect": "ask"
-                },
-                { "action": "shell", "resource": "*/rm *", "effect": "ask" },
-                {
-                    "action": "shell",
-                    "resource": "*/rmdir *",
-                    "effect": "ask"
-                },
-                { "action": "shell", "resource": "* rm *", "effect": "ask" },
-                {
-                    "action": "shell",
-                    "resource": "* rmdir *",
-                    "effect": "ask"
-                },
-                { "action": "shell", "resource": "* del *", "effect": "ask" }
-            ]
+        {
+          "action": "shell",
+          "resource": "rmdir *",
+          "effect": "ask"
         },
-        "goal-worker": {
-            "description": "Executes goal checkpoints autonomously toward a durable objective.",
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "del *",
+          "effect": "ask"
         },
-        "executor": {
-            "description": "Mechanical execution agent.",
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "erase *",
+          "effect": "ask"
         },
-        "analista": {
-            "description": "Refactor agent.",
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "unlink *",
+          "effect": "ask"
         },
-        "debug": {
-            "description": "Debug agent.",
-            "model": "opencode-go/gpt-5.6-luna",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "shred *",
+          "effect": "ask"
         },
-        "arquiteto": {
-            "description": "Architecture agent.",
-            "model": "opencode-go/gpt-5.6-luna",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "Remove-Item *",
+          "effect": "ask"
         },
-        "codex": {
-            "description": "Critical code agent.",
-            "model": "opencode-go/gpt-5.6-luna",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "Remove-ItemProperty *",
+          "effect": "ask"
         },
-        "tester": {
-            "description": "Tester agent.",
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "*/rm *",
+          "effect": "ask"
         },
-        "planner": {
-            "description": "Planning agent.",
-            "model": "opencode-go/qwen3.7-plus",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "*/rmdir *",
+          "effect": "ask"
         },
-        "auditor": {
-            "description": "Audit and review agent.",
-            "model": "opencode-go/mimo-v2.6-pro",
-            "mode": "subagent"
+        {
+          "action": "shell",
+          "resource": "* rm *",
+          "effect": "ask"
         },
-        "auto-mode": {
-            "description": "Auto-review agent for dangerous actions. Intercepts commands that cross safety boundaries.",
-            "model": "opencode-go/mimo-v2.6-pro",
-            "mode": "subagent",
-            "permissions": [
-                { "action": "edit", "resource": "*", "effect": "deny" },
-                { "action": "shell", "resource": "*", "effect": "deny" }
-            ]
+        {
+          "action": "shell",
+          "resource": "* rmdir *",
+          "effect": "ask"
         },
-        "safety-checker": {
-            "description": "Safety verification agent for Auto-Mode. Read-only risk assessment.",
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "subagent",
-            "permissions": [
-                { "action": "edit", "resource": "*", "effect": "deny" },
-                { "action": "shell", "resource": "*", "effect": "deny" }
-            ]
-        },
-        "cavecrew-investigator": {
-            "model": "opencode-go/mimo-v2.6-pro",
-            "mode": "subagent"
-        },
-        "cavecrew-builder": {
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "subagent"
-        },
-        "cavecrew-reviewer": {
-            "model": "opencode-go/mimo-v2.6-pro",
-            "mode": "subagent"
-        },
-        "tutor": {
-            "model": "opencode-go/mimo-v2.6-flash",
-            "mode": "primary"
+        {
+          "action": "shell",
+          "resource": "* del *",
+          "effect": "ask"
         }
+      ]
     },
-    "plugins": ["superpowers@git+https://github.com/obra/superpowers.git"]
+    "goal-worker": {
+      "description": "Executes goal checkpoints autonomously toward a durable objective.",
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "subagent"
+    },
+    "executor": {
+      "description": "Mechanical execution agent.",
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "subagent"
+    },
+    "analista": {
+      "description": "Refactor agent.",
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "subagent"
+    },
+    "debug": {
+      "description": "Debug agent.",
+      "model": "opencode-go/gpt-5.6-luna",
+      "mode": "subagent"
+    },
+    "arquiteto": {
+      "description": "Architecture agent.",
+      "model": "opencode-go/gpt-5.6-luna",
+      "mode": "subagent"
+    },
+    "codex": {
+      "description": "Critical code agent.",
+      "model": "opencode-go/gpt-5.6-luna",
+      "mode": "subagent"
+    },
+    "tester": {
+      "description": "Tester agent.",
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "subagent"
+    },
+    "planner": {
+      "description": "Planning agent.",
+      "model": "opencode-go/qwen3.7-plus",
+      "mode": "subagent"
+    },
+    "auditor": {
+      "description": "Audit and review agent.",
+      "model": "opencode-go/mimo-v2.6-pro",
+      "mode": "subagent"
+    },
+    "auto-mode": {
+      "description": "Auto-review agent for dangerous actions. Intercepts commands that cross safety boundaries.",
+      "model": "opencode-go/mimo-v2.6-pro",
+      "mode": "subagent",
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
+    },
+    "safety-checker": {
+      "description": "Safety verification agent for Auto-Mode. Read-only risk assessment.",
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "subagent",
+      "permissions": [
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
+    },
+    "cavecrew-investigator": {
+      "model": "opencode-go/mimo-v2.6-pro",
+      "mode": "subagent"
+    },
+    "cavecrew-builder": {
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "subagent"
+    },
+    "cavecrew-reviewer": {
+      "model": "opencode-go/mimo-v2.6-pro",
+      "mode": "subagent"
+    },
+    "tutor": {
+      "model": "opencode-go/mimo-v2.6-flash",
+      "mode": "primary"
+    }
+  },
+  "plugins": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ]
 }

@@ -137,3 +137,7 @@ eval "$(starship init bash)"
 if [ -f "$HOME/.safe-chain/scripts/init-posix.sh" ]; then
     source "$HOME/.safe-chain/scripts/init-posix.sh"
 fi
+
+# ai-memory client/hook URL (server binds 49375 to avoid opencode's 49374)
+export AI_MEMORY_SERVER_URL=http://127.0.0.1:49375
+export AI_MEMORY_HOOK_URL=http://127.0.0.1:49375

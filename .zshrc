@@ -202,3 +202,7 @@ source "$HOME/.config/dev-environment/android.sh"
 
 # Added by Antigravity CLI installer
 export PATH="/home/leonamduarte/.local/bin:$PATH"
+
+# ai-memory client/hook URL (server binds 49375 to avoid opencode's 49374)
+export AI_MEMORY_SERVER_URL=http://127.0.0.1:49375
+export AI_MEMORY_HOOK_URL=http://127.0.0.1:49375
