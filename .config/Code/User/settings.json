@@ -2,6 +2,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
   "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.codeLensFontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontSize": 12,
+  "chat.editor.fontSize": 12,
   "editor.fontLigatures": true,
   "mssql.connectionGroups": [
     {
@@ -215,15 +218,10 @@
     "ltmoerdani.opencode-copilot-chat": true,
   },
   "chat.viewSessions.orientation": "stacked",
-  "terminal.integrated.fontSize": 12,
-  "editor.codeLensFontFamily": "JetBrainsMono Nerd Font",
   "chat.pluginLocations": {
     "/home/leonamduarte/.cache/plugins/.install-staging/68f4c11ce3a259d801f0015bdb9c9dddabc6e8b0/vscode/repo": true,
   },
   "git.autofetch": true,
-  "workbench.colorTheme": "Omarchy",
-  "editor.fontSize": 13,
-  "chat.editor.fontSize": 12,
   "chat.agent.sandbox.enabledWindows": "on",
-  "workbench.sideBar.location": "right",
+  "workbench.colorTheme": "cursor-dark",
 }

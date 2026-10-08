@@ -17,10 +17,9 @@
     "code_actions": true
   },
   "agent_ui_font_size": 16.0,
-  "agent_buffer_font_size": 13.0,
-  "buffer_font_size": 12.0,
+  "buffer_font_size": 14.0,
   "load_extensions": true,
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "Maple Mono NF",
   "edit_predictions": {
     "allow_data_collection": "no",
   },
@@ -124,9 +123,9 @@
   "agent": {
     "default_model": {
       "provider": "opencode",
-      "model": "go/mimo-v2.5",
+      "model": "go/deepseek-v4.1-flash",
       "enable_thinking": true,
-      "effort": "medium"
+      "effort": "high"
     },
     "thinking_display": "always_collapsed",
     "sandbox_permissions": {
@@ -216,6 +215,6 @@
   "theme": {
     "mode": "system",
     "light": "Doom One Light",
-    "dark": "Omazed",
+    "dark": "Cursor Dark",
   },
 }
