@@ -36,3 +36,15 @@ Princípio: pecar pela excelência. Todo artefato — app, CLI, TUI, API, biblio
 - Fechar toda implementação relendo como usuário de primeira vez; corrigir o que doeu e registrar o porquê.
 - Skills: `ux-excellence` (checklist acionável por superfície) + `principle-experience-first`.
 <!-- ux-excellence:end -->
+
+<!-- minimalism:begin -->
+## Minimalismo e limpeza de órfãos (global)
+
+Escreva software simples: menos código, menos arquivos, menos estado. Deletion over addition.
+
+- Não crie o que não é usado: sem abstração, dependência, arquivo ou config sem dono.
+- Órfão = não referenciado, não carregado, obsoleto, duplicado ou leftover. Inclui `.bak` redundante, cache velho, diretório de ferramenta aposentada, código morto.
+- Ao achar órfão que VOCÊ criou ou que é claramente obsoleto: mova para `./trash/<caminho-relativo>/` e registre `data | origem | motivo` em `./trash/LOG.md`. Nunca delete.
+- Dados do usuário, perfis de apps (browser, IDE, editor) e config ambígua: confirmar antes de mover.
+- Vale para home Linux e Windows.
+<!-- minimalism:end -->
