@@ -175,6 +175,11 @@
       "action": "shell",
       "resource": "git restore *",
       "effect": "deny"
+    },
+    {
+      "action": "external_directory",
+      "resource": "*",
+      "effect": "allow"
     }
   ],
   "agents": {
@@ -384,6 +389,11 @@
     },
     "build": {
       "permissions": [
+        {
+          "action": "question",
+          "resource": "*",
+          "effect": "deny"
+        },
         {
           "action": "shell",
           "resource": "rm *",
@@ -650,40 +660,6 @@
       "description": "Audit and review agent.",
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
-    },
-    "auto-mode": {
-      "description": "Auto-review agent for dangerous actions. Intercepts commands that cross safety boundaries.",
-      "model": "opencode-go/mimo-v2.6-pro",
-      "mode": "subagent",
-      "permissions": [
-        {
-          "action": "edit",
-          "resource": "*",
-          "effect": "deny"
-        },
-        {
-          "action": "shell",
-          "resource": "*",
-          "effect": "deny"
-        }
-      ]
-    },
-    "safety-checker": {
-      "description": "Safety verification agent for Auto-Mode. Read-only risk assessment.",
-      "model": "opencode-go/mimo-v2.6-flash",
-      "mode": "subagent",
-      "permissions": [
-        {
-          "action": "edit",
-          "resource": "*",
-          "effect": "deny"
-        },
-        {
-          "action": "shell",
-          "resource": "*",
-          "effect": "deny"
-        }
-      ]
     },
     "cavecrew-investigator": {
       "model": "opencode-go/mimo-v2.6-pro",

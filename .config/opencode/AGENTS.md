@@ -48,3 +48,19 @@ Escreva software simples: menos código, menos arquivos, menos estado. Deletion 
 - Dados do usuário, perfis de apps (browser, IDE, editor) e config ambígua: confirmar antes de mover.
 - Vale para home Linux e Windows.
 <!-- minimalism:end -->
+
+<!-- autonomy:begin -->
+## Execução autônoma (unattended)
+
+Ao receber um plano/objetivo, execute até o critério de parada sem esperar o humano.
+
+- Não pare para perguntar. Escolha a opção mais segura e reversível, siga e registre a decisão. (O tool `question` está negado no build.)
+- Loop: 1 unidade verificável por vez → valide no artefato real → registre → próxima. Nunca batch de validação.
+- Persistência externa (sobrevive a compaction/reinício), no diretório de trabalho:
+  - `progress.json`: task, status, completed_steps, pending_steps, notes
+  - `errors.json`: erro, tentativas, abordagens falhas, solução
+  - Releia os dois ao iniciar/retomar; atualize após CADA passo.
+- Mesmo erro 2x → mude de abordagem (não repita). 3 tentativas sem progresso no mesmo passo → pare, documente em `progress.json` e reporte o bloqueio.
+- Pare SÓ no critério de parada atingido ou bloqueio documentado.
+- Nunca delete: mova para `./trash/` + `LOG.md`.
+<!-- autonomy:end -->
