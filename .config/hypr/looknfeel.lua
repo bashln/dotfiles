@@ -57,3 +57,11 @@ hl.layer_rule({
   blur = true,
   ignore_alpha = 0.5,
 })
+
+-- BEGIN Familiar Desktop title bars
+local familiarFile = io.open("/home/leonamduarte/.config/omarchy/familiar-titlebars/titlebars.lua", 'r')
+if familiarFile then
+  familiarFile:close()
+  dofile("/home/leonamduarte/.config/omarchy/familiar-titlebars/titlebars.lua")
+end
+-- END Familiar Desktop title bars
