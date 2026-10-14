@@ -23,9 +23,9 @@ Nunca delete arquivos. Para remover algo, crie `./trash/` no diretório atual se
 <!-- delete-protection:end -->
 
 <!-- bare-repo-guard:begin -->
-## Bare repo: nunca `git add -A`
+## Bare repo do home
 
-Este home é um bare repo (`~/.dotfiles-bare`, work-tree `$HOME`). Nunca use `git add -A`, `git add --all`, `git add .`, `git add :/` nem `git commit -a`: stage sempre por caminho explícito. Há `deny` no `opencode.json` para esses comandos e um guard em `~/.git-hooks/pre-commit` (`bulk-add-guard.sh`) que aborta staged suspeito (caminho de cache/sqlite/app ou contagem absurda). Override intencional: `DOTFILES_ALLOW_BULK=1`.
+O diretório `$HOME` é um bare repo (`~/.dotfiles-bare`). Ao trabalhar nele, stage por caminho explícito. Um guard em `~/.git-hooks/pre-commit` (`bulk-add-guard.sh`) aborta stage em massa (caminho de cache/sqlite/app, ou contagem acima do limite). Override: `DOTFILES_ALLOW_BULK=1`. Repos de projeto fora do home não são afetados pelo guard.
 <!-- bare-repo-guard:end -->
 
 <!-- ux-excellence:begin -->

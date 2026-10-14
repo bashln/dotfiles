@@ -1,6 +1,9 @@
 #!/bin/sh
-# --- bulk-add guard (bare-repo home) ---
-git diff --cached --name-only --diff-filter=ACMR | "$HOME/.git-hooks/bulk-add-guard.sh" || exit 1
+# --- bulk-add guard (only for the home bare repo) ---
+root=$(git rev-parse --show-toplevel 2>/dev/null || true)
+if [ "$root" = "$HOME" ]; then
+  git diff --cached --name-only --diff-filter=ACMR | "$HOME/.git-hooks/bulk-add-guard.sh" || exit 1
+fi
 # --- Aikido local scanner ---
 [ -x "/home/leonamduarte/.local/bin/aikido-local-scanner" ] || { echo "Aikido Local Scanner is missing. Find install instructions at https://help.aikido.dev/code-scanning/local-code-scanning/aikido-secrets-pre-commit-hook"; exit 1; }
 REPO_ROOT="$(git rev-parse --show-toplevel)"

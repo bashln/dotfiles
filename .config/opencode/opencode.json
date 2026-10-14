@@ -182,41 +182,6 @@
       "effect": "deny"
     },
     {
-      "action": "shell",
-      "resource": "*add -A*",
-      "effect": "deny"
-    },
-    {
-      "action": "shell",
-      "resource": "*add --all*",
-      "effect": "deny"
-    },
-    {
-      "action": "shell",
-      "resource": "*add :/*",
-      "effect": "deny"
-    },
-    {
-      "action": "shell",
-      "resource": "*add .",
-      "effect": "deny"
-    },
-    {
-      "action": "shell",
-      "resource": "*add ./",
-      "effect": "deny"
-    },
-    {
-      "action": "shell",
-      "resource": "*commit -a*",
-      "effect": "deny"
-    },
-    {
-      "action": "shell",
-      "resource": "*commit --all*",
-      "effect": "deny"
-    },
-    {
       "action": "external_directory",
       "resource": "*",
       "effect": "allow"
