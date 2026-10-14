@@ -15,6 +15,10 @@
         "type": "remote",
         "url": "http://127.0.0.1:49375/mcp",
         "oauth": false
+      },
+      "supabase": {
+        "type": "remote",
+        "url": "https://mcp.supabase.com/mcp"
       }
     }
   },
@@ -618,52 +622,48 @@
       ]
     },
     "goal-worker": {
-      "description": "Executes goal checkpoints autonomously toward a durable objective.",
       "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "executor": {
-      "description": "Mechanical execution agent.",
+      "description": "Mechanical execution agent. Runs a precise, fully-specified sequence to the letter: file moves, fixture updates, scripted edits. Use when the task is unambiguous and needs no judgment.",
       "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "analista": {
-      "description": "Refactor agent.",
-      "model": "opencode-go/mimo-v2.6-flash",
+      "description": "Behavior-preserving refactor. Rename, extract, inline, dedupe, move. Use for structural changes that must not alter behavior.",
+      "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "debug": {
-      "description": "Debug agent.",
+      "description": "Debug agent. Reproduces a defect, isolates the root cause, proposes the minimal fix. Use for failing tests, crashes, and unexpected behavior.",
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "arquiteto": {
-      "description": "Architecture agent.",
+      "description": "Architecture agent. Parallel design exploration before implementation: sketches types, boundaries, and module structure. Use for non-trivial design decisions.",
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "codex": {
-      "description": "Critical code agent.",
+      "description": "Critical code agent. Adversarial review of a diff or design; hunts edge cases and failure modes. Use before shipping risky changes.",
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "tester": {
-      "description": "Tester agent.",
       "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "planner": {
-      "description": "Planning agent.",
       "model": "opencode-go/qwen3.7-plus",
       "mode": "subagent"
     },
     "auditor": {
-      "description": "Audit and review agent.",
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "cavecrew-investigator": {
-      "model": "opencode-go/mimo-v2.6-pro",
+      "model": "opencode-go/mimo-v2.6-flash",
       "mode": "subagent"
     },
     "cavecrew-builder": {

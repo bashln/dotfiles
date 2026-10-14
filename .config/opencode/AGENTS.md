@@ -64,3 +64,18 @@ Ao receber um plano/objetivo, execute até o critério de parada sem esperar o h
 - Pare SÓ no critério de parada atingido ou bloqueio documentado.
 - Nunca delete: mova para `./trash/` + `LOG.md`.
 <!-- autonomy:end -->
+
+<!-- multiagent-routing:begin -->
+## Roteamento multiagent (modelos)
+
+O sheet de modelos do pstack (port `michael-denyer/pstack-claude`) fica em `~/.config/opencode/pstack-models.md`. Leia esse arquivo antes de qualquer fan-out (arena / swarm / architect / interrogate / thermo / papéis do poteto-mode) e use os slugs das linhas de papel.
+
+Regras duras:
+
+- Só slug que `opencode models` liste. Nunca invente ID nem troque um slug que falhou por nome de família (nada de `opus` / `fable` / `sonnet`).
+- Se um slug falhar, pare e reporte o erro.
+
+Agentes (o port é do Claude; no OpenCode o prefixo `pstack:` não existe): `poteto-agent`, `comment-sicko`, `thermo-nuclear-review-subagent`, `thermo-nuclear-code-quality-review-subagent`.
+
+Atualizar o pstack: `sh ~/.agents/update-pstack.sh` — faz `git pull` no clone `~/.agents/pstack-claude` e re-sincroniza `~/.agents/skills`.
+<!-- multiagent-routing:end -->
