@@ -19,7 +19,7 @@
   "agent_ui_font_size": 16.0,
   "buffer_font_size": 14.0,
   "load_extensions": true,
-  "buffer_font_family": "Maple Mono NF",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "edit_predictions": {
     "allow_data_collection": "no",
   },

@@ -34,3 +34,28 @@ vim.api.nvim_create_autocmd("SwapExists", {
     vim.v.swapchoice = "o"
   end,
 })
+
+-- Disable snacks picker backdrop (transparent background)
+vim.api.nvim_create_autocmd("User", {
+  group = vim.api.nvim_create_augroup("snacks_no_backdrop", { clear = true }),
+  pattern = "SnacksPickerOpened",
+  callback = function()
+    local snacks = require("snacks")
+    if snacks.picker then
+      snacks.picker.setup({ backdrop = false })
+    end
+  end,
+})
+
+-- Ensure opaque background on Windows
+if vim.fn.has("win32") == 1 then
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    group = vim.api.nvim_create_augroup("win32_opaque_bg", { clear = true }),
+    pattern = "*",
+    callback = function()
+      vim.api.nvim_set_hl(0, "Normal", { bg = "#282a36" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#282a36" })
+      vim.o.winblend = 0
+    end,
+  })
+end

@@ -3,16 +3,17 @@ return {
   lazy = true,
   priority = 1000,
   opts = {
-    -- show the '~' characters after the end of buffers
     show_end_of_buffer = true,
-    -- use transparent background
-    transparent_bg = true,
-    -- set custom lualine background color
+    transparent_bg = false,
     lualine_bg_color = "#44475a",
-    -- italic styles
     italic_comment = true,
-    -- overrides / custom colors
-    overrides = {},
+    overrides = {
+      Normal = { bg = "#282a36" },
+      NormalFloat = { bg = "#282a36" },
+      SignColumn = { bg = "#282a36" },
+      LineNr = { bg = "#282a36" },
+      CursorLineNr = { bg = "#282a36" },
+    },
   },
   config = function(_, opts)
     local dracula = require("dracula")

@@ -34,6 +34,8 @@ return {
           return name:match("^%.") ~= nil
         end,
       },
+      -- Use opaque background (no transparency in floating window)
+      transparent = false,
     }
   end,
   dependencies = { { "nvim-mini/mini.icons", opts = {} }, { "refractalize/oil-git-status.nvim" } },

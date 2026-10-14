@@ -224,4 +224,5 @@
   "git.autofetch": true,
   "chat.agent.sandbox.enabledWindows": "on",
   "workbench.colorTheme": "cursor-dark",
+  "editor.fontSize": 13,
 }

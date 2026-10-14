@@ -80,10 +80,9 @@ local spec = {
   { import = "plugins/colorscheme" },
 }
 
--- With the omarchy theme-hotreload disabled on win32, apply the first theme
--- configured natively in install.colorscheme instead of a LazyVim default.
+-- Windows: use dracula theme (already loaded via plugins/colorscheme)
 if vim.fn.has("win32") == 1 then
-  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "firesky" } })
+  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "dracula" } })
 end
 
 require("lazy").setup({
