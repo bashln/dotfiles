@@ -22,6 +22,12 @@ Boundaries: code/commits/PRs written normal.
 Nunca delete arquivos. Para remover algo, crie `./trash/` no diretório atual se não existir, mova o item para lá preservando o caminho relativo e registre `data | origem | motivo` em `./trash/LOG.md`.
 <!-- delete-protection:end -->
 
+<!-- bare-repo-guard:begin -->
+## Bare repo: nunca `git add -A`
+
+Este home é um bare repo (`~/.dotfiles-bare`, work-tree `$HOME`). Nunca use `git add -A`, `git add --all`, `git add .`, `git add :/` nem `git commit -a`: stage sempre por caminho explícito. Há `deny` no `opencode.json` para esses comandos e um guard em `~/.git-hooks/pre-commit` (`bulk-add-guard.sh`) que aborta staged suspeito (caminho de cache/sqlite/app ou contagem absurda). Override intencional: `DOTFILES_ALLOW_BULK=1`.
+<!-- bare-repo-guard:end -->
+
 <!-- ux-excellence:begin -->
 ## Excelência de UX (global, sempre, obrigatório)
 
