@@ -1,10 +1,11 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
-  "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "editor.codeLensFontFamily": "JetBrainsMono Nerd Font",
-  "terminal.integrated.fontSize": 12,
-  "chat.editor.fontSize": 12,
+  "editor.fontFamily": "IoskeleyMono Nerd Font Mono",
+  "editor.codeLensFontFamily": "IoskeleyMono Nerd Font Mono",
+  "terminal.integrated.fontSize": 13,
+  "chat.editor.fontSize": 13,
+  "editor.fontSize": 13,
   "editor.fontLigatures": true,
   "mssql.connectionGroups": [
     {
@@ -33,6 +34,7 @@
   },
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "security.workspace.trust.untrustedFiles": "prompt",
+  "security.allowedUNCHosts": ["server-adm", "server-gap", "192.168.254.3"],
   "chat.sessionSync.enabled": true,
   "chat.useCustomAgentHooks": true,
   "remote.SSH.remotePlatform": {
@@ -223,6 +225,6 @@
   },
   "git.autofetch": true,
   "chat.agent.sandbox.enabledWindows": "on",
-  "workbench.colorTheme": "cursor-dark",
-  "editor.fontSize": 13,
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "chat.permissions.default": "autopilot",
 }

@@ -2,8 +2,9 @@
 -- every copy is emitted as OSC 52 (inside tmux this becomes a tmux buffer,
 -- rebroadcast to every attached client, local or SSH). Paste prefers the
 -- local Wayland clipboard when one is available, so content copied in other
--- apps remains pasteable; without a display, paste is an OSC 52 query that
--- tmux (or the terminal) answers.
+-- apps remains pasteable. Without a display there is no paste source at all:
+-- an OSC 52 query is not used, because terminals that support OSC 52 writes
+-- only (Windows Terminal) never answer it and the wait times out.
 local M = {}
 
 local function proc_lines(pid, file)
@@ -41,6 +42,15 @@ local function ancestor_process_named(name)
 end
 
 function M.setup()
+  -- Native Windows: use the OS clipboard through win32yank. The OSC 52
+  -- provider must not be selected here: its paste is a terminal query that
+  -- terminals implementing OSC 52 writes only never answer, so every paste
+  -- would stall 10s and then warn.
+  if vim.fn.has("win32") == 1 and vim.fn.executable("win32yank.exe") == 1 then
+    vim.g.clipboard = "win32yank"
+    return
+  end
+
   local in_tmux = vim.env.TMUX ~= nil
   local in_ssh = vim.env.SSH_TTY ~= nil or vim.env.SSH_CONNECTION ~= nil
   local in_herdr = vim.env.HERDR_PANE_ID ~= nil or ancestor_process_named("herdr")
@@ -74,7 +84,14 @@ function M.setup()
 
   local function paste(register)
     if not has_wayland then
-      return osc52.paste(register)
+      -- No local clipboard to read from. Do not fall back to an OSC 52 query:
+      -- terminals that implement OSC 52 writes only (notably Windows Terminal)
+      -- never answer it, so every paste would stall 10s and then fail. Use the
+      -- terminal's own paste instead (Ctrl-Shift-V), which tmux and SSH
+      -- forward to nvim as bracketed paste.
+      return function()
+        return {}
+      end
     end
 
     return function()

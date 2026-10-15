@@ -80,9 +80,9 @@ local spec = {
   { import = "plugins/colorscheme" },
 }
 
--- Windows: use dracula theme (already loaded via plugins/colorscheme)
+-- Windows: use tokyonight theme (already loaded via plugins/colorscheme)
 if vim.fn.has("win32") == 1 then
-  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "dracula" } })
+  table.insert(spec, 1, { "LazyVim/LazyVim", opts = { colorscheme = "tokyonight" } })
 end
 
 require("lazy").setup({
@@ -96,7 +96,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "firesky", "doom-one", "habamax" } },
+  install = { colorscheme = { "tokyonight", "doom-one", "habamax" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
