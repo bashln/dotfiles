@@ -131,7 +131,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.font = wezterm.font("MesloLGM Nerd Font Mono")
   config.font = wezterm.font("JetBrainsMono Nerd Font")
   config.font = wezterm.font("IoskeleyMono Nerd Font Mono")
-	config.color_scheme = 'catppuccin-mocha'
+	config.color_scheme = 'tokyonight'
 
 	-- Garante fundo opaco: sem opacity, sem acrylic/Mica do sistema, sem imagem
 	config.window_background_opacity = 1.0
