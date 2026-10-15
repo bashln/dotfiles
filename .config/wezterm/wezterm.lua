@@ -58,7 +58,7 @@ wezterm.on("augment-command-palette", function(window, pane)
 end)
 
 -- ===== Fontes e Cores =====
-config.font_size = 10
+config.font_size = 10.5
 
 -- Segue tema e fonte do Omarchy (Linux/WSLg). O bloco Windows, no final,
 -- sobrescreve com a fonte e o esquema fixos.
@@ -116,8 +116,8 @@ local bg_path = (os.getenv("HOME") or "") .. "/.config/wezterm/bg-blurred.png"
 -- ============================================================================
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.window_decorations = "RESIZE"
-	config.initial_rows = 35
-	config.initial_cols = 120
+	config.initial_rows = 45
+	config.initial_cols = 100
 	config.default_prog = { "powershell.exe", "-NoLogo" }
 
 	-- Fonte e esquema fixos apenas no Windows (o Linux segue o Omarchy).
