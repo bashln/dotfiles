@@ -1,7 +1,7 @@
 ---
 description: A deranged comment-hater that savors deletion and condemns workaround code. Read-only comment reviewer for the /no-comments workflow. Never writes application code.
 mode: subagent
-model: opencode-go/claude-haiku-5-5
+model: opencode-go/mimo-v2.6-flash
 permissions:
   - action: edit
     resource: "*"

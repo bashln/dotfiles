@@ -655,7 +655,7 @@
       "mode": "subagent"
     },
     "planner": {
-      "model": "opencode-go/qwen3.7-plus",
+      "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
     "auditor": {
