@@ -17,7 +17,7 @@
 hl.config({
 decoration = {
 -- Use round window corners.
-rounding = 6,
+-- rounding = 6,
 
 -- Dim unfocused windows (0.0 = no dim, 1.0 = fully dimmed).
 dim_inactive = true,
@@ -65,3 +65,8 @@ if familiarFile then
   dofile("/home/leonamduarte/.config/omarchy/familiar-titlebars/titlebars.lua")
 end
 -- END Familiar Desktop title bars
+
+-- Opt another application in to Omarchy's standard transparency.
+-- Find its class with: hyprctl clients
+-- o.transparent_window("my-app")
+-- o.transparent_window("my-app", "0.9 0.85") -- Custom active/inactive opacity.

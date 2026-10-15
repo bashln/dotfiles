@@ -285,6 +285,13 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # Added by Antigravity CLI installer
 set -gx PATH "$HOME/.local/bin" $PATH
 
+# Android SDK & Tools
+set -gx ANDROID_HOME "$HOME/Android/Sdk"
+set -gx ANDROID_SDK_ROOT "$HOME/Android/Sdk"
+fish_add_path $ANDROID_HOME/emulator
+fish_add_path $ANDROID_HOME/platform-tools
+
 if test -f "$HOME/.safe-chain/scripts/init-fish.fish"
     source "$HOME/.safe-chain/scripts/init-fish.fish"
 end
+

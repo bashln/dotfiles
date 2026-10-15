@@ -27,3 +27,16 @@ require("default.hypr.toggles")
 
 -- Add any other personal Hyprland configuration below.
 o.window("[sS]potify", { workspace = "5" })
+
+-- Bitwarden passkey popup (browser extension) should float, not split the screen.
+-- Omarchy's default only covers the Chrome extension id (nngceck...); Edge ships
+-- its own id (jbkfoe...), so its passkey window tiles. Hyprland's class match is
+-- a full match, hence the leading/trailing ".*". Float is applied directly: a
+-- "+floating-window" tag set from a user rule is too late, as Omarchy's
+-- tag -> float rule already ran.
+o.window(".*jbkfoedolllekgbhcbcoahefnbanhhlh.*", {
+  no_screen_share = true,
+  float = true,
+  center = true,
+  size = { 875, 600 },
+})
