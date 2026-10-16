@@ -225,6 +225,6 @@
   },
   "git.autofetch": true,
   "chat.agent.sandbox.enabledWindows": "on",
-  "workbench.colorTheme": "Tokyo Night",
+  "workbench.colorTheme": "Omarchy",
   "chat.permissions.default": "autopilot",
 }
