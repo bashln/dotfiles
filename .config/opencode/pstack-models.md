@@ -15,11 +15,11 @@ why investigators: opencode-go/mimo-v2.6-flash
 why synthesizer: opencode-go/mimo-v2.6-pro
 reflect tooling: opencode-go/mimo-v2.6-flash
 reflect judgment, divergent, synthesizer: opencode-go/mimo-v2.6-pro
-arena runners: opencode-go/muse-spark-1.3-contributor, opencode-go/gpt-6-luna, opencode-go/mimo-v2.6-pro
-arena cross-judge pool: opencode-go/gpt-6-luna, opencode-go/muse-spark-1.3-contributor, opencode-go/mimo-v2.6-pro
+arena runners: opencode-go/gpt-6-luna, opencode-go/mimo-v2.6-pro
+arena cross-judge pool: opencode-go/gpt-6-luna, opencode-go/mimo-v2.6-pro
 swarm workers: opencode-go/mimo-v2.6-flash
-architect runners: opencode-go/muse-spark-1.3-contributor, opencode-go/gpt-6-luna, opencode-go/mimo-v2.6-pro
-interrogate reviewers: opencode-go/gpt-6-luna, opencode-go/muse-spark-1.3-contributor, opencode-go/mimo-v2.6-pro
+architect runners: opencode-go/gpt-6-luna, opencode-go/mimo-v2.6-pro
+interrogate reviewers: opencode-go/gpt-6-luna, opencode-go/mimo-v2.6-pro
 
 default effort: session
 session hook: off

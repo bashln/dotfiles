@@ -24,7 +24,7 @@
   },
   "update": "disable",
   "default_agent": "build",
-  "model": "opencode-go/deepseek-v4.1-flash",
+  "model": "opencode-go/mimo-v2.6-flash",
   "permissions": [
     {
       "action": "shell",
@@ -674,10 +674,7 @@
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
     },
-    "tutor": {
-      "model": "opencode-go/mimo-v2.6-flash",
-      "mode": "primary"
-    }
+
   },
   "plugins": [
     "superpowers@git+https://github.com/obra/superpowers.git"
