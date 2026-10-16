@@ -676,8 +676,7 @@
     "cavecrew-reviewer": {
       "model": "opencode-go/mimo-v2.6-pro",
       "mode": "subagent"
-    },
-
+    }
   },
   "plugins": [
     "superpowers@git+https://github.com/obra/superpowers.git"
